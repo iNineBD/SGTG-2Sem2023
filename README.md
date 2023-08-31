@@ -1,4 +1,4 @@
-# 2--BD - API
+# API
 
 | FUNÇÃO | NOME | REDES SOCIAIS |
 |-------|-----|---------|
