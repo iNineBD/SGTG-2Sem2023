@@ -1,6 +1,6 @@
 # Sistema Gerenciador de TGs - API 2° Semestre BD
 
-## ◻️ Índice
+<br>
 <p align="center">
     <a href="#equipe">Equipe</a> |
     <a href="#context">Contextualização</a>  |
@@ -8,6 +8,8 @@
     <a href="#backlog">Product Backlog</a>  |
     <a href="#tecnologias">Tecnologias</a>
 </p>
+
+<div align="center"><hr width=70%></div>
 
 <span id="equipe">
 
@@ -41,7 +43,7 @@
 
 <span id="requisitos">
 
-## ◻️ Requisitos
+## ◻️ Requisitos Funcionais
 
 - Importação de informações de alunos, orientadores e TGs;
 - Lançamento de notas de atividades;
