@@ -18,7 +18,7 @@
 <div align="left">
   
   | **FUNÇÃO** | **NOME** | **REDES SOCIAIS** |
-  |-------|--------|---------|
+  | :---: | :--- | :---: |
   | Product Owner | Beatriz Akemi | [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/beatriz-bonatto-263530156) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/BeatrizBonatto) |
   | Scrum  Master | André Bernardes | [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/andre-oliveira2004) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/Andre-Bernardes200) | 
   | Developer | Naiara Santos | [![Linkedin Badge](https://img.shields.io/badge/Linkedin-blue?style=flat-square&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/naiara-santos-73b83a186) [![GitHub Badge](https://img.shields.io/badge/GitHub-111217?style=flat-square&logo=github&logoColor=white)](https://github.com/NaiaraSantos3) |  
@@ -57,9 +57,87 @@ defesa, fechamento de semestre e transporte de notas.
 
 ## ◻️ Product Backlog
 
-|  **ÉPICO**  | **USER STORY** | **PRIORIDADE** | **SPRINT** |
-|-------------|----------------|----------------|------------|
-
+<table>
+    <tr>
+            <th>ÉPICO</th>
+            <th>USER STORY</th>
+            <th>PRIORIDADE</th>
+            <th>SPRINT</th>
+        </tr>
+        <tr>
+            <td>Modelos de tela a serem exibidas</td>
+            <td>Como cliente, desejo ter propostas de telas para verificar e entender o funcionamento do produto</td>
+            <td>1</td>
+            <td>1°</td>
+        </tr>
+        <tr>
+            <td rowspan="3">Banco de dados</td>
+            <td>Como usuário, eu quero poder carregar um arquivo CSV, que é gerado apartir de um forms preenchido pelos alunos, e ao ser exportado todas as informações ficam atribuidas em uma única linha, para que os dados sejam separados de formas automática</td>
+            <td>2</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Como usuário, quero poder armazenas os dados fornecidos pelos alunos a partir do arquivo CSV, podendo também criar, ler, atualizar e excluir informações</td>
+            <td>3</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Como usuário, eu quero poder tratar as informações de alunos, orientadores e os tipos de TGs importadas do CSV,  para que eu possa economizar tempo e esforço</td>
+            <td>4</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Controle de entregas</td>
+            <td>Como usuário, eu quero poder cadastrar, editar e excluir entregas, para que eu possa acompanhar o andamento dos trabalhos.</td>
+            <td>5</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Entregas</td>
+            <td>Como usuário, eu quero poder lançar notas de atividades para ter um acompanhamento das entregas efetivas, afim de facilitar o fechamento das notas e contribuir na verificação/possibilidade do aluno defender seu trabalho ao final do semestre</td>
+            <td>6</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Como usuário, eu quero realizar feedbacks por entrega para facilitar nas avaliações e acompanhamento do desenvolvimento do aluno</td>
+            <td>7</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Gestão de alunos</td>
+            <td>Como usuario, desejo poder visualizar os alunos matriculados nos TGs para monitorar a execução das atividades</td>
+            <td>8</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Gestão de orientadores</td>
+            <td>Como usuário, eu quero ter a relação dos orientadores de cada aluno matriculado, para me certificar que esse acompanhamento esta sendo feito</td>
+            <td>9</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td rowspan="3">Geração de relatórios</td>
+            <td>Como usuário quero gerar relatório de acompanhamento das entregas, para auxiliar na avaliação</td>
+            <td>10</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Como usuário quero gerar relatório de fechamento das notas, para que seja possível extrair as médias entre elas, gerando a nota final do aluno</td>
+            <td>11</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Como usuário, quero gerar relatório com dados de entregas, notas e se o aluno esta apto a defender, para assim poder realizar o agendamento com a banca</td>
+            <td>12</td>
+            <td>°</td>
+        </tr>
+        <tr>
+            <td>Documentação</td>
+            <td>Como cliente, quero ter um meio de consulta para possíveis difículdades e dúvidas sobre o produto, e requisitos de funcionamento da aplicação</td>
+            <td>13</td>
+            <td>°</td>
+        </tr>
+</table>
 
 <div align="left"><hr width=70%></div>
 
