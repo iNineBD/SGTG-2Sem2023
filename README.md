@@ -6,6 +6,7 @@
     <a href="#context">Contextualização</a>  |
     <a href="#requisitos">Requisitos</a>  |
     <a href="#backlog">Product Backlog</a>  |
+    <a href="#entregas">Sprints</a>  |
     <a href="#tecnologias">Tecnologias</a>
 </p>
 
@@ -138,6 +139,19 @@ defesa, fechamento de semestre e transporte de notas.
             <td>°</td>
         </tr>
 </table>
+
+<div align="left"><hr width=70%></div>
+
+<span id="entregas">
+
+## ◻️ Sprints
+
+| SPRINTS | PERÍODOS | DESCRIÇÃO |
+|:-------:|:-----:|:---------:|
+| [Sprint 1]() | 04/09/2023 à 24/09/2023 | - |
+| [Sprint 2]() | 25/09/2023 à 15/10/2023 | - |
+| [Sprint 3]() | 16/10/2023 à 05/11/2023 | - |
+| [Sprint 4]() | 06/11/2023 à 26/11/2023 | - |
 
 <div align="left"><hr width=70%></div>
 
