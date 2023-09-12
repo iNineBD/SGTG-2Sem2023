@@ -67,7 +67,7 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
             <td>Modelos de tela a serem exibidas</td>
-            <td>Como cliente, desejo ter propostas de telas para verificar e entender o funcionamento do produto</td>
+            <td>Como cliente, desejo ter proposta de tela para verificar e entender o funcionamento do produto</td>
             <td>1</td>
             <td>1°</td>
         </tr>
