@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane accessibleText="SGTG - Inine" prefHeight="400.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <Label text="SGTG" textAlignment="CENTER" BorderPane.alignment="CENTER">
-         <font>
-            <Font name="Verdana Bold" size="31.0" />
-         </font>
-      </Label>
-   </center>
-   <top>
-      <ImageView fitHeight="392.0" fitWidth="308.0" opacity="0.55" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
-         <image>
-            <Image url="@../imgs/inine_logo.png" />
-         </image>
-      </ImageView>
-   </top>
-</BorderPane>
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainController">
+   <content>
+      <VBox prefHeight="250.0" prefWidth="595.0">
+         <children>
+            <MenuBar style="-fx-font-size: 16px;">
+              <menus>
+                <Menu mnemonicParsing="false" text="Entregas">
+                  <items>
+                    <MenuItem fx:id="menuItemNovaEntrega" mnemonicParsing="false" onAction="#onMenuItemNovaEntregaAction" text="Nova entrega" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" onAction="#onMenuItemSobreAction" text="Sobre" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+         </children>
+      </VBox>
+   </content>
+</ScrollPane>
