@@ -1,7 +1,6 @@
 package application;
 
-
-
+import gui.util.Telas;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,12 +12,14 @@ public class Main extends Application {
 	
 	private static Scene mainScene;
 	
+	private Telas loadTelas = new Telas();
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {
 			
 			
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/Main.fxml"));
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainMenuBar.fxml"));
 			ScrollPane scrollPane = loader.load();
 			
 			scrollPane.setFitToHeight(true);
@@ -34,6 +35,8 @@ public class Main extends Application {
 			primaryStage.getIcons().add(iconeInine);
 			primaryStage.setTitle("Sistema Gerenciador de TG's");
 			primaryStage.show();
+			
+			loadTelas.loadView("/gui/TelaInicial.fxml");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
