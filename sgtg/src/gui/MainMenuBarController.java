@@ -24,8 +24,6 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	private MenuItem menuItemGerenciarAluno;
 	
-	@FXML
-	private MenuItem menuItemEditarAluno;
 
 	@FXML
 	private MenuItem menuItemNovaEntrega;
@@ -54,10 +52,6 @@ public class MainMenuBarController implements Initializable{
 		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
 	}
 	
-	@FXML
-	public void onMenuItemEditarAluno() {
-		loadTelas.loadView("/gui/TelaEditarAluno.fxml");
-	}
 	
 	@FXML
 	public void onMenuItemSobreAction() {
