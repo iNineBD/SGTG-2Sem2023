@@ -19,21 +19,22 @@ public class MainMenuBarController implements Initializable{
 	private MenuItem menuItemCarregarCsv;
 	
 	@FXML
-	private MenuItem menuItemNovaEntrega;
+	private MenuItem menuItemConfirmarCsv;
+	
+	@FXML
+	private MenuItem menuItemGerenciarAluno;
+	
+	@FXML
+	private MenuItem menuItemEditarAluno;
 
+	@FXML
+	private MenuItem menuItemNovaEntrega;
+	
 	@FXML
 	private MenuItem menuItemSobre;
 	
+	
 	@FXML
-	public void onMenuItemNovaEntregaAction() {
-		
-	}
-	
-	public void onMenuItemSobreAction() {
-		loadTelas.loadView("/gui/Sobre.fxml");
-	}
-	
-	
 	public void onMenuItemCarregarCsvAction() {
 		FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select File");
@@ -43,6 +44,30 @@ public class MainMenuBarController implements Initializable{
         }
 	}
 	
+	@FXML
+	public void onMenuItemConfirmarCsvAction() {
+		loadTelas.loadView("/gui/TelaConfirmarCsv.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemGerenciarAlunoAction() {
+		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemEditarAluno() {
+		loadTelas.loadView("/gui/TelaEditarAluno.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemSobreAction() {
+		loadTelas.loadView("/gui/TelaSobre.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemNovaEntrega() {
+		loadTelas.loadView("/gui/TelaCadastrarEntregas.fxml");
+	}
 	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {

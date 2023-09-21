@@ -19,16 +19,34 @@ public class TelaInicialController implements Initializable{
 	private Button btCarregarCsv;
 	
 	@FXML
+	private Button btGerenciarAlunos;
+	
+	@FXML
+	private Button btNovaEntrega;
+	
+	@FXML
 	public void onBtCarrgarCsvAction() {
 		FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecione um arquivo!");
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         if (selectedFile != null) {
-            // Faça algo com o arquivo selecionado
+            
             System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
         }
 	}
 
+	
+	@FXML
+	public void onBtGerenciarAlunosAction() {
+		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
+	}
+	
+	
+	@FXML
+	public void onBtNovaEntregaAction() {
+		loadTelas.loadView("/gui/TelaCadastrarEntregas.fxml");
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		

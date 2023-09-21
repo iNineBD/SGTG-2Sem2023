@@ -15,13 +15,26 @@
                   <Menu mnemonicParsing="false" text="Arquivo">
                      <items>
                         <MenuItem fx:id="menuItemCarregarCsv" mnemonicParsing="false" onAction="#onMenuItemCarregarCsvAction" text="Carregar CSV" />
+                        <MenuItem fx:id="menuItemConfirmarCsv" mnemonicParsing="false" onAction="#onMenuItemConfirmarCsvAction" text="Confirmar CSV" />
                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="Alunos">
+                    <items>
+                      <MenuItem fx:id="menuItemGerenciarAluno" mnemonicParsing="false" onAction="#onMenuItemGerenciarAlunoAction" text="Gerenciar Alunos" />
+                        <MenuItem fx:id="menuItemEditarAluno" mnemonicParsing="false" onAction="#onMenuItemEditarAluno" text="Editar Aluno" />
+                    </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Entregas">
                   <items>
-                    <MenuItem fx:id="menuItemNovaEntrega" mnemonicParsing="false" onAction="#onMenuItemNovaEntregaAction" text="Nova entrega" />
+                    <MenuItem fx:id="menuItemNovaEntrega" mnemonicParsing="false" onAction="#onMenuItemNovaEntrega" text="Nova entrega" />
                   </items>
                 </Menu>
+                  <Menu mnemonicParsing="false" text="Relatórios">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Acompanhamento de entregas" />
+                        <MenuItem mnemonicParsing="false" text="Aptos a defender" />
+                    </items>
+                  </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
                     <MenuItem fx:id="menuItemSobre" mnemonicParsing="false" onAction="#onMenuItemSobreAction" text="Sobre" />

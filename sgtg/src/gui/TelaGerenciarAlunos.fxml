@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" prefHeight="367.0" prefWidth="852.0">
+         <children>
+            <TableView prefHeight="374.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn editable="false" prefWidth="75.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Nome" />
+                  <TableColumn editable="false" prefWidth="99.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Orientador" />
+                  <TableColumn editable="false" prefWidth="114.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="TG Matriculado" />
+                  <TableColumn editable="false" prefWidth="69.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Tipo TG" />
+                  <TableColumn editable="false" prefWidth="74.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Entregas" />
+                  <TableColumn editable="false" minWidth="0.0" prefWidth="89.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Ações" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</VBox>
