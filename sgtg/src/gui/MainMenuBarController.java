@@ -19,11 +19,10 @@ public class MainMenuBarController implements Initializable{
 	private MenuItem menuItemCarregarCsv;
 	
 	@FXML
-	private MenuItem menuItemConfirmarCsv;
-	
-	@FXML
 	private MenuItem menuItemGerenciarAluno;
 	
+	@FXML
+	private MenuItem menuItemVisualizarEntregas;
 
 	@FXML
 	private MenuItem menuItemNovaEntrega;
@@ -43,25 +42,25 @@ public class MainMenuBarController implements Initializable{
 	}
 	
 	@FXML
-	public void onMenuItemConfirmarCsvAction() {
-		loadTelas.loadView("/gui/TelaConfirmarCsv.fxml");
-	}
-	
-	@FXML
 	public void onMenuItemGerenciarAlunoAction() {
 		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
-	}
-	
-	
-	@FXML
-	public void onMenuItemSobreAction() {
-		loadTelas.loadView("/gui/TelaSobre.fxml");
 	}
 	
 	@FXML
 	public void onMenuItemNovaEntrega() {
 		loadTelas.loadView("/gui/TelaCadastrarEntregas.fxml");
 	}
+	
+	@FXML
+	public void onMenuItemVisualizarEntregas() {
+		loadTelas.loadView("/gui/TelaEntregaTurma.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemSobreAction() {
+		loadTelas.loadView("/gui/TelaSobre.fxml");
+	}
+	
 	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {

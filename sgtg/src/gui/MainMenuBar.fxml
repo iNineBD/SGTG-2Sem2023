@@ -15,7 +15,6 @@
                   <Menu mnemonicParsing="false" text="Arquivo">
                      <items>
                         <MenuItem fx:id="menuItemCarregarCsv" mnemonicParsing="false" onAction="#onMenuItemCarregarCsvAction" text="Carregar CSV" />
-                        <MenuItem fx:id="menuItemConfirmarCsv" mnemonicParsing="false" onAction="#onMenuItemConfirmarCsvAction" text="Confirmar CSV" />
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Alunos">
@@ -26,6 +25,7 @@
                 <Menu mnemonicParsing="false" text="Entregas">
                   <items>
                     <MenuItem fx:id="menuItemNovaEntrega" mnemonicParsing="false" onAction="#onMenuItemNovaEntrega" text="Nova entrega" />
+                        <MenuItem fx:id="menuItemVisualizarEntregas" mnemonicParsing="false" onAction="#onMenuItemVisualizarEntregas" text="Visualizar entregas" />
                   </items>
                 </Menu>
                   <Menu mnemonicParsing="false" text="Relatórios">
