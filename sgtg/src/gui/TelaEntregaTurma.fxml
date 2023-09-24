@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
+         <children>
+            <Label text="Visualizar Entregas">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="220.0" prefWidth="100.0">
+         <children>
+            <ComboBox prefWidth="150.0" promptText="Selecione a turma">
+               <VBox.margin>
+                  <Insets bottom="25.0" />
+               </VBox.margin>
+            </ComboBox>
+            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <TableView prefHeight="200.0" prefWidth="500.0">
+                    <columns>
+                      <TableColumn prefWidth="96.0" text="Entrega" />
+                      <TableColumn prefWidth="280.5" text="Descrição" />
+                        <TableColumn prefWidth="72.5" text="Data" />
+                        <TableColumn prefWidth="50.5" text="Ações" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>
