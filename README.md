@@ -66,18 +66,18 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
         <tr>
-            <td rowspan="3">Banco de dados</td>
-            <td>Como professor, eu quero poder carregar um arquivo CSV, que é gerado a partir de um forms preenchido pelos alunos, e ao ser exportado todas as informações ficam atribuidas em uma única linha, para que os dados sejam separados de forma automática</td>
+            <td rowspan="3">Dados</td>
+            <td>Como professor, eu quero poder carregar um arquivo CSV, que é gerado a partir de um formulário preenchido pelos alunos, e ao ser exportado todas as informações de um aluno ficam atribuídas em uma única linha, para que os dados sejam separados de forma automática.</td>
             <td>1</td>
             <td>2</td>
         </tr>
         <tr>
-            <td>Como professor, quero poder armazenas os dados fornecidos pelos alunos a partir do arquivo CSV, podendo também ler, atualizar e excluir informações</td>
+            <td>Como professor, quero poder armazenas os dados fornecidos pelos alunos a partir do arquivo CSV, podendo também ler, atualizar e excluir informações.</td>
             <td>2</td>
             <td>2</td>
         </tr>
         <tr>
-            <td>Como professor, eu quero poder tratar as informações de alunos, orientadores e os tipos de TGs importadas do CSV,  para que eu possa economizar tempo e esforço</td>
+            <td>Como professor, eu quero poder tratar as informações de alunos, orientadores e os tipos de TG’s importadas do CSV, para que eu possa economizar tempo e esforço.</td>
             <td>3</td>
             <td>2</td>
         </tr>
@@ -89,48 +89,48 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
             <td rowspan="2">Entregas</td>
-            <td>Como professor, eu quero poder lançar notas de atividades para ter um acompanhamento das entregas efetivas, afim de facilitar o fechamento das notas e contribuir na verificação/possibilidade do aluno defender seu trabalho ao final do semestre</td>
+            <td>Como professor, eu quero poder lançar notas de atividades para ter um acompanhamento das entregas efetivas, a fim de facilitar o fechamento das notas e contribuir na verificação/possibilidade do aluno defender seu trabalho ao final do semestre.</td>
             <td>5</td>
             <td>3</td>
         </tr>
         <tr>
-            <td>Como professor, eu quero realizar feedbacks por entrega para facilitar nas avaliações e acompanhamento do desenvolvimento do aluno</td>
+            <td>Como professor, eu quero realizar feedbacks por entrega para facilitar nas avaliações e acompanhamento do desenvolvimento do aluno.</td>
             <td>6</td>
             <td>3</td>
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor quero gerar relatório de fechamento das notas, para que seja possível extrair as médias entre elas, gerando a nota final do aluno</td>
+            <td>Como professor quero gerar relatório de fechamento das notas, para que seja possível extrair as médias entre elas, gerando a nota final do aluno.</td>
             <td>7</td>
             <td>4</td>
         </tr>
         <tr>
             <td>Gestão de orientadores</td>
-            <td>Como professor, eu quero ter a relação dos orientadores de cada aluno matriculado, para me certificar que esse acompanhamento esta sendo feito</td>
+            <td>Como professor, eu quero ter a relação dos orientadores de cada aluno matriculado, para me certificar que esse acompanhamento está sendo feito.</td>
             <td>8</td>
             <td>4</td>
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor, quero gerar relatório com dados de entregas, notas e se o aluno esta apto a defender, para assim poder realizar o agendamento com a banca</td>
+            <td>Como professor, quero gerar relatório com dados de entregas, notas e se o aluno está apto a defender, para assim poder realizar o agendamento com a banca.</td>
             <td>9</td>
             <td>3</td>
         </tr>
         <tr>
             <td>Gestão de alunos</td>
-            <td>Como professor, desejo poder visualizar os alunos matriculados nos TGs para monitorar a execução das atividades</td>
+            <td>Como professor, desejo poder visualizar os alunos matriculados nos TG’s para monitorar a execução das atividades.</td>
             <td>10</td>
             <td>4</td>
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor quero gerar relatório de acompanhamento das entregas, para auxiliar na avaliação</td>
+            <td>Como professor quero gerar relatório de acompanhamento das entregas, para auxiliar na avaliação.</td>
             <td>11</td>
             <td>3</td>
         </tr>
         <tr>
             <td>Documentação</td>
-            <td>Como professor, quero ter um meio de consulta para possíveis difículdades e dúvidas sobre o produto, e requisitos de funcionamento da aplicação</td>
+            <td>Como professor, quero ter um meio de consulta para possíveis dificuldades e dúvidas sobre o produto, e requisitos de funcionamento da aplicação.</td>
             <td>12</td>
             <td>4</td>
         </tr>
@@ -144,10 +144,10 @@ defesa, fechamento de semestre e transporte de notas.
 
 | SPRINTS | PERÍODOS | DESCRIÇÃO |
 |:-------:|:-----:|:---------:|
-| [Sprint 1]() | 04/09/2023 à 24/09/2023 | Planejamento, modelagem e prototipação. |
-| [Sprint 2]() | 25/09/2023 à 15/10/2023 | - |
-| [Sprint 3]() | 16/10/2023 à 05/11/2023 | - |
-| [Sprint 4]() | 06/11/2023 à 26/11/2023 | - |
+| Sprint 1 | 04/09/2023 à 24/09/2023 | Planejamento, modelagem e prototipação. |
+| Sprint 2 | 25/09/2023 à 15/10/2023 | Upload, tratamento dos dados e controle de entregas. |
+| Sprint 3 | 16/10/2023 à 05/11/2023 | Feedbacks e notas. |
+| Sprint 4 | 06/11/2023 à 26/11/2023 | Relatórios e documentação |
 
 <div align="left"><hr width=70%></div>
 
