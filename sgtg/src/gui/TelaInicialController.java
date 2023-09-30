@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 import excecoes.CSVException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import entidades.CsvAluno;
+import entidades.Aluno;
 
 public class TelaInicialController implements Initializable{
 	
@@ -47,32 +47,74 @@ public class TelaInicialController implements Initializable{
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
 				System.out.println("Arquivo selecionado: " + nomeArquivo + " corresponde a um CSV");
 				
-				ArrayList<CsvAluno> listAlunos = new ArrayList<CsvAluno>();
+				ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
 				
 				try(BufferedReader br = new BufferedReader(new FileReader(caminhoAbsoluto))){
 					
 					String line = br.readLine();
 					line = br.readLine();
 					while (line!= null) {
-						String[] vetor = line.split(",");
+						String[] vetor = line.split(",", -1);
 						
-						// Adicionando os alunos na lista de alunos com seus atributos
-						String emailPessoal = vetor[1];
-						String emailFatecAluno = vetor[2];
-						String nomeAluno = vetor[3];
+						// Listando os atributos do CSV
+						String emailPessoal = vetor[1].trim();
+						String emailFatecAluno = vetor[2].trim();
+						String nome = vetor[3].trim();
+						String orientador = vetor[4].trim();
+						String emailFatecOrientador = vetor[5].trim();
+						String turma = vetor[6].trim();
+						String tipoTg = vetor[7].trim();
+						String problemaResolvidoOuEstudoArtigo = vetor[8].trim();
+						String empresa = vetor[9].trim();
+						String disciplina = vetor[10].trim();
 						
-						// Adicionando os alunos na lista de alunos com seus atributos
-						String nomeOrientador = vetor[4];
-						String emailFatecOrientador = vetor[5];
+				        // Verifique campos em branco e atribua valores padrão
+				        if (emailPessoal.isEmpty()) {
+				            emailPessoal = null;
+				        }
+				        if (emailFatecAluno.isEmpty()) {
+				            emailFatecAluno = null;
+				        }
+				        if (nome.isEmpty()) {
+				            nome = null;
+				        }
+				        if (orientador.isEmpty()) {
+				            orientador = null;
+				        }
+				        if (emailFatecOrientador.isEmpty()) {
+				            emailFatecOrientador = null;
+				        }
+				        if (turma.isEmpty()) {
+				            turma = null;
+				        }
+				        if (tipoTg.isEmpty()) {
+				            tipoTg = null;
+				        }
+				        if (problemaResolvidoOuEstudoArtigo.isEmpty()) {
+				            problemaResolvidoOuEstudoArtigo = null;
+				        }
+				        if (empresa.isEmpty()) {
+				            empresa = null;
+				        }
+				        if (disciplina.isEmpty()) {
+				            disciplina = null;
+				        }
 						
-						// Adicionando os 
+						// Adicionando os atributos na classe aluno
 						
+						Aluno aluno = new Aluno(nome,emailPessoal,emailFatecAluno,orientador,emailFatecOrientador,turma,tipoTg,problemaResolvidoOuEstudoArtigo,empresa,disciplina);
+						listAlunos.add(aluno);
 						
+						line = br.readLine();
+					}
+					System.out.println("Alunos:");
+					for (Aluno aluno : listAlunos) {
+						System.out.println(aluno);
 					}
 					
 					
 				}catch(IOException e) {
-					System.out.println(e.getMessage());
+					System.out.println("erro =" + e.getMessage());
 				}
 				
 			}else {
@@ -80,7 +122,10 @@ public class TelaInicialController implements Initializable{
 			}
 		}catch(CSVException e) {
 				System.out.println(e.getMessage());
-                }        
+                }
+		
+		TelaConfirmaAluno confirma = new TelaConfirmaAluno();
+		confirma.confirmaDadosAlunos();;
 	}
      
 	
