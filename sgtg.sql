@@ -1,26 +1,31 @@
+drop database sgtg;
+
 create database sgtg;
 
 use sgtg;
 
 -- Criando a tabela dos alunos
 create table aluno(
-id int primary key not null,
+id int auto_increment,
 email_institucional varchar(50) unique key not null ,
-nome varchar (100),
+nome varchar (100) not null,
 email_pessoal varchar(50),
-id_orientador int
+id_orientador int not null,
+constraint pk_idAluno primary key (id)
 );
 
 -- Criando a tabela matricula
 create table matricula(
 id_aluno int not null,
-id_turma int not null
+id_turma int not null,
+constraint pk_idAluno_e_idTurma primary key (id_aluno,id_turma)
 );
 
 -- Criando a tabela turma
 create table turma(
-id int primary key not null,
-nome varchar(10)
+id int auto_increment,
+nome varchar(10) not null,
+constraint pk_idTurma primary key (id)
 );
 
 -- Criando as relações do aluno com a turma através da tabela auxiliar matricula.
@@ -37,10 +42,11 @@ references turma (id);
 
 -- Criando a tabela de entregas
 create table entrega(
-id int primary key not null,
-data_entrega date,
-descricao varchar (200),
-id_turma int
+id int auto_increment,
+data_entrega date not null,
+descricao varchar (200) not null,
+id_turma int not null,
+constraint pk_idEntrega primary key (id)
 );
 
 -- Criando a relação da tabela entrega com a tabela turma
@@ -52,11 +58,12 @@ references turma (id);
 
 -- Criando a tabela feedback
 create table feedback(
-id int primary key not null,
-comentario varchar (200),
-nota double(4,2),
-id_entrega int,
-id_aluno int
+id int auto_increment,
+comentario varchar (200) not null,
+nota double(4,2) not null,
+id_entrega int not null,
+id_aluno int not null,
+constraint pk_feedback primary key (id)
 );
 
 -- Criando a relação do feedback com a entrega
@@ -75,9 +82,10 @@ references aluno (id);
 
 -- Criando a tabela do orientador
 create table orientador(
-id int primary key not null,
-email_fatec varchar(50),
-nome varchar (100)
+id int auto_increment,
+email_fatec varchar(50) not null,
+nome varchar (100) not null,
+constraint pk_idOrientador primary key (id)
 );
 
 -- Criando a relação aluno e orientador
@@ -89,12 +97,13 @@ references orientador (id);
 
 -- Criando a tabela tg
 create table tg(
-id int primary key not null,
+id int auto_increment,
 problema_a_resolver varchar(200) not null,
 empresa varchar(50),
 disciplina varchar(50),
-id_aluno int,
-id_tipo int
+id_aluno int not null,
+id_tipo int not null,
+constraint pk_idTg primary key(id)
 );
 
 -- Criando a relação do aluno com tg
@@ -106,9 +115,10 @@ references aluno (id);
 
 -- Criando a tabela tipo
 create table tipo(
-id int primary key not null,
-tipo varchar(50),
-regra varchar(50)
+id int auto_increment,
+tipo varchar(50) not null,
+regra varchar(50) not null,
+constraint pk_idTipo primary key (id)
 );
 
 -- Criando a relação do tg com tipp
