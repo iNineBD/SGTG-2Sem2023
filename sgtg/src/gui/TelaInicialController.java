@@ -1,6 +1,9 @@
 package gui;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -13,6 +16,8 @@ import javafx.stage.Stage;
 
 import excecoes.CSVException;
 import java.util.Scanner;
+import java.util.ArrayList;
+import entidades.CsvAluno;
 
 public class TelaInicialController implements Initializable{
 	
@@ -41,12 +46,35 @@ public class TelaInicialController implements Initializable{
 		try {
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
 				System.out.println("Arquivo selecionado: " + nomeArquivo + " corresponde a um CSV");
-//				try {
-//				leitor = new Scanner(file);
-//				
-//				}catch(IOException e){
-//					
-//				}
+				
+				ArrayList<CsvAluno> listAlunos = new ArrayList<CsvAluno>();
+				
+				try(BufferedReader br = new BufferedReader(new FileReader(caminhoAbsoluto))){
+					
+					String line = br.readLine();
+					line = br.readLine();
+					while (line!= null) {
+						String[] vetor = line.split(",");
+						
+						// Adicionando os alunos na lista de alunos com seus atributos
+						String emailPessoal = vetor[1];
+						String emailFatecAluno = vetor[2];
+						String nomeAluno = vetor[3];
+						
+						// Adicionando os alunos na lista de alunos com seus atributos
+						String nomeOrientador = vetor[4];
+						String emailFatecOrientador = vetor[5];
+						
+						// Adicionando os 
+						
+						
+					}
+					
+					
+				}catch(IOException e) {
+					System.out.println(e.getMessage());
+				}
+				
 			}else {
 				throw new CSVException("Arquivo selecionado: " + nomeArquivo + " não corresponde a um CSV");
 			}
