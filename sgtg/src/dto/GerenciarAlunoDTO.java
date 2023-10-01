@@ -11,6 +11,8 @@ public class GerenciarAlunoDTO {
 	private String nome_turma;
 		
 	private String tipo_tg;
+	
+	private String entregas;
 
 	
 
@@ -20,6 +22,14 @@ public class GerenciarAlunoDTO {
 		this.nome_orientador = nome_orientador;
 		this.nome_turma = nome_turma;
 		this.tipo_tg = tipo_tg;
+	}
+
+	public String getEntregas() {
+		return entregas;
+	}
+
+	public void setEntregas(String entregas) {
+		this.entregas = entregas;
 	}
 
 	public int getId_aluno() {
