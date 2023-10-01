@@ -12,25 +12,60 @@ public class GerenciarAlunoDTO {
 		
 	private String tipo_tg;
 	
-	private String entregas;
+	private int entregas_feitas;
+	
+	private int total_entregas;
+	
+	private String entregas_format;
+	
+	private int id_turma;
 
 	
 
-	public GerenciarAlunoDTO(int id_aluno, String nome_aluno, String nome_orientador, String nome_turma, String tipo_tg) {
+	public GerenciarAlunoDTO(int id_aluno, String nome_aluno, String nome_orientador, String nome_turma, String tipo_tg, int id_turma) {
 		this.id_aluno = id_aluno;
 		this.nome_aluno = nome_aluno;
 		this.nome_orientador = nome_orientador;
 		this.nome_turma = nome_turma;
 		this.tipo_tg = tipo_tg;
+		this.id_turma = id_turma;
 	}
 
-	public String getEntregas() {
-		return entregas;
+	
+	public String getEntregas_format() {
+		return entregas_format;
 	}
 
-	public void setEntregas(String entregas) {
-		this.entregas = entregas;
+	public void setEntregas_format(String entregas_format) {
+		this.entregas_format = entregas_format;
 	}
+
+
+
+
+	public int getEntregas_feitas() {
+		return entregas_feitas;
+	}
+
+
+
+	public void setEntregas_feitas(int entregas_feitas) {
+		this.entregas_feitas = entregas_feitas;
+	}
+
+
+
+	public int getTotal_entregas() {
+		return total_entregas;
+	}
+
+
+
+	public void setTotal_entregas(int total_entregas) {
+		this.total_entregas = total_entregas;
+	}
+
+
 
 	public int getId_aluno() {
 		return id_aluno;
@@ -71,5 +106,15 @@ public class GerenciarAlunoDTO {
 	public void setTipo_tg(String tipo_tg) {
 		this.tipo_tg = tipo_tg;
 	}
+
+	public int getId_turma() {
+		return id_turma;
+	}
+
+	public void setId_turma(int id_turma) {
+		this.id_turma = id_turma;
+	}
+	
+	
 	
 }

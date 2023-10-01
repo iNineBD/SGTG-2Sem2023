@@ -58,7 +58,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 		tableCollumOrientador.setCellValueFactory(new PropertyValueFactory<>("nome_orientador"));
 		tableCollumTurma.setCellValueFactory(new PropertyValueFactory<>("nome_turma"));
 		tableCollumTipoTG.setCellValueFactory(new PropertyValueFactory<>("tipo_tg"));
-		tableCollumEntregas.setCellValueFactory(new PropertyValueFactory<>("entregas"));
+		tableCollumEntregas.setCellValueFactory(new PropertyValueFactory<>("entregas_format"));
 	}
 
 	public void updateTableView() throws SQLException {
