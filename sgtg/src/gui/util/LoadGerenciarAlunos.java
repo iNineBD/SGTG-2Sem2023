@@ -12,7 +12,9 @@ import dto.GerenciarAlunoDTO;
 
 public class LoadGerenciarAlunos {
 	
+	private int id_turma;
 	public List<GerenciarAlunoDTO> atualizarDados() throws SQLException {
+		
 		List<GerenciarAlunoDTO> listaAlunos = new ArrayList<>();
 		
 		Connection conecta = DB.getConnection();
@@ -29,7 +31,7 @@ public class LoadGerenciarAlunos {
 	    	String nome_orientador = result.getString("orientador");
 	    	String tipo = result.getString("tipo");
 	    	String turma = result.getString("turma");
-	    	int id_turma = result.getInt("id_turma");
+	    	id_turma = result.getInt("id_turma");
 	    		
 	    	GerenciarAlunoDTO aluno = new GerenciarAlunoDTO(id, nome_aluno, nome_orientador, turma, tipo);
 	    	
@@ -43,8 +45,8 @@ public class LoadGerenciarAlunos {
 	    	int total_entregas = 0;
 	    	int entrega_aluno = 0;
 	    	
-	    	if (result2.next()) {
-	    		total_entregas = result2.getInt("n_entregas");
+	    	while (result2.next()) {
+	    		total_entregas += result2.getInt("n_entregas");
 			}
 	    	
 	    	// entregas feitas pelo aluno
@@ -69,6 +71,40 @@ public class LoadGerenciarAlunos {
 	            GerenciarAlunoDTO alunoAtual = listaAlunos.get(i);
 	            for (int j = i + 1; j < listaAlunos.size(); j++) {
 	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())) {
+	                	
+	                	alunoAtual.setNome_turma("TG1 e TG2");
+	                    
+		                 // total de entregas
+		        	    	PreparedStatement st2 = conecta.prepareStatement("select count(id) n_entregas from entrega where id_turma = ?");
+		        	    	st2.setInt(1, 1);
+		        	    	
+		        	    	ResultSet result2 = st2.executeQuery();
+		        	    	
+		        	    	PreparedStatement st5 = conecta.prepareStatement("select count(id) n_entregas from entrega where id_turma = ?");
+		        	    	st5.setInt(1, 2);
+		        	    	
+		        	    	ResultSet result5 = st5.executeQuery();
+		        	    	
+		        	    	int total_entregas = 0;
+		        	    	int entrega_aluno = 0;
+		        	    	
+		        	    	if(result2.next() && result5.next()) {
+		        	    		total_entregas = result2.getInt("n_entregas") + result5.getInt("n_entregas");
+		        			}
+		        	    	
+		        	    	// entregas feitas pelo aluno
+		        	    	PreparedStatement st3 = conecta.prepareStatement("select count(id_aluno) entrega_aluno from feedback where id_aluno = ?");
+		        	    	st3.setInt(1, alunoAtual.getId_aluno());
+		        	    	
+		        	    	ResultSet result3 = st3.executeQuery();
+		        	    	
+		        	    	if (result3.next()) {
+		        	    		entrega_aluno = result3.getInt("entrega_aluno");
+		        			}
+		        	    	
+		        	    	// setando no objeto
+		        	    	alunoAtual.setEntregas((entrega_aluno + "/" + total_entregas));
+		        	    	
 	                    alunoAtual.setNome_turma("TG1 e TG2");
 	                    listaAlunos.remove(j);
 	                }
