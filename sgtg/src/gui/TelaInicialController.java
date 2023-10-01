@@ -2,6 +2,7 @@ package gui;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import gui.util.Telas;
@@ -37,8 +38,8 @@ public class TelaInicialController implements Initializable{
 
 	
 	@FXML
-	public void onBtGerenciarAlunosAction() {
-		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
+	public void onBtGerenciarAlunosAction() throws SQLException {
+		loadTelas.loadView2("/gui/TelaGerenciarAlunos.fxml");
 	}
 	
 	

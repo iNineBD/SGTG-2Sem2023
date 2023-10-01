@@ -12,7 +12,7 @@ import dto.GerenciarAlunoDTO;
 
 public class LoadGerenciarAlunos {
 	
-	public static List<GerenciarAlunoDTO> atualizarDados() throws SQLException {
+	public List<GerenciarAlunoDTO> atualizarDados() throws SQLException {
 		List<GerenciarAlunoDTO> listaAlunos = new ArrayList<>();
 		
 		Connection conecta = DB.getConnection();
@@ -76,7 +76,6 @@ public class LoadGerenciarAlunos {
 	            
 	        }
 	    }
-
 	    return listaAlunos;
 	}
 
