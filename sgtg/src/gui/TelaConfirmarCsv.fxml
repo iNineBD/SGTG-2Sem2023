@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" >
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -103,17 +104,18 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="370.0">
+                  <VBox prefHeight="200.0" prefWidth="370.0" fx:controller="gui.TelaConfirmaController">
                      <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
+                        <TextField fx:id="txtNome" />
+						<TextField fx:id="txtEmailInstitucional" />
+						<TextField fx:id="txtEmailPessoal" />
+						<TextField fx:id="txtNomeOrientador" />
+						<TextField fx:id="txtEmailInstitucionalOrientador" />
+						<TextField fx:id="txtTgMatriculado" />
+						<TextField fx:id="txtTipoTg" />
+						<TextField fx:id="txtTituloTg" />
+						<TextField fx:id="txtEmpresa" />
+
                      </children>
                   </VBox>
                </children>

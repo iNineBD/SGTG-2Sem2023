@@ -42,12 +42,13 @@ public class TelaInicialController implements Initializable{
 		String nomeArquivo = selectedFile.getName();
 		String extensaoArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf(".") + 1);
 		Scanner leitor = null;
+		ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
 		
 		try {
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
 				System.out.println("Arquivo selecionado: " + nomeArquivo + " corresponde a um CSV");
 				
-				ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
+				
 				
 				try(BufferedReader br = new BufferedReader(new FileReader(caminhoAbsoluto))){
 					
@@ -107,11 +108,6 @@ public class TelaInicialController implements Initializable{
 						
 						line = br.readLine();
 					}
-					System.out.println("Alunos:");
-					for (Aluno aluno : listAlunos) {
-						System.out.println(aluno);
-					}
-					
 					
 				}catch(IOException e) {
 					System.out.println("erro =" + e.getMessage());
@@ -124,8 +120,9 @@ public class TelaInicialController implements Initializable{
 				System.out.println(e.getMessage());
                 }
 		
-		TelaConfirmaAluno confirma = new TelaConfirmaAluno();
-		confirma.confirmaDadosAlunos();;
+		TelaConfirmaController confirma = new TelaConfirmaController();
+		confirma.confirmaDadosAlunos(listAlunos);
+			
 	}
      
 	
