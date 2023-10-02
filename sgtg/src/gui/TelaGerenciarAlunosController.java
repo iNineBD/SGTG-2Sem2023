@@ -26,15 +26,15 @@ public class TelaGerenciarAlunosController implements Initializable {
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
 	@FXML
-	private TableColumn<GerenciarAlunoDTO, String> tableCollumNome;
+	private TableColumn<GerenciarAlunoDTO, String> tableColumnNome;
 	@FXML
-	private TableColumn<GerenciarAlunoDTO, String> tableCollumOrientador;
+	private TableColumn<GerenciarAlunoDTO, String> tableColumnOrientador;
 	@FXML
-	private TableColumn<GerenciarAlunoDTO, String> tableCollumTurma;
+	private TableColumn<GerenciarAlunoDTO, String> tableColumnTurma;
 	@FXML
-	private TableColumn<GerenciarAlunoDTO, String> tableCollumTipoTG;
+	private TableColumn<GerenciarAlunoDTO, String> tableColumnTipoTG;
 	@FXML
-	private TableColumn<GerenciarAlunoDTO, String> tableCollumEntregas;
+	private TableColumn<GerenciarAlunoDTO, String> tableColumnEntregas;
 	@FXML
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEDIT;
 	@FXML
@@ -54,11 +54,11 @@ public class TelaGerenciarAlunosController implements Initializable {
 
 	private void initializeNodes() {
 		// TODO Auto-generated method stub
-		tableCollumNome.setCellValueFactory(new PropertyValueFactory<>("nome_aluno"));
-		tableCollumOrientador.setCellValueFactory(new PropertyValueFactory<>("nome_orientador"));
-		tableCollumTurma.setCellValueFactory(new PropertyValueFactory<>("nome_turma"));
-		tableCollumTipoTG.setCellValueFactory(new PropertyValueFactory<>("tipo_tg"));
-		tableCollumEntregas.setCellValueFactory(new PropertyValueFactory<>("entregas_format"));
+		tableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome_aluno"));
+		tableColumnOrientador.setCellValueFactory(new PropertyValueFactory<>("nome_orientador"));
+		tableColumnTurma.setCellValueFactory(new PropertyValueFactory<>("nome_turma"));
+		tableColumnTipoTG.setCellValueFactory(new PropertyValueFactory<>("tipo_tg"));
+		tableColumnEntregas.setCellValueFactory(new PropertyValueFactory<>("entregas_format"));
 	}
 
 	public void updateTableView() throws SQLException {

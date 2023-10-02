@@ -26,7 +26,7 @@ public class TelaInicialController implements Initializable{
 	private Button btNovaEntrega;
 	
 	@FXML
-	public void onBtCarrgarCsvAction() {
+	public void onBtCarregarCsvAction() {
 		FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecione um arquivo!");
         File selectedFile = fileChooser.showOpenDialog(new Stage());
