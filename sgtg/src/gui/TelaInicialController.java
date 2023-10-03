@@ -118,11 +118,10 @@ public class TelaInicialController implements Initializable{
 			}
 		}catch(CSVException e) {
 				System.out.println(e.getMessage());
-                }
+                }     
+
+        loadTelas.loadView3("/gui/TelaConfirmarCsv.fxml",listAlunos);
 		
-		TelaConfirmaController confirma = new TelaConfirmaController();
-		confirma.confirmaDadosAlunos(listAlunos);
-			
 	}
      
 	
