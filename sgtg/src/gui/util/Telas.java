@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class Telas {
@@ -59,12 +60,21 @@ public class Telas {
             	
                 // Exibe o primeiro aluno ao carregar a tela.
                 showAluno(controller, alunos.get(currentAlunoIndex));
+                
 
                 // Configura o botão Confirma.  
                 controller.btConfirma.setOnAction(event -> {
+                	
+                	// Caso tenha alterações nos campos, caso não tenha segue normal.
+                	editInformation(controller, alunos.get(currentAlunoIndex));
+                	
+                	
+                	// Quando clicar no botão confirma ele vai acusar como True.
                 	alunos.get(currentAlunoIndex).setConfirmado();
                 	
+                	
                 	System.out.println(alunos.get(currentAlunoIndex));
+                	
                 	
                     // Avança para o próximo aluno.
                     currentAlunoIndex++;
@@ -79,11 +89,9 @@ public class Telas {
                 
                 //Configura o botão confirmar todos
                 controller.btConfirmaTodos.setOnAction(event ->{
-                	int i = 0;
-                	while(i < alunos.size()) {
-                    	alunos.get(i).setConfirmado();
-                    	System.out.println(alunos.get(i));
-                		i++;
+                	while(currentAlunoIndex < alunos.size()) {
+                    	alunos.get(currentAlunoIndex).setConfirmado();
+                    	currentAlunoIndex++;
                 	}
                 	loadView("/gui/TelaGerenciarAlunos.fxml");
                 });
@@ -96,16 +104,50 @@ public class Telas {
     // Método somente para exibir os alunos na tela
     private void showAluno(TelaConfirmaController controller, Aluno aluno) {
         controller.setTxtNome(aluno.getNome());
-        controller.settxtEmailInstitucional(aluno.getEmailFatecAluno());
+        controller.setTxtEmailInstitucional(aluno.getEmailFatecAluno());
         controller.setTxtdEmailPessoal(aluno.getEmailPessoal());
-        controller.settxtNomeOrientador(aluno.getOrientador());
-        controller.settxtEmailInstitucionalOrientador(aluno.getEmailFatecOrientador());
-        controller.settxtTgMatriculado(aluno.getNomeTurma());
-        controller.settxtTipoTg(aluno.getTipoTG());
-        controller.settxtTituloTg(aluno.getProblemaResolvidoOuEstudoArtigo());
-        controller.settxtEmpresa(aluno.getEmpresa());
+        controller.setTxtNomeOrientador(aluno.getOrientador());
+        controller.setTxtEmailInstitucionalOrientador(aluno.getEmailFatecOrientador());
+        controller.setTxtTgMatriculado(aluno.getNomeTurma());
+        controller.setTxtTipoTg(aluno.getTipoTG());
+        controller.setTxtTituloTg(aluno.getProblemaResolvidoOuEstudoArtigo());
+        controller.setTxtEmpresa(aluno.getEmpresa());
+        controller.setTxtDisciplina(aluno.getDisciplina());
     }
-
+    
+    //Método para editar informações
+    public void editInformation(TelaConfirmaController controller,Aluno aluno) {
+    	String novoNome = controller.getTxtNome();
+    	aluno.setNome(novoNome);
+    	
+    	String novoEmailPessoal = controller.getTxtdEmailPessoal();
+    	aluno.setEmailPessoal(novoEmailPessoal);
+    	
+    	String novoEmailInstitucional = controller.getTxtEmailInstitucional();
+    	aluno.setEmailFatecAluno(novoEmailInstitucional);
+    	
+    	String novoOrientador = controller.getTxtNomeOrientador();
+    	aluno.setOrientador(novoOrientador);
+    	
+    	String novoEmailOrientador = controller.getTxtEmailInstitucionalOrientador();
+    	aluno.setEmailFatec(novoEmailOrientador);
+    	
+    	String novaTurmaTg = controller.getTxtTgMatriculado();
+    	aluno.setNomeTurma(novaTurmaTg);
+    	
+    	String novoTipoTg = controller.getTxtTipoTg();
+    	aluno.setTipoTG(novoTipoTg);
+    	
+    	String novoTituloTg = controller.getTxtTituloTg();
+    	aluno.setProblemaResolvidoOuEstudoArtigo(novoTituloTg);
+    	
+    	String novaEmpresa = controller.getTxtEmpresa();
+    	aluno.setEmpresa(novaEmpresa);
+    	
+    	String novaDisciplina = controller.getTxtDisciplina();
+    	aluno.setDisciplina(novaDisciplina);
+    	
+    }
 	
 	
 	public synchronized void clearView() {

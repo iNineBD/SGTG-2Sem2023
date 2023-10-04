@@ -2,7 +2,7 @@ package entidades;
 
 import java.io.Serializable;
 
-public class Aluno implements Serializable {
+public class Aluno implements Serializable{
 	
 	// Atributos da classe Aluno
 		private String nome;
@@ -114,6 +114,6 @@ public class Aluno implements Serializable {
 		
 		@Override
 		public String toString() {
-			return (confirmado + nome) ;
+			return (confirmado + nome + disciplina) ;
 		}
 }
