@@ -7,14 +7,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import gui.util.Alerts;
 import gui.util.Telas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import excecoes.CSVException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import entidades.Aluno;
@@ -42,14 +43,11 @@ public class TelaInicialController implements Initializable{
 		String nomeArquivo = selectedFile.getName();
 		String extensaoArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf(".") + 1);
 		Scanner leitor = null;
+		
 		ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
 		
-		try {
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
-				System.out.println("Arquivo selecionado: " + nomeArquivo + " corresponde a um CSV");
-				
-				
-				
+							
 				try(BufferedReader br = new BufferedReader(new FileReader(caminhoAbsoluto))){
 					
 					String line = br.readLine();
@@ -109,18 +107,19 @@ public class TelaInicialController implements Initializable{
 						line = br.readLine();
 					}
 					
+					loadTelas.loadView3("/gui/TelaConfirmarCsv.fxml",listAlunos);
+					
 				}catch(IOException e) {
 					System.out.println("erro =" + e.getMessage());
 				}
 				
 			}else {
-				throw new CSVException("Arquivo selecionado: " + nomeArquivo + " não corresponde a um CSV");
-			}
-		}catch(CSVException e) {
-				System.out.println(e.getMessage());
-                }     
+				Alerts.showAlert("IO Exception","Erro","Este arquivo não corresponde a um CSV.", AlertType.ERROR);
+            	loadTelas.loadView("/gui/TelaInicial.fxml");
+			}   
 
-        loadTelas.loadView3("/gui/TelaConfirmarCsv.fxml",listAlunos);
+       
+        
 		
 	}
      

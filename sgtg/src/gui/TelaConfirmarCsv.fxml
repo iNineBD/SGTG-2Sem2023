@@ -134,7 +134,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Confirmar todos">
+            <Button fx:id="btConfirmaTodos" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Confirmar todos">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>

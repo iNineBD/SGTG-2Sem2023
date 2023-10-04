@@ -15,6 +15,7 @@ public class Aluno implements Serializable {
 		private String problemaResolvidoOuEstudoArtigo;
 		private String empresa;
 		private String disciplina;
+		private boolean confirmado = false;
 		
 		
 		// Criando o construtor
@@ -29,6 +30,7 @@ public class Aluno implements Serializable {
 			this.problemaResolvidoOuEstudoArtigo = problemaResolvidoOuEstudoArtigo;
 			this.empresa = empresa;
 			this.disciplina = disciplina;
+			this.confirmado = confirmado;
 		}
 		
 		// Métodos getters e setters para receber e editar os dados
@@ -106,8 +108,12 @@ public class Aluno implements Serializable {
 			this.disciplina = disciplina;
 		}
 		
+		public void setConfirmado() {
+			this.confirmado = true;
+		}
+		
 		@Override
 		public String toString() {
-			return (nome +  "-" + emailPessoal +  "-" + emailFatecAluno + "-" + orientador + "-" + emailFatecOrientador + "-" + nomeTurma + "-" + tipoTg + "-" + problemaResolvidoOuEstudoArtigo + "-" + empresa + "-" + disciplina) ;
+			return (confirmado + nome) ;
 		}
 }
