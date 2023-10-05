@@ -21,7 +21,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="btCarregarCsv" mnemonicParsing="false" onAction="#onBtCarrgarCsvAction" prefHeight="30.0" prefWidth="170.0" text="Carregar CSV">
+                  <Button fx:id="btCarregarCsv" mnemonicParsing="false" onAction="#onBtCarregarCsvAction" prefHeight="30.0" prefWidth="170.0" text="Carregar CSV">
                      <font>
                         <Font name="Arial Bold" size="17.0" />
                      </font>

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import gui.util.Alerts;
@@ -34,7 +35,7 @@ public class TelaInicialController implements Initializable{
 	private Button btNovaEntrega;
 	
 	@FXML
-	public void onBtCarrgarCsvAction() {
+	public void onBtCarregarCsvAction() {
 		FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Selecione um arquivo!");
         File selectedFile = fileChooser.showOpenDialog(new Stage());
@@ -125,8 +126,8 @@ public class TelaInicialController implements Initializable{
      
 	
 	@FXML
-	public void onBtGerenciarAlunosAction() {
-		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
+	public void onBtGerenciarAlunosAction() throws SQLException {
+		loadTelas.loadView2("/gui/TelaGerenciarAlunos.fxml");
 	}
 	
 	
