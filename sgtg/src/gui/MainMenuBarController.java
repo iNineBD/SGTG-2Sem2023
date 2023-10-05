@@ -34,13 +34,9 @@ public class MainMenuBarController implements Initializable{
 	
 	@FXML
 	public void onMenuItemCarregarCsvAction() {
-		FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select File");
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
-        if (selectedFile != null) {
-            System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+		TelaInicialController carregaCsv = new TelaInicialController();
+		carregaCsv.onBtCarrgarCsvAction();
         }
-	}
 	
 	@FXML
 	public void onMenuItemGerenciarAlunoAction() throws SQLException {
