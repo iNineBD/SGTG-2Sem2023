@@ -35,7 +35,7 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	public void onMenuItemCarregarCsvAction() {
 		TelaInicialController carregaCsv = new TelaInicialController();
-		carregaCsv.onBtCarrgarCsvAction();
+		carregaCsv.onBtCarregarCsvAction();
         }
 	
 	@FXML

@@ -1,10 +1,13 @@
 package gui.util;
 
 import java.io.IOException;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import application.Main;
+import conexao.DB;
 import gui.TelaGerenciarAlunosController;
 
 import java.util.ArrayList;
@@ -113,14 +116,13 @@ public class Telas {
                 	
                 	// Caso tenha alterações nos campos, caso não tenha segue normal.
                 	editInformation(controller, alunos.get(currentAlunoIndex));
-                	
-                	
+                	                	
                 	// Quando clicar no botão confirma ele vai acusar como True.
                 	alunos.get(currentAlunoIndex).setConfirmado();
                 	
-                	
-                	System.out.println(alunos.get(currentAlunoIndex));
-                	
+                	// Vai incluir o aluno no banco.
+					insertBd(alunos.get(currentAlunoIndex));
+
                 	
                     // Avança para o próximo aluno.
                     currentAlunoIndex++;
@@ -138,8 +140,17 @@ public class Telas {
                 	while(currentAlunoIndex < alunos.size()) {
                     	alunos.get(currentAlunoIndex).setConfirmado();
                     	currentAlunoIndex++;
+                    	
+                    	// Vai incluir o aluno no banco.
+                    	insertBd(alunos.get(currentAlunoIndex));
                 	}
-                	loadView("/gui/TelaGerenciarAlunos.fxml");
+                	
+                	try {
+						loadView2("/gui/TelaGerenciarAlunos.fxml");
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
                 });
             }
         } catch (IOException e) {
@@ -194,6 +205,63 @@ public class Telas {
     	aluno.setDisciplina(novaDisciplina);
     	
     }
+    
+    //Método para jogar os dados no banco de dados
+    
+    public void insertBd(Aluno aluno) {
+    	Connection conecta = null;
+    	
+    	try {
+    	conecta = DB.getConnection();
+    	
+    	PreparedStatement stBuscaEmailOrientador = conecta.prepareStatement("select orientador.id, orientador.email_fatec from orientador where email_fatec like %?%");
+    	
+    	PreparedStatement stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador) values(?,?,?,?)");
+    	
+    	PreparedStatement stOrientador = conecta.prepareStatement("insert into orientador (nome,email_fatec) values(?,?)");
+    	
+    	PreparedStatement stTurma = conecta.prepareStatement("insert into turma(nome) values(?)");
+    	
+    	PreparedStatement stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina) values(?,?,?)");
+    	
+    	PreparedStatement stTipo = conecta.prepareStatement("insert into tipo(tipo) values(?)");
+    	
+    	stOrientador.setString(1,aluno.getOrientador());
+    	stOrientador.setString(2, aluno.getEmailFatecOrientador());
+    	stOrientador.executeUpdate();
+    	
+    	stTurma.setString(1,aluno.getNomeTurma());
+    	stTurma.executeUpdate();
+    	
+    	stAluno.setString(1, aluno.getNome());
+    	stAluno.setString(2, aluno.getEmailFatecAluno());
+    	stAluno.setString(3, aluno.getEmailPessoal());
+    	stAluno.setInt(4, 5);
+    	stAluno.executeUpdate();
+    	
+    	stTipo.setString(1, aluno.getTipoTG());
+    	stTipo.executeUpdate();
+    	
+    	stTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
+    	stTg.setString(2, aluno.getEmpresa());
+    	stTg.setString(3, aluno.getDisciplina());
+    	stTg.executeUpdate();
+    	
+
+    	} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.getMessage();
+		} finally {
+			try {
+				if(conecta != null) {
+				conecta.close();
+				}
+			}catch(SQLException e) {
+				throw new RuntimeException("Erro ao fechar conexão", e);
+			}
+		}
+    	
+    	}
 	
 	
 
