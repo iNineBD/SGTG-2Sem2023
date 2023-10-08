@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -20,7 +19,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -61,14 +59,13 @@ public class TelaCadastrarEntregasController implements Initializable {
 		List<String> nome_entrega = new ArrayList<String>();
 
 		if (turma_selecionada == null || titulo.trim().isEmpty() || descricao.trim().isEmpty() || data == null) {
-			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos!", AlertType.WARNING);
+			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
 		} else {
 			LocalDate dataAtual = LocalDate.now();
 
 			// Verifica se localData é menor do que a data atual
 			if (data.isBefore(dataAtual)) {
-				Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data seleionada é anterior a data atual",
-						AlertType.INFORMATION);
+				Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data seleionada é anterior a data atual", AlertType.WARNING);
 			} else {
 				new DB();
 				Connection conn = DB.getConnection();
@@ -90,7 +87,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 				}
 				if (nome_repetido) {
 					Alerts.showAlert("Titulo de entrega", "Titulo de entrega ja cadastrado",
-							"O titulo inserido já foi ultilizado para esta turma", AlertType.INFORMATION);
+							"O titulo inserido já foi ultilizado para esta turma", AlertType.WARNING);
 				} else {
 					PreparedStatement st = conn.prepareStatement(
 							"insert into entrega (titulo_entrega, data_entrega, descricao, id_turma) values (?, ?, ?, ?)");
@@ -100,6 +97,10 @@ public class TelaCadastrarEntregasController implements Initializable {
 					st.setInt(4, turma_selecionada.getId());
 
 					st.executeUpdate();
+					
+					Alerts.showAlert("Sucesso", "Entrega cadastrada!!!",
+							"A entrega foi cadastrada com sucesso", AlertType.INFORMATION);
+					
 				}
 
 			}
@@ -134,8 +135,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			Alerts.showAlert("SQLException", "Erro ao buscar turmas",
-					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
+			Alerts.showAlert("SQLException", "Erro ao buscar turmas", "Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
 		}
 
 		if (listaTurmas != null) {

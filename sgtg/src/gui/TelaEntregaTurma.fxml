@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEntregaTurmaController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
          <children>
@@ -22,19 +22,19 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="220.0" prefWidth="100.0">
          <children>
-            <ComboBox prefWidth="150.0" promptText="Selecione a turma">
+            <ComboBox fx:id="comboBoxTurma" prefWidth="150.0" promptText="Selecione a turma">
                <VBox.margin>
                   <Insets bottom="25.0" />
                </VBox.margin>
             </ComboBox>
-            <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="500.0" prefWidth="900.0">
                <children>
-                  <TableView prefHeight="200.0" prefWidth="500.0">
+                  <TableView fx:id="tableViewEntregas" prefHeight="322.0" prefWidth="900.0">
                     <columns>
-                      <TableColumn prefWidth="96.0" text="Entrega" />
-                      <TableColumn prefWidth="280.5" text="Descrição" />
-                        <TableColumn prefWidth="72.5" text="Data" />
-                        <TableColumn prefWidth="50.5" text="Ações" />
+                      <TableColumn fx:id="tableColumnTitulo" prefWidth="96.0" text="Entrega" />
+                      <TableColumn fx:id="tableColumnDescricao" prefWidth="354.0" text="Descrição" />
+                        <TableColumn fx:id="tableColumnData" prefWidth="289.0" text="Data" />
+                        <TableColumn fx:id="tableColumnEditar" prefWidth="149.0" text="Ações" />
                     </columns>
                   </TableView>
                </children>
