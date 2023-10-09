@@ -12,7 +12,6 @@ import gui.TelaGerenciarAlunosController;
 
 import java.util.ArrayList;
 
-import application.Main;
 import entidades.Aluno;
 import gui.TelaConfirmaController;
 
@@ -21,7 +20,6 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
 public class Telas {
@@ -122,11 +120,12 @@ public class Telas {
                 	
                 	// Vai incluir o aluno no banco.
 					insertBd(alunos.get(currentAlunoIndex));
+					
 
-                	
-                    // Avança para o próximo aluno.
+					// Avança para o próximo aluno.
                     currentAlunoIndex++;
                     if (currentAlunoIndex < alunos.size()) {
+                        
                         showAluno(controller, alunos.get(currentAlunoIndex));
                         
                     // Caso todos os alunos tenham sido exibidos
@@ -139,10 +138,10 @@ public class Telas {
                 controller.btConfirmaTodos.setOnAction(event ->{
                 	while(currentAlunoIndex < alunos.size()) {
                     	alunos.get(currentAlunoIndex).setConfirmado();
-                    	currentAlunoIndex++;
                     	
                     	// Vai incluir o aluno no banco.
                     	insertBd(alunos.get(currentAlunoIndex));
+                    	currentAlunoIndex++;
                 	}
                 	
                 	try {
@@ -208,58 +207,112 @@ public class Telas {
     
     //Método para jogar os dados no banco de dados
     
-    public void insertBd(Aluno aluno) {
+    public void insertBd(Aluno aluno){
     	Connection conecta = null;
     	
-    	try {
+    	PreparedStatement stBuscaEmailOrientador = null;
+    	 
+    	PreparedStatement stBuscaIdTurma = null;
+    	
+    	PreparedStatement stBuscaIdAluno = null;
+    	
+    	PreparedStatement stBuscaIdTipo = null;
+    	
+    	PreparedStatement stAluno = null;
+    	
+    	PreparedStatement stOrientador = null;
+    	
+    	PreparedStatement stTurma = null;
+    	
+    	PreparedStatement stTg = null;
+    	
+    	PreparedStatement stTipo = null;
+    	
+    	PreparedStatement stMatricula = null;
+    	
+    	
+    	try	 {
     	conecta = DB.getConnection();
     	
-    	PreparedStatement stBuscaEmailOrientador = conecta.prepareStatement("select orientador.id, orientador.email_fatec from orientador where email_fatec like %?%");
+    	stBuscaEmailOrientador = conecta.prepareStatement("select orientador.id, orientador.email_fatec from orientador where email_fatec like ?");
     	
-    	PreparedStatement stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador) values(?,?,?,?)");
+    	stBuscaIdTurma = conecta.prepareStatement("select turma.id, turma.nome from turma where turma.nome = ?");
     	
-    	PreparedStatement stOrientador = conecta.prepareStatement("insert into orientador (nome,email_fatec) values(?,?)");
+    	stBuscaIdAluno = conecta.prepareStatement("select aluno.id,aluno.email_institucional from aluno where aluno.email_institucional = ?");
     	
-    	PreparedStatement stTurma = conecta.prepareStatement("insert into turma(nome) values(?)");
+    	stBuscaIdTipo = conecta.prepareStatement("select tipo.id,tipo.tipo from tipo where tipo.tipo = ?");
     	
-    	PreparedStatement stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina) values(?,?,?)");
+    	stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador) values(?,?,?,?)");
     	
-    	PreparedStatement stTipo = conecta.prepareStatement("insert into tipo(tipo) values(?)");
+    	stOrientador = conecta.prepareStatement("insert into orientador (nome,email_fatec) values(?,?)");
+    	
+    	stTurma = conecta.prepareStatement("insert into turma(nome) values(?)");
+    	
+    	stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
+    	
+    	stTipo = conecta.prepareStatement("insert into tipo(tipo,regra) values(?,?)");
+    	
+    	stMatricula = conecta.prepareStatement("insert into matricula(id_aluno,id_turma) values(?,?)");
     	
     	stOrientador.setString(1,aluno.getOrientador());
     	stOrientador.setString(2, aluno.getEmailFatecOrientador());
     	stOrientador.executeUpdate();
     	
-    	stTurma.setString(1,aluno.getNomeTurma());
-    	stTurma.executeUpdate();
+    	// Para fazer a consulta e achar o ID do orientador
+    	stBuscaEmailOrientador.setString(1, "%" + aluno.getEmailFatecOrientador() + "%" );
+    	ResultSet result1 = stBuscaEmailOrientador.executeQuery();
+    	result1.next();
+    	int idOrientador = result1.getInt("id");
     	
     	stAluno.setString(1, aluno.getNome());
     	stAluno.setString(2, aluno.getEmailFatecAluno());
     	stAluno.setString(3, aluno.getEmailPessoal());
-    	stAluno.setInt(4, 5);
+    	stAluno.setInt(4, idOrientador);
     	stAluno.executeUpdate();
     	
+    	// Para fazer a consulta e localizar o ID do aluno
+    	stBuscaIdAluno.setString(1, aluno.getEmailFatecAluno());
+    	ResultSet result3 = stBuscaIdAluno.executeQuery();
+    	result3.next();
+    	int idAluno = result3.getInt("id");
+    	
+    	stTurma.setString(1,aluno.getNomeTurma());
+    	stTurma.executeUpdate();
+    	
+    	// Para fazer a consulta e localizar o ID da turma
+    	stBuscaIdTurma.setString(1, aluno.getNomeTurma());
+    	ResultSet result2 = stBuscaIdTurma.executeQuery();
+    	result2.next();
+    	int idTurma = result2.getInt("id");
+    	
+    	stMatricula.setInt(1, idAluno);
+    	stMatricula.setInt(2, idTurma);
+    	stMatricula.executeUpdate();
+    	
+    	
     	stTipo.setString(1, aluno.getTipoTG());
+    	stTipo.setString(2, "123");
     	stTipo.executeUpdate();
+    	
+    	// Para fazer a consulta e localizar o ID do tipo
+    	stBuscaIdTipo.setString(1, aluno.getTipoTG());
+    	ResultSet result4 = stBuscaIdTurma.executeQuery();
+    	result4.next();
+    	int idTipo = result4.getInt("id");
     	
     	stTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
     	stTg.setString(2, aluno.getEmpresa());
     	stTg.setString(3, aluno.getDisciplina());
+    	stTg.setInt(4, idAluno);
+    	stTg.setInt(5, idTipo);
     	stTg.executeUpdate();
     	
 
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.getMessage();
-		} finally {
-			try {
-				if(conecta != null) {
-				conecta.close();
-				}
-			}catch(SQLException e) {
-				throw new RuntimeException("Erro ao fechar conexão", e);
-			}
-		}
+    		e.printStackTrace();
+//    		Alerts.showAlert("SQL Exception","Erro","Este aluno já está cadastrado", AlertType.ERROR);
+		} 
     	
     	}
 	
@@ -278,5 +331,4 @@ public class Telas {
 		mainVbox.getChildren().add(mainMenu);
 
 	}
-
 }
