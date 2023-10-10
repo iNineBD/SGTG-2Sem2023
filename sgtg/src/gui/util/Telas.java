@@ -5,12 +5,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.Year;
 
 import application.Main;
 import conexao.DB;
 import gui.TelaGerenciarAlunosController;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import entidades.Aluno;
 import gui.TelaConfirmaController;
@@ -130,7 +133,12 @@ public class Telas {
                         
                     // Caso todos os alunos tenham sido exibidos
                     } else {
-                        loadView("/gui/TelaGerenciarAlunos.fxml");
+                        try {
+							loadView2("/gui/TelaGerenciarAlunos.fxml");
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
                     }
                 });
                 
@@ -208,6 +216,20 @@ public class Telas {
     //Método para jogar os dados no banco de dados
     
     public void insertBd(Aluno aluno){
+    	
+    	int ano = LocalDate.now().getYear();
+    	
+    	int mes = LocalDate.now().getMonthValue();
+    	
+    	int semestre;
+    	
+    	if(mes > 6) {
+    		semestre = 2;
+    	}else {
+    		semestre = 1;
+    	}
+    	
+    	
     	Connection conecta = null;
     	
     	PreparedStatement stBuscaEmailOrientador = null;
@@ -217,6 +239,10 @@ public class Telas {
     	PreparedStatement stBuscaIdAluno = null;
     	
     	PreparedStatement stBuscaIdTipo = null;
+    	
+    	PreparedStatement stBuscaSemestreEAno = null;
+    	
+    	PreparedStatement stAnoESemestre = null;
     	
     	PreparedStatement stAluno = null;
     	
@@ -242,11 +268,15 @@ public class Telas {
     	
     	stBuscaIdTipo = conecta.prepareStatement("select tipo.id,tipo.tipo from tipo where tipo.tipo = ?");
     	
+    	stBuscaSemestreEAno = conecta.prepareStatement("select semestre.semestralizacao, semestre.ano from semestre where semestre.semestralizacao = ? and semestre.ano = ?");
+    	
+    	stAnoESemestre = conecta.prepareStatement("insert into semestre(semestralizacao,ano) values(?,?)");
+    	
     	stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador) values(?,?,?,?)");
     	
     	stOrientador = conecta.prepareStatement("insert into orientador (nome,email_fatec) values(?,?)");
     	
-    	stTurma = conecta.prepareStatement("insert into turma(nome) values(?)");
+    	stTurma = conecta.prepareStatement("insert into turma(nome,semestralizacao,ano) values(?,?,?)");
     	
     	stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
     	
@@ -276,13 +306,93 @@ public class Telas {
     	result3.next();
     	int idAluno = result3.getInt("id");
     	
-    	stTurma.setString(1,aluno.getNomeTurma());
-    	stTurma.executeUpdate();
-    	
     	// Para fazer a consulta e localizar o ID da turma
     	stBuscaIdTurma.setString(1, aluno.getNomeTurma());
     	ResultSet result2 = stBuscaIdTurma.executeQuery();
-    	result2.next();
+        	
+    	if(!result2.next()) {
+    	// Verificação se no banco já existe ano e semestre
+    	try {
+    		stBuscaSemestreEAno.setInt(1, semestre);
+    		stBuscaSemestreEAno.setInt(2,ano);
+    		ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+    		result5.next();
+    		int sem = result5.getInt("semestralizacao");
+    		int year = result5.getInt("ano");
+        	stTurma.setString(1,aluno.getNomeTurma());
+        	stTurma.setInt(2, sem);
+        	stTurma.setInt(3, year);
+        	stTurma.executeUpdate();
+        	
+        	stBuscaIdTurma.setString(1, aluno.getNomeTurma());
+        	result2 = stBuscaIdTurma.executeQuery();
+        	result2.next();
+        	int idTurma = result2.getInt("id");
+        	
+        	stMatricula.setInt(1, idAluno);
+        	stMatricula.setInt(2, idTurma);
+        	stMatricula.executeUpdate();
+        	       	
+        	stTipo.setString(1, aluno.getTipoTG());
+        	stTipo.setString(2, "123");
+        	stTipo.executeUpdate();
+        	
+        	// Para fazer a consulta e localizar o ID do tipo
+        	stBuscaIdTipo.setString(1, aluno.getTipoTG());
+        	ResultSet result4 = stBuscaIdTurma.executeQuery();
+        	result4.next();
+        	int idTipo = result4.getInt("id");
+        	
+        	stTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
+        	stTg.setString(2, aluno.getEmpresa());
+        	stTg.setString(3, aluno.getDisciplina());
+        	stTg.setInt(4, idAluno);
+        	stTg.setInt(5, idTipo);
+        	stTg.executeUpdate();
+    	}catch(SQLException e) {
+//    		e.printStackTrace();
+    		stAnoESemestre.setInt(1,semestre);
+    		stAnoESemestre.setInt(2, ano);
+    		stAnoESemestre.executeUpdate();
+    		
+    		stBuscaSemestreEAno.setInt(1, semestre);
+    		stBuscaSemestreEAno.setInt(2,ano);
+    		ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+    		result5.next();
+    		int sem = result5.getInt("semestralizacao");
+    		int year = result5.getInt("ano");
+        	stTurma.setString(1,aluno.getNomeTurma());
+        	stTurma.setInt(2, sem);
+        	stTurma.setInt(3,year);
+        	stTurma.executeUpdate();
+        	
+        	stBuscaIdTurma.setString(1, aluno.getNomeTurma());
+        	result2 = stBuscaIdTurma.executeQuery();
+        	result2.next();
+        	int idTurma = result2.getInt("id");
+        	stMatricula.setInt(1, idAluno);
+        	stMatricula.setInt(2, idTurma);
+        	stMatricula.executeUpdate();
+        	
+        	
+        	stTipo.setString(1, aluno.getTipoTG());
+        	stTipo.setString(2, "123");
+        	stTipo.executeUpdate();
+        	
+        	// Para fazer a consulta e localizar o ID do tipo
+        	stBuscaIdTipo.setString(1, aluno.getTipoTG());
+        	ResultSet result4 = stBuscaIdTurma.executeQuery();
+        	result4.next();
+        	int idTipo = result4.getInt("id");
+        	
+        	stTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
+        	stTg.setString(2, aluno.getEmpresa());
+        	stTg.setString(3, aluno.getDisciplina());
+        	stTg.setInt(4, idAluno);
+        	stTg.setInt(5, idTipo);
+        	stTg.executeUpdate();
+    	}}
+    	else {
     	int idTurma = result2.getInt("id");
     	
     	stMatricula.setInt(1, idAluno);
@@ -306,13 +416,14 @@ public class Telas {
     	stTg.setInt(4, idAluno);
     	stTg.setInt(5, idTipo);
     	stTg.executeUpdate();
-    	
+    	}
 
     	} catch (SQLException e) {
 			// TODO Auto-generated catch block
     		e.printStackTrace();
 //    		Alerts.showAlert("SQL Exception","Erro","Este aluno já está cadastrado", AlertType.ERROR);
 		} 
+    	
     	
     	}
 	

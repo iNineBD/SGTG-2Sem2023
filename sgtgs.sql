@@ -1,6 +1,6 @@
 drop database sgtg;
 
-create database sgtg;
+create database if not exists sgtg;
 
 use sgtg;
 
@@ -21,11 +21,23 @@ id_turma int not null,
 constraint pk_idAluno_e_idTurma primary key (id_aluno,id_turma)
 );
 
+
+-- Criando tabela Semestre
+create table semestre(
+semestralizacao int not null,
+ano year not null,
+constraint pk_semestre primary key (semestralizacao, ano)
+);
+
 -- Criando a tabela turma
 create table turma(
 id int auto_increment,
 nome varchar(10) not null,
-constraint pk_idTurma primary key (id)
+semestralizacao int not null,
+ano year not null,
+constraint pk_idTurma primary key (id),
+constraint fk_turma_semestre foreign key (semestralizacao, ano) references semestre (semestralizacao, ano),
+constraint uk_nome_semest_ano unique (nome, semestralizacao, ano)
 );
 
 -- Criando as relações do aluno com a turma através da tabela auxiliar matricula.
@@ -43,6 +55,7 @@ references turma (id);
 -- Criando a tabela de entregas
 create table entrega(
 id int auto_increment,
+titulo_entrega varchar(30),
 data_entrega date not null,
 descricao varchar (200) not null,
 id_turma int not null,
@@ -63,7 +76,8 @@ comentario varchar (200) not null,
 nota double(4,2) not null,
 id_entrega int not null,
 id_aluno int not null,
-constraint pk_feedback primary key (id)
+constraint pk_feedback primary key (id),
+constraint uk_feedback unique (id_entrega, id_aluno)
 );
 
 -- Criando a relação do feedback com a entrega
@@ -98,7 +112,7 @@ references orientador (id);
 -- Criando a tabela tg
 create table tg(
 id int auto_increment,
-problema_a_resolver varchar(200) not null,
+problema_a_resolver varchar(200),
 empresa varchar(50),
 disciplina varchar(50),
 id_aluno int not null,
@@ -116,12 +130,12 @@ references aluno (id);
 -- Criando a tabela tipo
 create table tipo(
 id int auto_increment,
-tipo varchar(50) not null,
-regra varchar(50) not null,
+tipo varchar(100) not null,
+regra varchar(100),
 constraint pk_idTipo primary key (id)
 );
 
--- Criando a relação do tg com tipp
+-- Criando a relação do tg com tipo
 -- Devido a relação N:1 do tg com tipo não é necessária a criação de tabela auxiliar
 alter table tg
 add constraint fk_id_tipo
