@@ -77,8 +77,12 @@ public class LoadGerenciarAlunos {
 	                	alunoAtual.setTotal_entregas(alunoAtual.getTotal_entregas()+listaAlunos.get(j).getTotal_entregas());
 	                    listaAlunos.remove(j);
 	                }
+	                
 	                alunoAtual.setEntregas_format(alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
 	            }
+//	            
+//	            System.out.println(alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
+//                System.out.println(alunoAtual.getNome_aluno());
 	            
 	        }
 	    }
