@@ -63,10 +63,22 @@ public class TelaInicialController implements Initializable{
 						String orientador = vetor[4].trim();
 						String emailFatecOrientador = vetor[5].trim();
 						String turma = vetor[6].trim();
-						String tipoTg = vetor[7].trim();
+						//Pegando o tipo TG e sua regra
+						String tipo = vetor[7].trim();
+						String[] separador = tipo.split("\\(");
+						String tipoTg = separador[0].trim();
+						String regra;
+						try {
+						regra = separador[1].replaceAll("\\)", " ").trim();
+						}
+						catch(ArrayIndexOutOfBoundsException a) {
+							regra = null;
+						}
 						String problemaResolvidoOuEstudoArtigo = vetor[8].trim();
 						String empresa = vetor[9].trim();
 						String disciplina = vetor[10].trim();
+						
+						
 						
 				        // Verifique campos em branco e atribua valores padrão
 				        if (emailPessoal.isEmpty()) {
@@ -102,7 +114,7 @@ public class TelaInicialController implements Initializable{
 						
 						// Adicionando os atributos na classe aluno
 						
-						Aluno aluno = new Aluno(nome,emailPessoal,emailFatecAluno,orientador,emailFatecOrientador,turma,tipoTg,problemaResolvidoOuEstudoArtigo,empresa,disciplina);
+						Aluno aluno = new Aluno(nome,emailPessoal,emailFatecAluno,orientador,emailFatecOrientador,turma,tipoTg,regra,problemaResolvidoOuEstudoArtigo,empresa,disciplina);
 						listAlunos.add(aluno);
 						
 						line = br.readLine();
@@ -111,6 +123,7 @@ public class TelaInicialController implements Initializable{
 					loadTelas.loadView3("/gui/TelaConfirmarCsv.fxml",listAlunos);
 					
 				}catch(IOException e) {
+//					e.printStackTrace();
 					System.out.println("erro =" + e.getMessage());
 				}
 				

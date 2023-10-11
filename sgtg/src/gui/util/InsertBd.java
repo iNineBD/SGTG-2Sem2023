@@ -136,7 +136,7 @@ public class InsertBd {
 	        	stMatricula.executeUpdate();
 	        	       	
 	        	stTipo.setString(1, aluno.getTipoTG());
-	        	stTipo.setString(2, "123");
+	        	stTipo.setString(2,aluno.getRegra());
 	        	stTipo.executeUpdate();
 	        	
 	        	// Para fazer a consulta e localizar o ID do tipo
@@ -178,7 +178,7 @@ public class InsertBd {
 	        	
 	        	
 	        	stTipo.setString(1, aluno.getTipoTG());
-	        	stTipo.setString(2, "123");
+	        	stTipo.setString(2, aluno.getRegra());
 	        	stTipo.executeUpdate();
 	        	
 	        	// Para fazer a consulta e localizar o ID do tipo
@@ -203,7 +203,7 @@ public class InsertBd {
 	    	
 	    	
 	    	stTipo.setString(1, aluno.getTipoTG());
-	    	stTipo.setString(2, "123");
+	    	stTipo.setString(2, aluno.getRegra());
 	    	stTipo.executeUpdate();
 	    	
 	    	// Para fazer a consulta e localizar o ID do tipo
@@ -263,7 +263,7 @@ public class InsertBd {
 	            	stMatricula.executeUpdate();
 	            	       	
 	            	stTipo.setString(1, aluno.getTipoTG());
-	            	stTipo.setString(2, "123");
+	            	stTipo.setString(2,aluno.getRegra());
 	            	stTipo.executeUpdate();
 	            	
 	            	// Para fazer a consulta e localizar o ID do tipo
@@ -305,7 +305,7 @@ public class InsertBd {
 	            	
 	            	
 	            	stTipo.setString(1, aluno.getTipoTG());
-	            	stTipo.setString(2, "123");
+	            	stTipo.setString(2, aluno.getRegra());
 	            	stTipo.executeUpdate();
 	            	
 	            	// Para fazer a consulta e localizar o ID do tipo
@@ -330,7 +330,7 @@ public class InsertBd {
 	        	
 	        	
 	        	stTipo.setString(1, aluno.getTipoTG());
-	        	stTipo.setString(2, "123");
+	        	stTipo.setString(2, aluno.getRegra());
 	        	stTipo.executeUpdate();
 	        	
 	        	// Para fazer a consulta e localizar o ID do tipo

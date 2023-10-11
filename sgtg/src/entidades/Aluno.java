@@ -12,6 +12,7 @@ public class Aluno implements Serializable{
 		private String emailFatecOrientador;
 		private String nomeTurma;
 		private String tipoTg;
+		private String regra;
 		private String problemaResolvidoOuEstudoArtigo;
 		private String empresa;
 		private String disciplina;
@@ -19,7 +20,7 @@ public class Aluno implements Serializable{
 		
 		
 		// Criando o construtor
-		public Aluno(String nome, String emailPessoal ,String emailFatecAluno, String orientador,String emailFatecOrientador, String nomeTurma, String tipoTg, String problemaResolvidoOuEstudoArtigo, String empresa, String disciplina) {
+		public Aluno(String nome, String emailPessoal ,String emailFatecAluno, String orientador,String emailFatecOrientador, String nomeTurma, String tipoTg,String regra,String problemaResolvidoOuEstudoArtigo, String empresa, String disciplina) {
 			this.nome = nome;
 			this.emailPessoal = emailPessoal;
 			this.emailFatecAluno = emailFatecAluno;
@@ -27,6 +28,7 @@ public class Aluno implements Serializable{
 			this.emailFatecOrientador = emailFatecOrientador;
 			this.nomeTurma = nomeTurma;
 			this.tipoTg = tipoTg;
+			this.regra = regra;
 			this.problemaResolvidoOuEstudoArtigo = problemaResolvidoOuEstudoArtigo;
 			this.empresa = empresa;
 			this.disciplina = disciplina;
@@ -82,6 +84,10 @@ public class Aluno implements Serializable{
 
 		public void setTipoTG(String tipoTg) {
 			this.tipoTg = tipoTg;
+		}
+		
+		public String getRegra() {
+			return regra;
 		}
 
 		public String getProblemaResolvidoOuEstudoArtigo() {
