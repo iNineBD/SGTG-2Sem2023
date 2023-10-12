@@ -9,37 +9,50 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEntregaTurmaController">
-   <children>
-      <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
-         <children>
-            <Label text="Visualizar Entregas">
-               <font>
-                  <Font name="System Bold" size="25.0" />
-               </font>
-            </Label>
-         </children>
-      </VBox>
-      <VBox alignment="CENTER" prefHeight="220.0" prefWidth="100.0">
-         <children>
-            <ComboBox fx:id="comboBoxTurma" prefWidth="150.0" promptText="Selecione a turma">
-               <VBox.margin>
-                  <Insets bottom="25.0" />
-               </VBox.margin>
-            </ComboBox>
-            <HBox alignment="CENTER" prefHeight="500.0" prefWidth="900.0">
-               <children>
-                  <TableView fx:id="tableViewEntregas" prefHeight="322.0" prefWidth="900.0">
-                    <columns>
-                      <TableColumn fx:id="tableColumnTitulo" prefWidth="96.0" text="Entrega" />
-                      <TableColumn fx:id="tableColumnDescricao" prefWidth="354.0" text="Descrição" />
-                        <TableColumn fx:id="tableColumnData" prefWidth="289.0" text="Data" />
-                        <TableColumn fx:id="tableColumnEditar" prefWidth="149.0" text="Ações" />
-                    </columns>
-                  </TableView>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+	minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+	prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="gui.TelaEntregaTurmaController">
+	<children>
+		<VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
+			<children>
+				<Label text="Visualizar Entregas">
+					<font>
+						<Font name="System Bold" size="25.0" />
+					</font>
+				</Label>
+			</children>
+		</VBox>
+		<VBox alignment="CENTER" prefHeight="220.0" prefWidth="100.0">
+			<children>
+				<ComboBox fx:id="comboBoxTurma" prefWidth="150.0"
+					promptText="Selecione a turma">
+					<VBox.margin>
+						<Insets bottom="25.0" />
+					</VBox.margin>
+				</ComboBox>
+				<HBox alignment="CENTER" prefHeight="1000.0" prefWidth="900.0">
+					<children>
+						<TableView fx:id="tableViewEntregas" prefHeight="322.0"
+							prefWidth="900.0">
+							<columns>
+								<TableColumn fx:id="tableColumnTitulo"
+									prefWidth="96.0" text="Entrega" />
+								<TableColumn fx:id="tableColumnDescricao"
+									prefWidth="354.0" text="Descrição" />
+								<TableColumn fx:id="tableColumnData"
+									prefWidth="289.0" text="Data" />
+								<TableColumn fx:id="tableColumnEditar"
+									prefWidth="149.0" text="Ações" />
+							</columns>
+							<columnResizePolicy>
+								<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+							</columnResizePolicy>
+						</TableView>
+					</children>
+				</HBox>
+			</children>
+		</VBox>
+	</children>
 </VBox>

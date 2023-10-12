@@ -33,6 +33,9 @@ public class Telas {
 			mainVbox.getChildren().clear();
 
 			mainVbox.getChildren().add(mainMenu);
+			
+			mainVbox.prefHeightProperty().bind(mainScene.heightProperty());
+			mainVbox.prefWidthProperty().bind(mainScene.widthProperty());
 
 
 			mainVbox.getChildren().addAll(newVbox.getChildren());
@@ -61,6 +64,9 @@ public class Telas {
 			mainVbox.getChildren().add(mainMenu);
 
 			mainVbox.getChildren().addAll((newVbox.getChildren()));
+			
+			mainVbox.prefHeightProperty().bind(mainScene.heightProperty());
+			mainVbox.prefWidthProperty().bind(mainScene.widthProperty());
 			
 			TelaGerenciarAlunosController controller = loader.getController();
 			controller.setLoadAluno(new LoadGerenciarAlunos());
