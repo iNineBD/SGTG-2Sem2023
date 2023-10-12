@@ -62,7 +62,7 @@ public class TelaInicialController implements Initializable{
 						String nome = vetor[3].trim();
 						String orientador = vetor[4].trim();
 						String emailFatecOrientador = vetor[5].trim();
-						String turma = vetor[6].trim();
+						String turma = vetor[6].trim().toUpperCase();
 						//Pegando o tipo TG e sua regra
 						String tipo = vetor[7].trim();
 						String[] separador = tipo.split("\\(");

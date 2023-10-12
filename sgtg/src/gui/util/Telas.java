@@ -120,7 +120,6 @@ public class Telas {
                 	
                 	// Vai incluir o aluno no banco.
                 	insertBd.insertBd(alunos.get(currentAlunoIndex));
-					
 
 					// Avança para o próximo aluno.
                     currentAlunoIndex++;
