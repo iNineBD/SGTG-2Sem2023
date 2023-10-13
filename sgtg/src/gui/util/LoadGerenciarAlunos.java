@@ -32,8 +32,9 @@ public class LoadGerenciarAlunos {
 	    	String tipo = result.getString("tipo");
 	    	String turma = result.getString("turma");
 	    	int id_turma = result.getInt("id_turma");
-	    		
+//	    	System.out.println(id +" - "+ nome_aluno+" - "+ nome_orientador+" - "+ turma+" - "+ tipo+" - "+ id_turma);	
 	    	GerenciarAlunoDTO aluno = new GerenciarAlunoDTO(id, nome_aluno, nome_orientador, turma, tipo, id_turma);
+	    	
 	    	
 	    	
 	    	// total de entregas
@@ -72,7 +73,7 @@ public class LoadGerenciarAlunos {
 	            GerenciarAlunoDTO alunoAtual = listaAlunos.get(i);
 
 	            for (int j = i + 1; j < listaAlunos.size(); j++) {
-	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())) {
+	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())&& alunoAtual.getId_turma() !=(listaAlunos.get(j).getId_turma()) ) {
 	                	alunoAtual.setNome_turma("TG1 e TG2");
 	                	alunoAtual.setTotal_entregas(alunoAtual.getTotal_entregas()+listaAlunos.get(j).getTotal_entregas());
 	                    listaAlunos.remove(j);

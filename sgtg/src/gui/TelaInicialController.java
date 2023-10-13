@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import gui.util.Alerts;
+import gui.util.Constraints;
 import gui.util.Telas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,6 +47,7 @@ public class TelaInicialController implements Initializable{
 		Scanner leitor = null;
 		
 		ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
+		Constraints filtro = new Constraints();
 		
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
 							
@@ -58,10 +60,10 @@ public class TelaInicialController implements Initializable{
 						
 						// Listando os atributos do CSV
 						String emailPessoal = vetor[1].trim();
-						String emailFatecAluno = vetor[2].trim();
-						String nome = vetor[3].trim();
-						String orientador = vetor[4].trim();
-						String emailFatecOrientador = vetor[5].trim();
+						String emailFatecAluno = filtro.verificarEmail(vetor[2].trim());
+						String nome = filtro.verificarNome(vetor[3].trim());
+						String orientador = filtro.verificarNome(vetor[4].trim());
+						String emailFatecOrientador = filtro.verificarEmail(vetor[5].trim());
 						String turma = vetor[6].trim().toUpperCase();
 						//Pegando o tipo TG e sua regra
 						String tipo = vetor[7].trim();

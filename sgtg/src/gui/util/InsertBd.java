@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 
 import conexao.DB;
 import entidades.Aluno;
+import javafx.scene.control.Alert.AlertType;
 
 public class InsertBd {
 
@@ -28,9 +30,10 @@ public class InsertBd {
         int ano = LocalDate.now().getYear();
         int mes = LocalDate.now().getMonthValue();
         int semestre = (mes > 6) ? 2 : 1;
+        Connection conecta = null;
         
         try {
-            Connection conecta = DB.getConnection();
+            conecta = DB.getConnection();
             prepararStatements(conecta);
 
             int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
@@ -41,7 +44,10 @@ public class InsertBd {
             inserirTg(aluno, idAluno, idTipo);
             inserirMatricula(idAluno, idTurma,semestre,ano);
 
-        } catch (SQLException e) {
+        }catch(SQLIntegrityConstraintViolationException a) {
+        	Alerts.showAlert("IO Exception", "Erro ao inserir aluno", a.getMessage(), AlertType.ERROR);
+        	
+        }catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as needed (e.g., show an error message).
         }
