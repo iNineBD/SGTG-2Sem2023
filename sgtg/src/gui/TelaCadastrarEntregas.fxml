@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaCadastrarEntregasController">
    <children>
       <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
          <children>
@@ -30,14 +30,17 @@
       </VBox>
       <VBox alignment="CENTER" prefHeight="150.0" prefWidth="100.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="20.0" prefWidth="600.0">
-               <children>
-                  <Label text="Semestre/Ano" />
-               </children>
-            </VBox>
+            <Label fx:id="lbSemestreAno" textFill="#2821ff">
+               <VBox.margin>
+                  <Insets bottom="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
             <VBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0">
                <children>
-                  <ChoiceBox prefWidth="100.0" />
+                  <ChoiceBox fx:id="choiceBoxTurma" prefWidth="100.0" />
                </children>
                <VBox.margin>
                   <Insets bottom="5.0" />
@@ -78,17 +81,17 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="180.0">
                      <children>
-                        <TextField>
+                        <TextField fx:id="txtFieldTituloEntrega">
                            <VBox.margin>
                               <Insets bottom="3.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextArea prefHeight="200.0" prefWidth="200.0">
+                        <TextArea fx:id="txtAreaDescricao" prefHeight="200.0" prefWidth="200.0">
                            <VBox.margin>
                               <Insets bottom="3.0" />
                            </VBox.margin>
                         </TextArea>
-                        <DatePicker prefWidth="180.0">
+                        <DatePicker fx:id="datePickerDataFinal" prefWidth="180.0">
                            <VBox.margin>
                               <Insets bottom="3.0" />
                            </VBox.margin>
@@ -106,7 +109,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Cancelar">
+                  <Button fx:id="btnCancelar" mnemonicParsing="false" onAction="#onBtnCancelarAction" prefHeight="25.0" prefWidth="70.0" text="Cancelar">
                      <HBox.margin>
                         <Insets left="15.0" right="15.0" />
                      </HBox.margin>
@@ -114,7 +117,7 @@
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Salvar">
+                  <Button fx:id="btnSalvar" mnemonicParsing="false" onAction="#onBtnSalvarAction" prefHeight="25.0" prefWidth="70.0" text="Salvar">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
