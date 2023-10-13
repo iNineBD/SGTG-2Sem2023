@@ -18,9 +18,7 @@ public class GerenciarAlunoDTO {
 	
 	private String entregas_format;
 	
-	private int id_turma;
-
-	
+	private int id_turma;	
 
 	public GerenciarAlunoDTO(int id_aluno, String nome_aluno, String nome_orientador, String nome_turma, String tipo_tg, int id_turma) {
 		this.id_aluno = id_aluno;
