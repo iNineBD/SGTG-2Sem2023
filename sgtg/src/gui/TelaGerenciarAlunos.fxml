@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="852.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaGerenciarAlunosController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaGerenciarAlunosController">
    <children>
       <VBox alignment="CENTER" prefHeight="367.0" prefWidth="852.0">
          <children>
@@ -19,7 +19,7 @@
                   <Insets bottom="25.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <TableView fx:id="tableViewGerenciarAluno" prefHeight="374.0" prefWidth="600.0">
+            <TableView fx:id="tableViewGerenciarAluno" prefHeight="900.0" prefWidth="550.0">
                <columns>
                   <TableColumn fx:id="tableColumnNome" editable="false" prefWidth="75.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Nome" />
                   <TableColumn fx:id="tableColumnOrientador" editable="false" prefWidth="99.0" style="-fx-font-size: 15; -fx-font-family: arial;" text="Orientador" />

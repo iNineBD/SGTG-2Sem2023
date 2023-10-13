@@ -2,6 +2,7 @@ package gui;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -50,6 +51,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		initializeNodes();
+		
 	}
 
 	private void initializeNodes() {

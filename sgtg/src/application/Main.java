@@ -18,7 +18,6 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			
-			
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/MainMenuBar.fxml"));
 			ScrollPane scrollPane = loader.load();
 			
