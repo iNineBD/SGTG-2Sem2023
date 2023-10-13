@@ -39,10 +39,11 @@ public class InsertBd {
             int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
             int idAluno = buscarOuInserirAluno(aluno);
             int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano);
+            inserirMatricula(idAluno, idTurma,semestre,ano);
 
             int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
             inserirTg(aluno, idAluno, idTipo);
-            inserirMatricula(idAluno, idTurma,semestre,ano);
+            
 
         }catch(SQLIntegrityConstraintViolationException a) {
         	Alerts.showAlert("IO Exception", "Erro ao inserir aluno", a.getMessage(), AlertType.ERROR);
