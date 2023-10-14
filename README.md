@@ -7,7 +7,8 @@
     <a href="#requisitos">Requisitos</a>  |
     <a href="#backlog">Product Backlog</a>  |
     <a href="#entregas">Sprints</a>  |
-    <a href="#tecnologias">Tecnologias</a>
+    <a href="#tecnologias">Tecnologias</a> |
+    <a href="#burndown">Burndown</a>
 </p>
 
 <div align="center"><hr width=70%></div>
@@ -35,9 +36,9 @@
 
 ## ◻️ Contextualização
 
-> O curso de Análise e Desenvolvimento de Sistemas da Fatec São José dos Campos enfrenta desafios no gerenciamento de Trabalhos de Graduação (TGs), pois não possui um sistema eficiente para isso. Atualmente, a gestão dos TGs é feita por meio de formulários do Google, planilhas e e-mails, o que gera problemas de organização e dificulta o acompanhamento do progresso dos alunos.
+> Muitos desafios no gerenciamento de Trabalho de Graduação (TG's) estão sendo enfrentados atualmente no curso de Análise e Desenvolvimento de Sistemas, na unidade da FATEC - São José dos Campos, por não se ter um sistema prático e efciente para realizar a gestão. Com isso, se tem dificuldades na organização e acompanhamentos do progresso dos alunos.
 
-> Propomos a criação de um software dedicado à gestão dos Trabalhos de Graduação (TGs) no âmbito do curso de Análise e Desenvolvimento de Sistemas da Fatec São José dos Campos. Este software visa enfrentar os desafios atuais e aprimorar todo o processo relacionado aos TGs. O software será desenvolvido com o intuito de centralizar e simplificar a administração dos TGs, permitindo um acompanhamento eficaz das etapas de desenvolvimento, prazos de entrega e status dos projetos.
+> Para que seja possível sanar esses problemas, foi proposto como ferramenta, a criação de um Sistema de Gerenciamento de Banco de Dados, que será desenvolvido com o foco de simplificar e centralizar toda a administração dos TGs, permitindo o acompanhamento eficiente durante as etapas, prazos de entrega e status dos projetos.
 
 <div align="left"><hr width=70%></div>
 
@@ -67,7 +68,7 @@ defesa, fechamento de semestre e transporte de notas.
         <tr>
         <tr>
             <td rowspan="3">Dados</td>
-            <td>Como professor, eu quero poder carregar um arquivo CSV, que é gerado a partir de um formulário preenchido pelos alunos, e ao ser exportado todas as informações de um aluno ficam atribuídas em uma única linha, para que os dados sejam separados de forma automática.</td>
+            <td>Como professor, eu quero poder carregar um arquivo CSV (gerado a partir de um formulário preenchido pelos alunos) e ao ser exportado todas as informações de um aluno, ficam atribuídas em uma única linha, para que os dados sejam separados de forma automática, alimentando um Banco de Dados.</td>
             <td>1</td>
             <td>2</td>
         </tr>
@@ -83,7 +84,7 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
             <td>Controle de entregas</td>
-            <td>Como professor, eu quero poder cadastrar, editar e excluir entregas, para que eu possa acompanhar o andamento dos trabalhos.</td>
+            <td>Como professor, eu quero poder cadastrar, editar e excluir entregas, para que seja possível gerar um histórico e acompanhar o andamento durante as etapas até serem finalizadas.</td>
             <td>4</td>
             <td>2</td>
         </tr>
@@ -94,25 +95,25 @@ defesa, fechamento de semestre e transporte de notas.
             <td>3</td>
         </tr>
         <tr>
-            <td>Como professor, eu quero realizar feedbacks por entrega para facilitar nas avaliações e acompanhamento do desenvolvimento do aluno.</td>
+            <td>Como professor, eu quero realizar feedbacks por entrega, para facilitar nas avaliações e acompanhamento do desenvolvimento do aluno durante o semestre.</td>
             <td>6</td>
             <td>3</td>
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor quero gerar relatório de fechamento das notas, para que seja possível extrair as médias entre elas, gerando a nota final do aluno.</td>
+            <td>Como professor quero gerar relatório de fechamento das notas, para que seja possível extrair as médias entre elas, gerando a nota final de cada aluno.</td>
             <td>7</td>
             <td>4</td>
         </tr>
         <tr>
             <td>Gestão de orientadores</td>
-            <td>Como professor, eu quero ter a relação dos orientadores de cada aluno matriculado, para me certificar que esse acompanhamento está sendo feito.</td>
+            <td>Como professor, eu quero ter a relação dos orientadores de cada aluno matriculado, para me certificar que esse acompanhamento, entre as partes envolvidas,está sendo feito.</td>
             <td>8</td>
             <td>4</td>
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor, quero gerar relatório com dados de entregas, notas e se o aluno está apto a defender, para assim poder realizar o agendamento com a banca.</td>
+            <td>Como professor, quero gerar relatório com dados de entregas, notas e se o aluno está apto a defender o seu trabalho, para assim poder realizar o agendamento com a banca.</td>
             <td>9</td>
             <td>3</td>
         </tr>
@@ -124,13 +125,13 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
             <td>Geração de relatórios</td>
-            <td>Como professor quero gerar relatório de acompanhamento das entregas, para auxiliar na avaliação.</td>
+            <td>Como professor quero gerar relatório de acompanhamento das entregas, para auxiliar na avaliação de desempenho do aluno.</td>
             <td>11</td>
             <td>3</td>
         </tr>
         <tr>
             <td>Documentação</td>
-            <td>Como professor, quero ter um meio de consulta para possíveis dificuldades e dúvidas sobre o produto, e requisitos de funcionamento da aplicação.</td>
+            <td>Como professor, quero ter um meio de consulta  e requisitos de funcionamento sobre o Sistema de Gerenciamento do Banco de Dados, para que eu tenha total independência para tratar possíveis dificuldades.</td>
             <td>12</td>
             <td>4</td>
         </tr>
@@ -144,10 +145,10 @@ defesa, fechamento de semestre e transporte de notas.
 
 | SPRINTS | PERÍODOS | DESCRIÇÃO |
 |:-------:|:-----:|:---------:|
-| Sprint 1 | 04/09/2023 à 24/09/2023 | Planejamento, modelagem e prototipação. |
-| Sprint 2 | 25/09/2023 à 15/10/2023 | Upload, tratamento dos dados e controle de entregas. |
-| Sprint 3 | 16/10/2023 à 05/11/2023 | Feedbacks e notas. |
-| Sprint 4 | 06/11/2023 à 26/11/2023 | Relatórios e documentação |
+| [Sprint 1](https://github.com/iNineBD/SGTG-2Sem2023/wiki/Sprint-1) | 04/09/2023 à 24/09/2023 | Planejamento, modelagem e prototipação. |
+| [Sprint 2](https://github.com/iNineBD/SGTG-2Sem2023/wiki/Sprint-2) | 25/09/2023 à 15/10/2023 | Upload, tratamento dos dados e controle de entregas. |
+| [Sprint 3](https://github.com/iNineBD/SGTG-2Sem2023/wiki/Sprint-3) | 16/10/2023 à 05/11/2023 | Feedbacks e notas. |
+| [Sprint 4](https://github.com/iNineBD/SGTG-2Sem2023/wiki/Sprint-4) | 06/11/2023 à 26/11/2023 | Relatórios e documentação |
 
 <div align="left"><hr width=70%></div>
 
@@ -161,3 +162,13 @@ defesa, fechamento de semestre e transporte de notas.
 ![Figma](https://img.shields.io/badge/figma-%23F24E1E.svg?style=for-the-badge&logo=figma&logoColor=white)
 ![Scene Builder](https://img.shields.io/badge/scene_builder-orange.svg?style=for-the-badge&logo=&logoColor=orange)
 ![ClickUp](https://img.shields.io/badge/clickup-%237B68EE.svg?&style=for-the-badge&logo=clickup&logoColor=white)
+
+<div align="left"><hr width=70%></div>
+
+<span id="burndown">
+
+## ◻️ Burndown
+
+![image](https://github.com/iNineBD/SGTG-2Sem2023/assets/117841950/8f424740-789e-4dfd-868d-7f9b04132afc)
+
+
