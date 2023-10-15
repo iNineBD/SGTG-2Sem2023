@@ -65,13 +65,13 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 			// Verifica se localData é menor do que a data atual
 			if (data.isBefore(dataAtual)) {
-				Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data seleionada é anterior a data atual", AlertType.WARNING);
+				Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data selecionada é anterior a data atual", AlertType.WARNING);
 			} else {
 				new DB();
 				Connection conn = DB.getConnection();
 
-				PreparedStatement st2 = conn.prepareStatement("select titulo_entrega from entrega where id_turma = ?");
-				st2.setInt(1, turma_selecionada.getId());
+				PreparedStatement st2 = conn.prepareStatement("select titulo_entrega from entrega");
+				
 				ResultSet result = st2.executeQuery();
 
 				while (result.next()) {
@@ -87,7 +87,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 				}
 				if (nome_repetido) {
 					Alerts.showAlert("Titulo de entrega", "Titulo de entrega ja cadastrado",
-							"O titulo inserido já foi ultilizado para esta turma", AlertType.WARNING);
+							"O titulo inserido já foi ultilizado", AlertType.WARNING);
 				} else {
 					PreparedStatement st = conn.prepareStatement(
 							"insert into entrega (titulo_entrega, data_entrega, descricao, id_turma) values (?, ?, ?, ?)");

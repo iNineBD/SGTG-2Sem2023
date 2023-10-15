@@ -1,5 +1,3 @@
-drop database sgtg;
-
 create database if not exists sgtg;
 
 use sgtg;
