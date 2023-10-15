@@ -9,9 +9,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaConfirmaController">
+
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox alignment="CENTER" prefHeight="327.0" prefWidth="600.0">
          <children>
             <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0">
                <children>
@@ -25,11 +26,11 @@
                   <Insets bottom="15.0" />
                </VBox.margin>
             </VBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" prefHeight="268.0" prefWidth="600.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="170.0" prefWidth="210.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="267.0" prefWidth="224.0">
                      <children>
-                        <Label text="Nome completo:" textAlignment="CENTER">
+                        <Label prefHeight="16.0" prefWidth="110.0" text="Nome completo:" textAlignment="CENTER">
                            <font>
                               <Font name="Arial" size="15.0" />
                            </font>
@@ -101,19 +102,60 @@
                               <Insets bottom="9.0" left="5.0" />
                            </VBox.margin>
                         </Label>
+                        <Label text="Disciplina:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="370.0">
+                  <VBox prefHeight="239.0" prefWidth="370.0">
                      <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
-                        <TextField />
+                        <TextField fx:id="txtNome">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailInstitucional">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailPessoal">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtNomeOrientador">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailInstitucionalOrientador">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTgMatriculado">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTipoTg">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTituloTg">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmpresa">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+                        <TextField fx:id="txtDisciplina">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin>
+                        </TextField>
+
                      </children>
                   </VBox>
                </children>
@@ -123,9 +165,9 @@
             <Insets top="20.0" />
          </VBox.margin>
       </VBox>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Confirmar">
+            <Button fx:id="btConfirma" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Confirmar">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>
@@ -133,7 +175,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Confirmar todos">
+            <Button fx:id="btConfirmaTodos" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Confirmar todos">
                <font>
                   <Font name="Arial" size="12.0" />
                </font>

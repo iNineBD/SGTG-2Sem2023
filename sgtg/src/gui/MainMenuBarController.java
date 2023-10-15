@@ -2,6 +2,7 @@ package gui;
 
 import java.io.File;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import gui.util.Telas;
@@ -33,17 +34,13 @@ public class MainMenuBarController implements Initializable{
 	
 	@FXML
 	public void onMenuItemCarregarCsvAction() {
-		FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select File");
-        File selectedFile = fileChooser.showOpenDialog(new Stage());
-        if (selectedFile != null) {
-            System.out.println("Arquivo selecionado: " + selectedFile.getAbsolutePath());
+		TelaInicialController carregaCsv = new TelaInicialController();
+		carregaCsv.onBtCarregarCsvAction();
         }
-	}
 	
 	@FXML
-	public void onMenuItemGerenciarAlunoAction() {
-		loadTelas.loadView("/gui/TelaGerenciarAlunos.fxml");
+	public void onMenuItemGerenciarAlunoAction() throws SQLException {
+		loadTelas.loadView2("/gui/TelaGerenciarAlunos.fxml");
 	}
 	
 	@FXML
