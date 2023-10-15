@@ -147,47 +147,56 @@ public class Telas {
             	
                 // Exibe o primeiro aluno ao carregar a tela.
                 aluno.mostraAluno(controller, alunos.get(currentAlunoIndex));
-                
 
                 // Configura o botão Confirma.  
                 controller.btConfirma.setOnAction(event -> {
-                	
                 	// Caso tenha alterações nos campos, caso não tenha segue normal.
                 	aluno.editaInformacao(controller, alunos.get(currentAlunoIndex));
-                	                	
-                	// Quando clicar no botão confirma ele vai acusar como True.
-                	alunos.get(currentAlunoIndex).setConfirmado();
                 	
-                	// Vai incluir o aluno no banco.
-                	insertBd.insertBd(alunos.get(currentAlunoIndex));
-
-					// Avança para o próximo aluno.
-                    currentAlunoIndex++;
-                    if (currentAlunoIndex < alunos.size()) {
-                        
-                    	aluno.mostraAluno(controller, alunos.get(currentAlunoIndex));
-                        
-                    // Caso todos os alunos tenham sido exibidos
-                    } else {
-                        try {
-							loadView2("/gui/TelaGerenciarAlunos.fxml");
-						} catch (SQLException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-                    }
+                	if(aluno.confirmaDados(controller, alunos.get(currentAlunoIndex))) {
+                		      	
+	                	// Quando clicar no botão confirma ele vai acusar como True.
+	                	alunos.get(currentAlunoIndex).setConfirmado();
+	                	
+	                	// Vai incluir o aluno no banco.
+	                	insertBd.insertBd(alunos.get(currentAlunoIndex));
+	
+						// Avança para o próximo aluno.
+	                    currentAlunoIndex++;
+	                    if (currentAlunoIndex < alunos.size()) {
+	                        
+	                    	aluno.mostraAluno(controller, alunos.get(currentAlunoIndex));
+	                        
+	                    // Caso todos os alunos tenham sido exibidos
+	                    } else {
+	                        try {
+								loadView2("/gui/TelaGerenciarAlunos.fxml");
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+	                    }
+                	}else {
+                		Alerts.showAlert("IO Exception","Erro","Dados inválidos.", AlertType.ERROR);
+                	}
                 });
                 
                 //Configura o botão confirmar todos
                 controller.btConfirmaTodos.setOnAction(event ->{
+                	// Caso tenha alterações nos campos, caso não tenha segue normal.
+                	aluno.editaInformacao(controller, alunos.get(currentAlunoIndex));
                 	while(currentAlunoIndex < alunos.size()) {
                     	alunos.get(currentAlunoIndex).setConfirmado();
-                    	
+                    	if(aluno.confirmaDados(controller, alunos.get(currentAlunoIndex))) {
                     	// Vai incluir o aluno no banco.
                     	insertBd.insertBd(alunos.get(currentAlunoIndex));
                     	currentAlunoIndex++;
-                	}
-                	
+                    	}else {
+                    		aluno.mostraAluno(controller, alunos.get(currentAlunoIndex));
+                    		Alerts.showAlert("IO Exception","Erro","Dados inválidos.", AlertType.ERROR);
+                    		return;
+                      	}
+                	}               	
                 	try {
 						loadView2("/gui/TelaGerenciarAlunos.fxml");
 					} catch (SQLException e) {

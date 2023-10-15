@@ -5,6 +5,8 @@ import gui.TelaConfirmaController;
 
 public class ShowAndEditAluno {
 	
+	Constraints filtro = new Constraints();
+	
     // Método somente para exibir os alunos na tela
     public void mostraAluno(TelaConfirmaController controller, Aluno aluno) {
         controller.setTxtNome(aluno.getNome());
@@ -52,5 +54,46 @@ public class ShowAndEditAluno {
     	aluno.setDisciplina(novaDisciplina);
     	
     }
+    
+    public boolean confirmaDados(TelaConfirmaController controller, Aluno aluno) {
+        boolean dadosCorretos = true;
+        
+        //Verifica se o nome está vazio
+        if(aluno.getNome().isEmpty() || aluno.getNome() == null) {
+        	 dadosCorretos = false;
+        }
+
+        // Verifique se o e-mail do orientador não é nulo
+        if (aluno.getEmailFatecOrientador() == null || aluno.getEmailFatecOrientador().isEmpty()) {
+            dadosCorretos = false;
+       }else if(!aluno.getEmailFatecOrientador().contains("@fatec.sp.gov.br")) {
+    	    dadosCorretos = false;
+       }
+
+        // Verifique se o nome do orientador não é nulo
+        if (aluno.getOrientador() == null || aluno.getOrientador().isEmpty()) {
+            dadosCorretos = false;
+        }
+
+        // Verifique se o e-mail do aluno termina com @fatec.sp.gov.br
+        if (aluno.getEmailFatecAluno() == null || aluno.getEmailFatecAluno().isEmpty()) {
+            dadosCorretos = false;
+        }else if(!aluno.getEmailFatecAluno().contains("@fatec.sp.gov.br")){
+        	dadosCorretos = false;
+        }
+
+        // Verifique se a turma não está em branco
+        if (aluno.getNomeTurma() == null || aluno.getNomeTurma().isEmpty()) {
+            dadosCorretos = false;
+
+        }
+        if(aluno.getTipoTG() == null || aluno.getTipoTG().isEmpty()) {
+        	dadosCorretos = false;
+        }
+        
+        return dadosCorretos;
+
+    }
+
 
 }

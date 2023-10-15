@@ -27,7 +27,7 @@ public class Constraints {
 
 		String email = emailFatec;
 		if(emailFatec.isEmpty()) {
-			return email;
+			return email = "";
 		}else {
 			String[] institucional = email.split("@", 2);
 

@@ -46,8 +46,8 @@ public class InsertBd {
             
 
         }catch(SQLIntegrityConstraintViolationException a) {
-        	Alerts.showAlert("IO Exception", "Erro ao inserir aluno", a.getMessage(), AlertType.ERROR);
-        	
+        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
+        	return;
         }catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as needed (e.g., show an error message).
