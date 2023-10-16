@@ -66,7 +66,7 @@ public class ShowAndEditAluno {
         // Verifique se o e-mail do orientador não é nulo
         if (aluno.getEmailFatecOrientador() == null || aluno.getEmailFatecOrientador().isEmpty()) {
             dadosCorretos = false;
-       }else if(!aluno.getEmailFatecOrientador().contains("@fatec.sp.gov.br")) {
+       }else if(!aluno.getEmailFatecOrientador().endsWith("@fatec.sp.gov.br")) {
     	    dadosCorretos = false;
        }
 
@@ -78,7 +78,7 @@ public class ShowAndEditAluno {
         // Verifique se o e-mail do aluno termina com @fatec.sp.gov.br
         if (aluno.getEmailFatecAluno() == null || aluno.getEmailFatecAluno().isEmpty()) {
             dadosCorretos = false;
-        }else if(!aluno.getEmailFatecAluno().contains("@fatec.sp.gov.br")){
+        }else if(!aluno.getEmailFatecAluno().endsWith("@fatec.sp.gov.br")){
         	dadosCorretos = false;
         }
 
