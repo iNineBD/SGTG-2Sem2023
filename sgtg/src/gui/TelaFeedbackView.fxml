@@ -24,7 +24,7 @@
                         <Insets bottom="5.0" top="10.0" />
                      </HBox.margin>
                   </Text>
-                  <Label alignment="TOP_LEFT" contentDisplay="TOP" text="*Nome Aluno*">
+                  <Label fx:id="labelNomeAluno" alignment="TOP_LEFT" contentDisplay="TOP" text="*Nome Aluno*">
                      <font>
                         <Font name="Arial" size="25.0" />
                      </font>
