@@ -2,13 +2,15 @@ package gui;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
 
 import dto.GerenciarAlunoDTO;
+import entidades.Aluno;
 import gui.util.LoadGerenciarAlunos;
+import gui.util.ShowAndEditAluno;
+import gui.util.Telas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class TelaGerenciarAlunosController implements Initializable {
 
 	private LoadGerenciarAlunos loadAluno;
+	private Telas load = new Telas();
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -78,8 +81,9 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("edit");
-
+			private final Button button = new Button("Visual./Edit.");
+			private final Button button2 = new Button("Voltar");
+			
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
 				super.updateItem(obj, empty);
@@ -89,7 +93,30 @@ public class TelaGerenciarAlunosController implements Initializable {
 				}
 				setGraphic(button);
 				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+						event -> {
+							
+							TelaConfirmaController controller = new TelaConfirmaController();
+							ShowAndEditAluno aluno = new ShowAndEditAluno();
+							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
+							try {
+								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2);
+								controller.btVoltar.setOnAction( event1 ->{
+									try {
+										load.loadView2("/gui/TelaGerenciarAlunos.fxml");
+									} catch (SQLException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+								});
+								
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+						}
+						
+						);
 			}
 		});
 		

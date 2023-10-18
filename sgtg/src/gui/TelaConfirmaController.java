@@ -51,6 +51,12 @@ public class TelaConfirmaController implements Initializable{
 	@FXML
 	public Button btConfirmaTodos;
 	
+	@FXML
+	public Button btVoltar;
+	
+	@FXML
+	public Button btEditar;
+	
 	public String getTxtNome() {
 		return txtNome.getText();
 	}
@@ -130,7 +136,47 @@ public class TelaConfirmaController implements Initializable{
 	public void setTxtDisciplina(String text) {
 		txtDisciplina.setText(text);
 	}
-	
+
+	public void setTxtNomeTravado() {
+		txtNome.setEditable(false);
+	}
+
+	public void setTxtEmailPessoalTravado() {
+		txtEmailPessoal.setEditable(false);
+	}
+
+	public void setTxtEmailInstitucionalTravado() {
+		txtEmailInstitucional.setEditable(false);
+	}
+
+	public void setTxtNomeOrientadorTravado() {
+		txtNomeOrientador.setEditable(false);
+	}
+
+	public void setTxtEmailInstitucionalOrientadorTravado() {
+		txtEmailInstitucionalOrientador.setEditable(false);
+	}
+
+	public void setTxtTgMatriculadoTravado() {
+		txtTgMatriculado.setEditable(false);
+	}
+
+	public void setTxtTipoTgTravado() {
+		txtTipoTg.setEditable(false);
+	}
+
+	public void setTxtTituloTgTravado() {
+		txtTituloTg.setEditable(false);
+	}
+
+	public void setTxtEmpresaTravado() {
+		txtEmpresa.setEditable(false);
+	}
+
+	public void setTxtDisciplinaTravado() {
+		txtDisciplina.setEditable(false);
+	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {

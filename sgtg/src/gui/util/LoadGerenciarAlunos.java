@@ -20,7 +20,7 @@ public class LoadGerenciarAlunos {
 
 		// busca as informações da tela gerenciar aluno
 		
-	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno, orientador.nome orientador, tipo.tipo, turma.nome turma, turma.id id_turma from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma order by aluno.id");
+	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno,aluno.email_institucional email_fatec,aluno.email_pessoal email_pessoal,orientador.nome orientador,orientador.email_fatec email_fatec_orientador, tipo.tipo tipo, tipo.regra regra, turma.nome turma, turma.id id_turma,tg.disciplina disciplina,tg.empresa empresa,tg.problema_a_resolver tema from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id order by aluno.id");
 
 	    ResultSet result = st.executeQuery();
 	    
@@ -28,13 +28,20 @@ public class LoadGerenciarAlunos {
 	    	
 	    	int id = result.getInt("aluno_id");
 	    	String nome_aluno = result.getString("aluno");
+	    	String emailAlunoFatec = result.getString("email_fatec");
+	    	String emailAlunoPessoal = result.getString("email_pessoal");
 	    	String nome_orientador = result.getString("orientador");
-	    	String tipo = result.getString("tipo");
-	    	String turma = result.getString("turma");
+	    	String emailOrientador = result.getString("email_fatec");
+	    	String tipo_tg = result.getString("tipo");
+	    	String nome_turma = result.getString("turma");
+	    	String disciplina = result.getString("disciplina");
+	    	String tituloTg = result.getString("tema");
+	    	String regra = result.getString("regra");
+	    	String empresa = result.getString("empresa");
 	    	int id_turma = result.getInt("id_turma");
-//	    	System.out.println(id +" - "+ nome_aluno+" - "+ nome_orientador+" - "+ turma+" - "+ tipo+" - "+ id_turma);	
-	    	GerenciarAlunoDTO aluno = new GerenciarAlunoDTO(id, nome_aluno, nome_orientador, turma, tipo, id_turma);
 	    	
+//	    	System.out.println(id +" - "+ nome_aluno+" - "+ nome_orientador+" - "+ turma+" - "+ tipo+" - "+ id_turma);	
+	    	GerenciarAlunoDTO aluno = new GerenciarAlunoDTO(id,nome_aluno,emailAlunoPessoal,emailAlunoFatec,nome_orientador,emailOrientador,nome_turma,tipo_tg,tituloTg,empresa,disciplina,regra,id_turma);
 	    	
 	    	
 	    	// total de entregas

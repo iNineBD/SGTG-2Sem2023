@@ -21,6 +21,20 @@ public class ShowAndEditAluno {
         controller.setTxtDisciplina(aluno.getDisciplina());
     }
     
+    // Método somente para exibir os alunos na tela
+    public void mostraAlunoTravado(TelaConfirmaController controller) {
+    	controller.setTxtNomeTravado();
+    	controller.setTxtDisciplinaTravado();
+    	controller.setTxtEmailInstitucionalOrientadorTravado();
+    	controller.setTxtEmailInstitucionalTravado();
+    	controller.setTxtEmailPessoalTravado();
+    	controller.setTxtEmpresaTravado();
+    	controller.setTxtNomeOrientadorTravado();
+    	controller.setTxtTgMatriculadoTravado();
+    	controller.setTxtTipoTgTravado();
+    	controller.setTxtTituloTgTravado();
+    }
+    
     //Método para editar informações
     public void editaInformacao(TelaConfirmaController controller,Aluno aluno) {
     	String novoNome = controller.getTxtNome();
