@@ -1,19 +1,10 @@
 package gui;
 
-
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-import gui.util.Telas;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
-
-
-
-public class TelaConfirmaController implements Initializable{
+public class TelaEditarAlunoController {
 	
 	@FXML
 	private TextField txtNome = new TextField();
@@ -47,10 +38,10 @@ public class TelaConfirmaController implements Initializable{
 	
 	
 	@FXML
-	public Button btConfirma;
+	public Button btCancelar;
 	
 	@FXML
-	public Button btConfirmaTodos;
+	public Button btSalvar;
 	
 	
 	public String getTxtNome() {
@@ -144,10 +135,5 @@ public class TelaConfirmaController implements Initializable{
 	}
 	
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-	}
-	
 
 }

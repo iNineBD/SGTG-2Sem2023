@@ -1,19 +1,10 @@
 package gui;
 
-
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-import gui.util.Telas;
-import javafx.fxml.Initializable;
-import javafx.fxml.FXML;
-
-
-
-public class TelaConfirmaController implements Initializable{
+public class TelaMostrarAlunoController {
 	
 	@FXML
 	private TextField txtNome = new TextField();
@@ -45,109 +36,97 @@ public class TelaConfirmaController implements Initializable{
 	@FXML
 	private TextField txtDisciplina = new TextField();
 	
+	@FXML
+	public Button btVoltar;
 	
 	@FXML
-	public Button btConfirma;
+	public Button btEditar;
 	
-	@FXML
-	public Button btConfirmaTodos;
-	
-	
-	public String getTxtNome() {
-		return txtNome.getText();
-	}
 
 	public void setTxtNome(String text) {
-		txtNome.setEditable(true);
 		txtNome.setText(text);
 	}
 	
-	public String getTxtdEmailPessoal() {
-		return txtEmailPessoal.getText();
-	}
 	
 	public void setTxtdEmailPessoal(String text) {
-		txtEmailPessoal.setEditable(true);
 		txtEmailPessoal.setText(text);
 	}
 	
-	public String getTxtEmailInstitucional() {
-		return txtEmailInstitucional.getText();
-	}
-	
 	public void setTxtEmailInstitucional(String text) {
-		txtNomeOrientador.setEditable(true);
 		txtEmailInstitucional.setText(text);
 	}
 	
-	public String getTxtNomeOrientador() {
-		return txtNomeOrientador.getText();
-	}
 	
 	public void setTxtNomeOrientador(String text) {
-		txtNomeOrientador.setEditable(true);
 		txtNomeOrientador.setText(text);
 	}
 	
-	public String getTxtEmailInstitucionalOrientador() {
-		return txtEmailInstitucionalOrientador.getText();
-	}
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
-		txtEmailInstitucionalOrientador.setEditable(true);
 		txtEmailInstitucionalOrientador.setText(text);
 	}
 	
-	public String getTxtTgMatriculado() {
-		return txtTgMatriculado.getText();
-	}
 	
 	public void setTxtTgMatriculado(String text) {
-		txtTgMatriculado.setEditable(true);
 		txtTgMatriculado.setText(text);
 	}
 	
-	public String getTxtTipoTg() {
-		return txtTipoTg.getText();
-	}
 	
 	public void setTxtTipoTg(String text) {
-		txtTipoTg.setEditable(true);
 		txtTipoTg.setText(text);
 	}
-	
-	public String getTxtTituloTg() {
-		return txtTituloTg.getText();
-	}
-	
+		
 	public void setTxtTituloTg(String text) {
-		txtTituloTg.setEditable(true);
 		txtTituloTg.setText(text);
 	}
-	
-	public String getTxtEmpresa() {
-		return txtEmpresa.getText();
-	}
-	
+		
 	public void setTxtEmpresa(String text) {
-		txtEmpresa.setEditable(true);
 		txtEmpresa.setText(text);
 	}
 	
-	public String getTxtDisciplina() {
-		return txtDisciplina.getText();
-	}
 	
 	public void setTxtDisciplina(String text) {
-		txtDisciplina.setEditable(true);
 		txtDisciplina.setText(text);
 	}
-	
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		
+	public void setTxtNomeTravado() {
+		txtNome.setEditable(false);
 	}
-	
+
+	public void setTxtEmailPessoalTravado() {
+		txtEmailPessoal.setEditable(false);
+	}
+
+	public void setTxtEmailInstitucionalTravado() {
+		txtEmailInstitucional.setEditable(false);
+	}
+
+	public void setTxtNomeOrientadorTravado() {
+		txtNomeOrientador.setEditable(false);
+	}
+
+	public void setTxtEmailInstitucionalOrientadorTravado() {
+		txtEmailInstitucionalOrientador.setEditable(false);
+	}
+
+	public void setTxtTgMatriculadoTravado() {
+		txtTgMatriculado.setEditable(false);
+	}
+
+	public void setTxtTipoTgTravado() {
+		txtTipoTg.setEditable(false);
+	}
+
+	public void setTxtTituloTgTravado() {
+		txtTituloTg.setEditable(false);
+	}
+
+	public void setTxtEmpresaTravado() {
+		txtEmpresa.setEditable(false);
+	}
+
+	public void setTxtDisciplinaTravado() {
+		txtDisciplina.setEditable(false);
+	}
 
 }

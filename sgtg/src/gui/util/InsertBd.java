@@ -215,5 +215,8 @@ public class InsertBd {
             stMatricula.executeUpdate();
         }
     }
-
+    
+    public void atualizaAluno(Aluno aluno) {
+    	
+    }
 }

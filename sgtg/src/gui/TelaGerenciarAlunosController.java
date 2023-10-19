@@ -82,7 +82,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
 			private final Button button = new Button("Visual./Edit.");
-			private final Button button2 = new Button("Voltar");
+			
 			
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
@@ -100,23 +100,11 @@ public class TelaGerenciarAlunosController implements Initializable {
 							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
 							try {
 								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2);
-								controller.btVoltar.setOnAction( event1 ->{
-									try {
-										load.loadView2("/gui/TelaGerenciarAlunos.fxml");
-									} catch (SQLException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
-								});
-								
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
-							
-						}
-						
-						);
+						});
 			}
 		});
 		
