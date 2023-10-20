@@ -20,7 +20,7 @@ public class LoadGerenciarAlunos {
 
 		// busca as informações da tela gerenciar aluno
 		
-	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno, orientador.nome orientador, tipo.tipo, turma.nome turma, turma.id id_turma from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma order by aluno.id");
+	    PreparedStatement st = conecta.prepareStatement("select semestre.semestralizacao, semestre.ano, aluno.id aluno_id, aluno.nome aluno, orientador.nome orientador, tipo.tipo, turma.nome turma, turma.id id_turma  from aluno, orientador, tg, tipo, turma, matricula, semestre where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id  and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma and turma.semestralizacao = semestre.semestralizacao and turma.ano = semestre.ano and aluno.visibility = 1 order by aluno.id");
 
 	    ResultSet result = st.executeQuery();
 	    
