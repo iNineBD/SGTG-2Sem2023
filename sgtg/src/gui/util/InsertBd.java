@@ -8,7 +8,9 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 
 import conexao.DB;
+import dto.GerenciarAlunoDTO;
 import entidades.Aluno;
+import gui.TelaEditarAlunoController;
 import javafx.scene.control.Alert.AlertType;
 
 public class InsertBd {
@@ -25,6 +27,12 @@ public class InsertBd {
     private PreparedStatement stTg = null;
     private PreparedStatement stTipo = null;
     private PreparedStatement stMatricula = null;
+    
+    private PreparedStatement stAtualizaAluno = null;
+    private PreparedStatement stAtualizaTG = null;
+    private PreparedStatement stAtualizaMatricula = null;
+    private PreparedStatement stBuscaIdOrientador = null;
+    
 
     public void insertBd(Aluno aluno) {
         int ano = LocalDate.now().getYear();
@@ -67,6 +75,10 @@ public class InsertBd {
         stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
         stTipo = conecta.prepareStatement("insert into tipo(tipo,regra) values(?,?)");
         stMatricula = conecta.prepareStatement("insert into matricula(id_aluno,id_turma) values(?,?)");
+        
+        stBuscaIdOrientador = conecta.prepareStatement("select orientador.id as id from orientador where orientador.id = ?");
+        
+        stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?");
     }
 
     private int buscarOuInserirOrientador(String emailFatecOrientador, String nomeOrientador) throws SQLException {
@@ -216,7 +228,21 @@ public class InsertBd {
         }
     }
     
-    public void atualizaAluno(Aluno aluno) {
+    public void atualizaAluno(GerenciarAlunoDTO obj,TelaEditarAlunoController controller) throws SQLException {
+    	int id_aluno = obj.getId_aluno();
+    	
+    	try {
+    	stBuscaIdOrientador.setString(1, null);
+    	}catch(SQLException e) {
+    		e.printStackTrace();
+    		stBusca
+    	}
+    	
+    	stAtualizaAluno.setString(1, controller.getTxtNome());
+    	stAtualizaAluno.setString(2, controller.getTxtEmailInstitucional());
+    	stAtualizaAluno.setString(3, controller.getTxtdEmailPessoal());
+    	
+    	
     	
     }
 }
