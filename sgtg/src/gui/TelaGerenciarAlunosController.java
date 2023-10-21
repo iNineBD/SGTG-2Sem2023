@@ -106,7 +106,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 				}
 				setGraphic(button);
 				button.setOnAction(event -> {
-					load.loadView("/gui/TelaFeedbackView.fxml");
+					load.loadView99("/gui/TelaFeedbackView.fxml", obj);
 				});
 			}
 		});

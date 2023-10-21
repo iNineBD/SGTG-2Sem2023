@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 
 import conexao.DB;
 import dto.FeedbackDTO;
+import dto.GerenciarAlunoDTO;
 import gui.util.Alerts;
 import gui.util.Telas;
 import javafx.fxml.FXML;
@@ -27,6 +28,10 @@ public class TelaFeedbackAlunoController implements Initializable {
 
 	@FXML
 	private Label lbNomeAluno;
+
+	public void setLbNomeAluno(String nomeAluno) {
+		this.lbNomeAluno.setText(nomeAluno);
+	}
 
 	@FXML
 	private ComboBox<FeedbackDTO> comboBoxEntrega;
@@ -46,6 +51,13 @@ public class TelaFeedbackAlunoController implements Initializable {
 	@FXML
 	private Button btnCancelar;
 
+	// AS INFORMAÇÕES DO ALUNO EM QUESTÃO ESTÃO AQUIIIIIIII!!!!!!!
+	private GerenciarAlunoDTO aluno;
+
+	public void setAluno(GerenciarAlunoDTO aluno) {
+		this.aluno = aluno;
+	}
+
 	public void onBtnSalvarAction() throws SQLException {
 		FeedbackDTO entrega_selecionada = comboBoxEntrega.getValue();
 		String nota = TxtFieldNota.getText();
@@ -56,39 +68,33 @@ public class TelaFeedbackAlunoController implements Initializable {
 		} else {
 			try {
 				Connection conn = DB.getConnection();
-				PreparedStatement st = conn.prepareStatement("select nome from aluno where id = ?");
-				ResultSet resultSet = st.executeQuery();
-				while (resultSet.next()) {
-					String nome = resultSet.getString("nome");
-
-					lbNomeAluno.setText(lbNomeAluno.getText() + nome);
-
 				
 				PreparedStatement st2 = conn.prepareStatement(
 						"insert into feedback (id_entrega, nota, comentario, id_aluno) values (?, ?, ?, ?)");
 				st2.setString(1, entrega_selecionada.getTitulo_entrega());
 				st2.setObject(2, nota);
 				st2.setString(3, comentario);
-//				st2.setInt(4,  id_aluno);
+				st2.setInt(4,  aluno.getId_aluno());
 				st2.executeUpdate();
 				Alerts.showAlert("Sucesso", "Feedback dado!!!",
 						"O feedback foi armazenado com sucesso", AlertType.INFORMATION);
-				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 
 			}
 		}
+
 	}
+
 	public void onBtnCancelarAction() {
 		Telas tela = new Telas();
 
-		tela.loadView("/gui/TelaFeedbackView.fxml");
+		tela.loadView99("/gui/TelaFeedbackView.fxml", this.aluno);
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

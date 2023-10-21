@@ -1,51 +1,75 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-import conexao.DB;
 import dto.FeedbackDTO;
+import dto.GerenciarAlunoDTO;
 import gui.util.LoadFeedback;
+import gui.util.Telas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 public class TelaFeedbackViewController implements Initializable {
+	
+    private LoadFeedback loadFeedback;
+    
+    //AS INFORMACOES DO ALUNO ESTÃO AQUIIIIIII!!!
+    private GerenciarAlunoDTO aluno;
 
-	private LoadFeedback loadFeedback;
+	public void setAluno(GerenciarAlunoDTO aluno) {
+		this.aluno = aluno;
+	}
 
-	private TableView<FeedbackDTO> tableViewFeedback;
 	@FXML
-	private Label labelNomeAluno;
+    private Button btnAvaliarEntrega;
+    
+    @FXML
+    private Label labelNomeAluno;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-		initializeNodes();
+    
+	public void setLabelNomeAluno(String nome) {
+		this.labelNomeAluno.setText(nome);
 	}
 
-	private void initializeNodes() {
-		// TODO Auto-generated method stub
-		try {
-			Connection connection = DB.getConnection();
+	@FXML
+    private TableView<FeedbackDTO> tableViewFeedback;
 
-			PreparedStatement statement = connection.prepareStatement("SELECT nome FROM aluno WHERE id = ?");
+    @FXML
+    private TableColumn<FeedbackDTO, String> tableColumnTituloEntrega;
 
-			ResultSet resultSet = statement.executeQuery();
+    @FXML
+    private TableColumn<FeedbackDTO, String> tableColumnDescricao;
 
-			while (resultSet.next()) {
-				String nome = resultSet.getString("nome");
+    @FXML
+    private TableColumn<FeedbackDTO, Double> tableColumnNota;
 
-				labelNomeAluno.setText(labelNomeAluno.getText() + nome);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+    @FXML
+    private TableColumn<FeedbackDTO, String> tableColumnComentario;
+    
+    public void onBtnAvaliarEntrega() {
+        Telas tela = new Telas();
+
+        tela.loadView4("/gui/TelaFeedbackAluno.fxml", aluno);
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
+        initializeNodes();
+    }
+
+    private void initializeNodes() {
+        // TODO Auto-generated method stub
+//        tableColumnTituloEntrega.setCellValueFactory(new PropertyValueFactory<>("titulo_entrega"));
+//        tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+//        tableColumnNota.setCellValueFactory(new PropertyValueFactory<>("nota"));
+//        tableColumnComentario.setCellValueFactory(new PropertyValueFactory<>("comentario"));
+    }
 
 }
