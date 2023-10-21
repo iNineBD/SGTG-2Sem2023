@@ -11,6 +11,8 @@ public class EntregasDTO {
 	private String descricao;
 	
 	private LocalDate data_final;
+	
+	private int id_turma;
 
 	public int getId() {
 		return id;
@@ -21,12 +23,23 @@ public class EntregasDTO {
 		return titulo;
 	}
 
-	public EntregasDTO(int id, String titulo, String descricao, LocalDate data_final) {
+	public EntregasDTO(int id, String titulo, String descricao, LocalDate data_final, int id_turma) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
 		this.descricao = descricao;
 		this.data_final = data_final;
+		this.id_turma = id_turma;
+	}
+	
+	
+
+	public int getId_turma() {
+		return id_turma;
+	}
+
+	public void setId_turma(int id_turma) {
+		this.id_turma = id_turma;
 	}
 
 	public void setId(int id) {

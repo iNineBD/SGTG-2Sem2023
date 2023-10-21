@@ -5,12 +5,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import conexao.DB;
 import dto.EntregasDTO;
+import dto.TurmasDTO;
+import gui.TelaEditarEntregaController;
+import javafx.collections.ObservableList;
 
 public class LoadEntregas {
 	
@@ -20,7 +22,7 @@ public class LoadEntregas {
 		
 		Connection conn = DB.getConnection();		
 		
-		PreparedStatement st = conn.prepareStatement("select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ?");
+		PreparedStatement st = conn.prepareStatement("select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ? and visibility = true");
 		st.setInt(1, id_turma_selecionada);
 		
 		ResultSet result = st.executeQuery();
@@ -32,10 +34,30 @@ public class LoadEntregas {
 			String descricao = result.getString("descricao");
 			Date data= result.getDate("data_entrega");
 			
-			entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate()));
+			entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate(), id_turma_selecionada));
 		}
 		
 		return entregas;
+		
+	}
+	
+	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj) {
+		
+		controller.setTxtFieldTituloEntrega(obj.getTitulo());
+		controller.setTxtAreaDescricao(obj.getDescricao());
+		controller.setDatePickerDataFinal(obj.getData_final());
+		
+		ObservableList<TurmasDTO> listaChoice = controller.getItensChoiceBox();
+		
+		for (TurmasDTO turma: listaChoice) {
+			
+			if (turma.getId() == obj.getId_turma()) {
+				controller.setChoiceBox(turma);
+			}
+			
+		}
+		
+		controller.setId(obj.getId());
 		
 	}
 
