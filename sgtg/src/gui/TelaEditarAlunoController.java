@@ -1,10 +1,24 @@
 package gui;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
-public class TelaEditarAlunoController {
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import dto.OrientadorDto;
+import dto.TurmasDTO;
+import gui.util.LoadOrientadores;
+
+public class TelaEditarAlunoController implements Initializable{
 	
 	@FXML
 	private TextField txtNome = new TextField();
@@ -16,7 +30,7 @@ public class TelaEditarAlunoController {
 	private TextField txtEmailInstitucional = new TextField();
 	
 	@FXML
-	private TextField txtNomeOrientador = new TextField();
+	private ChoiceBox<OrientadorDto> comboxNomeOrientador;
 	
 	@FXML
 	private TextField txtEmailInstitucionalOrientador = new TextField();
@@ -67,17 +81,12 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtEmailInstitucional(String text) {
-		txtNomeOrientador.setEditable(true);
+		txtEmailInstitucional.setEditable(true);
 		txtEmailInstitucional.setText(text);
 	}
 	
-	public String getTxtNomeOrientador() {
-		return txtNomeOrientador.getText();
-	}
-	
-	public void setTxtNomeOrientador(String text) {
-		txtNomeOrientador.setEditable(true);
-		txtNomeOrientador.setText(text);
+	public String getComboxNomeOrientador() {
+		return comboxNomeOrientador.getValue().toString();
 	}
 	
 	public String getTxtEmailInstitucionalOrientador() {
@@ -85,7 +94,7 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
-		txtEmailInstitucionalOrientador.setEditable(true);
+		txtEmailInstitucionalOrientador.setEditable(false);
 		txtEmailInstitucionalOrientador.setText(text);
 	}
 	
@@ -94,7 +103,7 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtTgMatriculado(String text) {
-		txtTgMatriculado.setEditable(true);
+		txtTgMatriculado.setEditable(false);
 		txtTgMatriculado.setText(text);
 	}
 	
@@ -103,7 +112,7 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtTipoTg(String text) {
-		txtTipoTg.setEditable(true);
+		txtTipoTg.setEditable(false);
 		txtTipoTg.setText(text);
 	}
 	
@@ -112,7 +121,7 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtTituloTg(String text) {
-		txtTituloTg.setEditable(true);
+		txtTituloTg.setEditable(false);
 		txtTituloTg.setText(text);
 	}
 	
@@ -121,7 +130,7 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtEmpresa(String text) {
-		txtEmpresa.setEditable(true);
+		txtEmpresa.setEditable(false);
 		txtEmpresa.setText(text);
 	}
 	
@@ -130,10 +139,25 @@ public class TelaEditarAlunoController {
 	}
 	
 	public void setTxtDisciplina(String text) {
-		txtDisciplina.setEditable(true);
+		txtDisciplina.setEditable(false);
 		txtDisciplina.setText(text);
 	}
 	
+	@Override
+	
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		List<OrientadorDto> listaOrientadores = new ArrayList<OrientadorDto>();
+		
+		try {
+			listaOrientadores = LoadOrientadores.carregaOrientadores();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ObservableList<OrientadorDto> orientador = FXCollections.observableArrayList(listaOrientadores);
+		comboxNomeOrientador.getItems().addAll(orientador);
+	}
 
 
 }

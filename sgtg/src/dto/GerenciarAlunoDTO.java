@@ -33,8 +33,10 @@ public class GerenciarAlunoDTO {
 	private String entregas_format;
 	
 	private int id_turma;	
+	
+	private int id_orientador;
 
-	public GerenciarAlunoDTO(int id_aluno, String nome_aluno,String emailPessoal,String emailFatecAluno ,String nome_orientador,String emailOrientador, String nome_turma, String tipo_tg,String tituloTg,String empresa , String disciplina,String regra,int id_turma) {
+	public GerenciarAlunoDTO(int id_aluno, String nome_aluno,String emailPessoal,String emailFatecAluno ,String nome_orientador,String emailOrientador, String nome_turma, String tipo_tg,String tituloTg,String empresa , String disciplina,String regra,int id_turma, int id_orientador) {
 		this.id_aluno = id_aluno;
 		this.nome_aluno = nome_aluno;
 		this.emailFatecAluno = emailFatecAluno;
@@ -48,6 +50,7 @@ public class GerenciarAlunoDTO {
 		this.empresa = empresa;
 		this.disciplina = disciplina;
 		this.regra = regra;
+		this.id_orientador = id_orientador;
 	}
 	
 	
@@ -184,6 +187,14 @@ public class GerenciarAlunoDTO {
 
 	public void setId_turma(int id_turma) {
 		this.id_turma = id_turma;
+	}
+	
+	public int getId_orientador() {
+		return id_orientador;
+	}
+	
+	public void setId_orientador(int id_orientador) {
+		this.id_orientador = id_orientador;
 	}
 	
 	

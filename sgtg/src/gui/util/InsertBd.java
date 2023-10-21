@@ -75,10 +75,7 @@ public class InsertBd {
         stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
         stTipo = conecta.prepareStatement("insert into tipo(tipo,regra) values(?,?)");
         stMatricula = conecta.prepareStatement("insert into matricula(id_aluno,id_turma) values(?,?)");
-        
-        stBuscaIdOrientador = conecta.prepareStatement("select orientador.id as id from orientador where orientador.id = ?");
-        
-        stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?");
+       
     }
 
     private int buscarOuInserirOrientador(String emailFatecOrientador, String nomeOrientador) throws SQLException {
@@ -228,21 +225,34 @@ public class InsertBd {
         }
     }
     
-    public void atualizaAluno(GerenciarAlunoDTO obj,TelaEditarAlunoController controller) throws SQLException {
-    	int id_aluno = obj.getId_aluno();
+    
+    
+    
+    public void atualizaAluno(int id_aluno,TelaEditarAlunoController controller) throws SQLException {
+    	Connection conecta = conecta = DB.getConnection();
     	
+    	stBuscaIdOrientador = conecta.prepareStatement("select orientador.id as id, orientador.email_fatec as email_fatec from orientador where orientador.nome = ?");
+        
+        stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?");
+    	
+    	int id = id_aluno;
+    	int id_orientador;    	    	
     	try {
-    	stBuscaIdOrientador.setString(1, null);
+    		stBuscaIdOrientador.setString(1, controller.getComboxNomeOrientador());
+    		ResultSet result = stBuscaIdOrientador.executeQuery();
+    		result.next();
+    		id_orientador = result.getInt("id");
     	}catch(SQLException e) {
     		e.printStackTrace();
-    		stBusca
+    		id_orientador = buscarOuInserirOrientador(controller.getTxtEmailInstitucionalOrientador(),controller.getComboxNomeOrientador());
     	}
     	
     	stAtualizaAluno.setString(1, controller.getTxtNome());
     	stAtualizaAluno.setString(2, controller.getTxtEmailInstitucional());
     	stAtualizaAluno.setString(3, controller.getTxtdEmailPessoal());
-    	
-    	
+    	stAtualizaAluno.setInt(4, id_orientador);
+    	stAtualizaAluno.setInt(5,id);    
+    	stAtualizaAluno.executeUpdate();
     	
     }
 }

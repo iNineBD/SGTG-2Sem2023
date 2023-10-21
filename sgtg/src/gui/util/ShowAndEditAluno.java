@@ -40,7 +40,6 @@ public class ShowAndEditAluno {
         controller.setTxtNome(aluno.getNome());
         controller.setTxtEmailInstitucional(aluno.getEmailFatecAluno());
         controller.setTxtdEmailPessoal(aluno.getEmailPessoal());
-        controller.setTxtNomeOrientador(aluno.getOrientador());
         controller.setTxtEmailInstitucionalOrientador(aluno.getEmailFatecOrientador());
         controller.setTxtTgMatriculado(aluno.getNomeTurma());
         controller.setTxtTipoTg(aluno.getTipoTG());
@@ -108,8 +107,8 @@ public class ShowAndEditAluno {
     	String novoEmailInstitucional = controller.getTxtEmailInstitucional();
     	aluno.setEmailFatecAluno(novoEmailInstitucional);
     	
-    	String novoOrientador = controller.getTxtNomeOrientador();
-    	aluno.setOrientador(novoOrientador);
+//    	String novoOrientador = controller.getTxtNomeOrientador();
+//    	aluno.setOrientador(novoOrientador);
     	
     	String novoEmailOrientador = controller.getTxtEmailInstitucionalOrientador();
     	aluno.setEmailFatec(novoEmailOrientador);

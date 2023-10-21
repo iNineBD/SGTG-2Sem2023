@@ -93,7 +93,7 @@ public class Telas {
 
 	}
 	
-	public synchronized void loadView10(String absoluteName,Aluno alunos) throws SQLException {
+	public synchronized void loadView10(String absoluteName,Aluno alunos, int id_aluno) throws SQLException {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -132,7 +132,7 @@ public class Telas {
 			
 			controller1.btEditar.setOnAction( event2 ->{
 				try {
-					loadView11("/gui/TelaEditarAluno.fxml",alunoEdit);
+					loadView11("/gui/TelaEditarAluno.fxml",alunoEdit, id_aluno);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -145,7 +145,7 @@ public class Telas {
 
 	}
 	
-	public synchronized void loadView11(String absoluteName,Aluno alunos) throws SQLException {
+	public synchronized void loadView11(String absoluteName,Aluno alunos, int id_aluno) throws SQLException {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -169,26 +169,29 @@ public class Telas {
 			
 			TelaEditarAlunoController controller = loader.getController();
 			
+			
 			Aluno alunoMostrar = alunos;
 			aluno.mostraAluno3(controller, alunos);
 			aluno.editaInformacao2(controller,alunos);
 			
 			controller.btCancelar.setOnAction( event1 ->{
 				try {
-					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar);
+					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			});
-//			controller.btEditar.setOnAction( event1 ->{
-////				try {
-//					loadView("/gui/TelaEditarAluno.fxml");
-////				} catch (SQLException e) {
-////					// TODO Auto-generated catch block
-////					e.printStackTrace();
-////				}
-//			});
+			controller.btSalvar.setOnAction( event1 ->{
+				try {
+					insertBd.atualizaAluno(id_aluno, controller);
+					Aluno alunoMostrarNovo;
+					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
