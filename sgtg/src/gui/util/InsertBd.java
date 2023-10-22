@@ -242,17 +242,15 @@ public class InsertBd {
     		ResultSet result = stBuscaIdOrientador.executeQuery();
     		result.next();
     		id_orientador = result.getInt("id");
-    	}catch(SQLException e) {
-    		e.printStackTrace();
-    		id_orientador = buscarOuInserirOrientador(controller.getTxtEmailInstitucionalOrientador(),controller.getComboxNomeOrientador());
+        	stAtualizaAluno.setString(1, controller.getTxtNome());
+        	stAtualizaAluno.setString(2, controller.getTxtEmailInstitucional());
+        	stAtualizaAluno.setString(3, controller.getTxtdEmailPessoal());
+        	stAtualizaAluno.setInt(4, id_orientador);
+        	stAtualizaAluno.setInt(5,id);    
+        	stAtualizaAluno.executeUpdate();
+    	}catch(NullPointerException e) {
+//    		e.printStackTrace();
+    		Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados em branco, por favor verfique os dados", AlertType.WARNING);
     	}
-    	
-    	stAtualizaAluno.setString(1, controller.getTxtNome());
-    	stAtualizaAluno.setString(2, controller.getTxtEmailInstitucional());
-    	stAtualizaAluno.setString(3, controller.getTxtdEmailPessoal());
-    	stAtualizaAluno.setInt(4, id_orientador);
-    	stAtualizaAluno.setInt(5,id);    
-    	stAtualizaAluno.executeUpdate();
-    	
     }
 }

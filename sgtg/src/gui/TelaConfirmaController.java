@@ -54,93 +54,93 @@ public class TelaConfirmaController implements Initializable{
 	
 	
 	public String getTxtNome() {
-		return txtNome.getText();
+		return txtNome.getText().trim();
 	}
 
 	public void setTxtNome(String text) {
 		txtNome.setEditable(true);
-		txtNome.setText(text);
+		txtNome.setText(text.trim());
 	}
 	
 	public String getTxtdEmailPessoal() {
-		return txtEmailPessoal.getText();
+		return txtEmailPessoal.getText().trim();
 	}
 	
 	public void setTxtdEmailPessoal(String text) {
 		txtEmailPessoal.setEditable(true);
-		txtEmailPessoal.setText(text);
+		txtEmailPessoal.setText(text.trim());
 	}
 	
 	public String getTxtEmailInstitucional() {
-		return txtEmailInstitucional.getText();
+		return txtEmailInstitucional.getText().trim();
 	}
 	
 	public void setTxtEmailInstitucional(String text) {
 		txtNomeOrientador.setEditable(true);
-		txtEmailInstitucional.setText(text);
+		txtEmailInstitucional.setText(text.trim());
 	}
 	
 	public String getTxtNomeOrientador() {
-		return txtNomeOrientador.getText();
+		return txtNomeOrientador.getText().trim();
 	}
 	
 	public void setTxtNomeOrientador(String text) {
 		txtNomeOrientador.setEditable(true);
-		txtNomeOrientador.setText(text);
+		txtNomeOrientador.setText(text.trim());
 	}
 	
 	public String getTxtEmailInstitucionalOrientador() {
-		return txtEmailInstitucionalOrientador.getText();
+		return txtEmailInstitucionalOrientador.getText().trim();
 	}
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
 		txtEmailInstitucionalOrientador.setEditable(true);
-		txtEmailInstitucionalOrientador.setText(text);
+		txtEmailInstitucionalOrientador.setText(text.trim());
 	}
 	
 	public String getTxtTgMatriculado() {
-		return txtTgMatriculado.getText();
+		return txtTgMatriculado.getText().trim();
 	}
 	
 	public void setTxtTgMatriculado(String text) {
 		txtTgMatriculado.setEditable(true);
-		txtTgMatriculado.setText(text);
+		txtTgMatriculado.setText(text.trim());
 	}
 	
 	public String getTxtTipoTg() {
-		return txtTipoTg.getText();
+		return txtTipoTg.getText().trim();
 	}
 	
 	public void setTxtTipoTg(String text) {
 		txtTipoTg.setEditable(true);
-		txtTipoTg.setText(text);
+		txtTipoTg.setText(text.trim());
 	}
 	
 	public String getTxtTituloTg() {
-		return txtTituloTg.getText();
+		return txtTituloTg.getText().trim();
 	}
 	
 	public void setTxtTituloTg(String text) {
 		txtTituloTg.setEditable(true);
-		txtTituloTg.setText(text);
+		txtTituloTg.setText(text.trim());
 	}
 	
 	public String getTxtEmpresa() {
-		return txtEmpresa.getText();
+		return txtEmpresa.getText().trim();
 	}
 	
 	public void setTxtEmpresa(String text) {
 		txtEmpresa.setEditable(true);
-		txtEmpresa.setText(text);
+		txtEmpresa.setText(text.trim());
 	}
 	
 	public String getTxtDisciplina() {
-		return txtDisciplina.getText();
+		return txtDisciplina.getText().trim();
 	}
 	
 	public void setTxtDisciplina(String text) {
 		txtDisciplina.setEditable(true);
-		txtDisciplina.setText(text);
+		txtDisciplina.setText(text.trim());
 	}
 	
 

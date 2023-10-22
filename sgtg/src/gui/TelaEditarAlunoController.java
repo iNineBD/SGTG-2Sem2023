@@ -59,30 +59,30 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	
 	public String getTxtNome() {
-		return txtNome.getText();
+		return txtNome.getText().trim();
 	}
 
 	public void setTxtNome(String text) {
 		txtNome.setEditable(true);
-		txtNome.setText(text);
+		txtNome.setText(text.trim());
 	}
 	
 	public String getTxtdEmailPessoal() {
-		return txtEmailPessoal.getText();
+		return txtEmailPessoal.getText().trim();
 	}
 	
 	public void setTxtdEmailPessoal(String text) {
 		txtEmailPessoal.setEditable(true);
-		txtEmailPessoal.setText(text);
+		txtEmailPessoal.setText(text.trim());
 	}
 	
 	public String getTxtEmailInstitucional() {
-		return txtEmailInstitucional.getText();
+		return txtEmailInstitucional.getText().trim();
 	}
 	
 	public void setTxtEmailInstitucional(String text) {
 		txtEmailInstitucional.setEditable(true);
-		txtEmailInstitucional.setText(text);
+		txtEmailInstitucional.setText(text.trim());
 	}
 	
 	public String getComboxNomeOrientador() {
@@ -95,7 +95,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
 		txtEmailInstitucionalOrientador.setEditable(false);
-		txtEmailInstitucionalOrientador.setText(text);
+		txtEmailInstitucionalOrientador.setText(text.trim());
 	}
 	
 	public String getTxtTgMatriculado() {
@@ -104,7 +104,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtTgMatriculado(String text) {
 		txtTgMatriculado.setEditable(false);
-		txtTgMatriculado.setText(text);
+		txtTgMatriculado.setText(text.trim());
 	}
 	
 	public String getTxtTipoTg() {
@@ -113,7 +113,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtTipoTg(String text) {
 		txtTipoTg.setEditable(false);
-		txtTipoTg.setText(text);
+		txtTipoTg.setText(text.trim());
 	}
 	
 	public String getTxtTituloTg() {

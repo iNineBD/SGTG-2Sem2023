@@ -95,8 +95,6 @@ public class TelaGerenciarAlunosController implements Initializable {
 				button.setOnAction(
 						event -> {
 							
-							TelaConfirmaController controller = new TelaConfirmaController();
-							ShowAndEditAluno aluno = new ShowAndEditAluno();
 							int id_aluno = obj.getId_aluno();
 							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
 							try {

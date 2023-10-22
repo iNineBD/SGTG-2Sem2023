@@ -169,6 +169,32 @@ public class ShowAndEditAluno {
         return dadosCorretos;
 
     }
+    public boolean confirmaDados2(TelaEditarAlunoController controller) {
+        boolean dadosCorretos = true;
+        
+        //Verifica se o nome está vazio
+        if(controller.getTxtNome().isEmpty() ||controller.getTxtNome() == null) {
+        	 dadosCorretos = false;
+        }
+        if(controller.getTxtdEmailPessoal().isEmpty() || controller.getTxtdEmailPessoal() == null) {
+        	dadosCorretos = false;
+        }
+
+        // Verifique se o nome do orientador não é nulo
+        if (controller.getComboxNomeOrientador() == null || controller.getComboxNomeOrientador().isEmpty()) {
+            dadosCorretos = false;
+        }
+
+        // Verifique se o e-mail do aluno termina com @fatec.sp.gov.br
+        if (controller.getTxtEmailInstitucional() == null || controller.getTxtEmailInstitucional().isEmpty()) {
+            dadosCorretos = false;
+        }else if(!controller.getTxtEmailInstitucional().endsWith("@fatec.sp.gov.br")){
+        	dadosCorretos = false;
+        }
+        
+        return dadosCorretos;
+
+    }
 
 
 }

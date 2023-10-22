@@ -184,14 +184,20 @@ public class Telas {
 			});
 			controller.btSalvar.setOnAction( event1 ->{
 				try {
+				if(aluno.confirmaDados2(controller)) {
+				try {
 					insertBd.atualizaAluno(id_aluno, controller);
-					Aluno alunoMostrarNovo;
-					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno);
+					Alerts.showAlert("IO Exception", "Salvamento de dados", "Aluno salvo com sucesso!", AlertType.INFORMATION);
+					loadView2("/gui/TelaGerenciarAlunos.fxml");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}}else {
+					Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados inválidos", AlertType.WARNING);
 				}
-			});
+			}catch(NullPointerException a) {
+				Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados em branco, por favor verfique os dados", AlertType.WARNING);
+			}});
 
 		} catch (IOException e) {
 			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
