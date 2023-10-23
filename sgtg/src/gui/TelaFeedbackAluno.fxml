@@ -55,7 +55,7 @@
                               <Insets />
                            </HBox.margin>
                         </Text>
-                        <Label fx:id="lbDescricao" text="*Descrição Turma*">
+                        <Label fx:id="lbDescricao">
                            <HBox.margin>
                               <Insets left="100.0" />
                            </HBox.margin>

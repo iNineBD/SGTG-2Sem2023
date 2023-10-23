@@ -21,13 +21,18 @@ public class EntregasDTO {
 		return titulo;
 	}
 
-	public EntregasDTO(int id, String titulo, String descricao, LocalDate data_final) {
-		super();
-		this.id = id;
-		this.titulo = titulo;
-		this.descricao = descricao;
-		this.data_final = data_final;
-	}
+	private int id_turma;
+
+
+
+    public EntregasDTO(int id, String titulo, String descricao, LocalDate data_final, int id_turma) {
+        super();
+        this.id = id;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.data_final = data_final;
+        this.id_turma = id_turma;
+    }
 
 	public void setId(int id) {
 		this.id = id;

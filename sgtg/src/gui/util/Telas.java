@@ -256,6 +256,7 @@ public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
             TelaFeedbackAlunoController controller = loader.getController();
             
             PassaDados.passaDadosFeedbackAluno(controller, obj);
+            controller.carregarEntregas();
             
         } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);

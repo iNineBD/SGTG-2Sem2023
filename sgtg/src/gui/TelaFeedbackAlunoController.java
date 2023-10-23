@@ -11,10 +11,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import conexao.DB;
+import dto.EntregasDTO;
 import dto.FeedbackDTO;
 import dto.GerenciarAlunoDTO;
+import dto.TurmasDTO;
 import gui.util.Alerts;
+import gui.util.LoadEntregas;
 import gui.util.Telas;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -34,7 +39,7 @@ public class TelaFeedbackAlunoController implements Initializable {
 	}
 
 	@FXML
-	private ComboBox<FeedbackDTO> comboBoxEntrega;
+	private ComboBox<EntregasDTO> comboBoxEntrega;
 
 	@FXML
 	private Label lbDescricao;
@@ -59,30 +64,42 @@ public class TelaFeedbackAlunoController implements Initializable {
 	}
 
 	public void onBtnSalvarAction() throws SQLException {
-		FeedbackDTO entrega_selecionada = comboBoxEntrega.getValue();
-		String nota = TxtFieldNota.getText();
-		String comentario = TxtAreaComentario.getText();
+		EntregasDTO entrega_selecionada = comboBoxEntrega.getValue();
+		float nota = 0; 
+		try {
+			nota = Float.parseFloat(TxtFieldNota.getText().trim()) ;
+			String comentario = TxtAreaComentario.getText();
 
-		if (entrega_selecionada == null || nota.trim().isEmpty() || comentario.trim().isEmpty()) {
-			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
-		} else {
-			try {
-				Connection conn = DB.getConnection();
+			if (entrega_selecionada == null || comentario.trim().isEmpty()) {
+				Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
+			} else {
+				try {
+					Connection conn = DB.getConnection();
+
+					PreparedStatement st2 = conn.prepareStatement(
+							"insert into feedback (id_entrega, nota, comentario, id_aluno) values (?, ?, ?, ?)");
+					st2.setInt(1, entrega_selecionada.getId());
+					st2.setFloat(2, nota);
+					st2.setString(3, comentario);
+					st2.setInt(4, aluno.getId_aluno());
+					st2.executeUpdate();
+					Alerts.showAlert("Sucesso", "Feedback dado!!!", "O feedback foi armazenado com sucesso",
+							AlertType.INFORMATION);
+					Telas load = new Telas();
+					load.loadView99("/gui/TelaFeedbackView.fxml", this.aluno);
+				} catch (SQLException e) {
 				
-				PreparedStatement st2 = conn.prepareStatement(
-						"insert into feedback (id_entrega, nota, comentario, id_aluno) values (?, ?, ?, ?)");
-				st2.setString(1, entrega_selecionada.getTitulo_entrega());
-				st2.setObject(2, nota);
-				st2.setString(3, comentario);
-				st2.setInt(4,  aluno.getId_aluno());
-				st2.executeUpdate();
-				Alerts.showAlert("Sucesso", "Feedback dado!!!",
-						"O feedback foi armazenado com sucesso", AlertType.INFORMATION);
-			} catch (SQLException e) {
-				e.printStackTrace();
+					Alerts.showAlert("Atenção", "Já foi dado um feedback para este aluno", "Já foi atribuido um feedback para esta entrega",
+							AlertType.INFORMATION);
 
+				}
 			}
+		
+		} catch (NumberFormatException e) {
+			Alerts.showAlert("Formato invalido!", "A nota foi dada no formato invalido!", "Favor digite neste formato: 0.0",
+					AlertType.INFORMATION);
 		}
+		
 
 	}
 
@@ -90,11 +107,34 @@ public class TelaFeedbackAlunoController implements Initializable {
 		Telas tela = new Telas();
 
 		tela.loadView99("/gui/TelaFeedbackView.fxml", this.aluno);
+
+	}
+
+	public void carregarEntregas() {
+		// preenchimento do ComboBox Entrega
+		List<EntregasDTO> listaEntrega = new ArrayList<EntregasDTO>();
+		// TODO Auto-generated method stub
+		try {
+			int id_aluno_selecionada = this.aluno.getId_aluno();
+
+			listaEntrega = LoadEntregas.atualizarDadosComboBox(id_aluno_selecionada);// Oq eu preciso passar no parenteses
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Alerts.showAlert("SQLException", "Erro ao buscar entregas",
+					"Ocorreu um erro ao buscar as entregas por aluno.", AlertType.ERROR);
+		}
+		if (listaEntrega != null) {
+			ObservableList<EntregasDTO> entregas = FXCollections.observableArrayList(listaEntrega);
+			comboBoxEntrega.getItems().addAll(entregas);
+		}
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// TODO Auto-generated method stub
-
+		comboBoxEntrega.setOnAction(event -> {
+            EntregasDTO selectedItem = comboBoxEntrega.getValue();
+            // Execute ação com base na seleção
+            lbDescricao.setText(selectedItem.getDescricao());
+        });
 	}
 }
