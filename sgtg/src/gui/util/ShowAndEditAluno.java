@@ -104,20 +104,22 @@ public class ShowAndEditAluno {
 	}
 
 	public void excluirUser(int id_usuario) {
-		if (Alerts.showAlertConfirmation("Atenção", "Voce esta prestes a excluir um aluno", "Tem certeza?")) {
+		if (Alerts.showAlertConfirmation("Atenção", "Voce está prestes a excluir um aluno", "Tem certeza?")) {
 			PreparedStatement st2;
 			try {
 				st2 = conecta.prepareStatement("update sgtg.aluno set visibility = 0 where id = ?");
 				st2.setInt(1, id_usuario);
 				st2.executeUpdate();
-				TelaGerenciarAlunosController controller = new TelaGerenciarAlunosController();
-				controller.updateTableView();
+				
+				Telas loadTelas = new Telas();
+				loadTelas.loadView2("/gui/TelaGerenciarAlunos.fxml");
 
 			} catch (SQLException e) {
 
 				Alerts.showAlert("Erro ao conectar com o Banco", "Atenção", "Ocorreu um erro em excluir o usuario",
 						AlertType.WARNING);
 			}
+			
 		}
 
 	}

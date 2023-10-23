@@ -23,7 +23,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
 
-	private LoadGerenciarAlunos loadAluno;
+	public LoadGerenciarAlunos loadAluno;
 	
 	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
 
@@ -122,7 +122,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 			private final Button button = new Button("excluir");
 
 			@Override
-			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
+			public void updateItem(GerenciarAlunoDTO obj, boolean empty) {
 				super.updateItem(obj, empty);
 				if (obj == null) {
 					setGraphic(null);
@@ -130,7 +130,10 @@ public class TelaGerenciarAlunosController implements Initializable {
 				}
 
 				setGraphic(button);
-				button.setOnAction(event -> excluiraluno.excluirUser(obj.getId_aluno())
+				button.setOnAction(
+						event -> {
+							excluiraluno.excluirUser(obj.getId_aluno());
+						}
 				);
 			}
 		});
