@@ -1,17 +1,21 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import conexao.DB;
 import dto.EntregasDTO;
 import dto.TurmasDTO;
 import gui.util.Alerts;
 import gui.util.LoadEntregas;
 import gui.util.LoadTurmas;
+import gui.util.Telas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,6 +45,9 @@ public class TelaEntregaTurmaController implements Initializable {
 	private TableColumn<EntregasDTO, LocalDate> tableColumnData;
 	@FXML
 	private TableColumn<EntregasDTO, EntregasDTO> tableColumnEditar;
+	
+	@FXML
+	private TableColumn<EntregasDTO, EntregasDTO> tableColumnDel;
 
 	private ObservableList<EntregasDTO> obsList;
 
@@ -72,7 +79,8 @@ public class TelaEntregaTurmaController implements Initializable {
 
 		try {
 
-			listaTurmas = LoadTurmas.carregaTurmas((LocalDate.now().getMonthValue() > 6 ? 2 : 1), LocalDate.now().getYear());
+			listaTurmas = LoadTurmas.carregaTurmas((LocalDate.now().getMonthValue() > 6 ? 2 : 1),
+					LocalDate.now().getYear());
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -109,7 +117,7 @@ public class TelaEntregaTurmaController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEditar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEditar.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
-			private final Button button = new Button("edit");
+			private final Button edit = new Button("edit");
 
 			@Override
 			protected void updateItem(EntregasDTO obj, boolean empty) {
@@ -118,11 +126,59 @@ public class TelaEntregaTurmaController implements Initializable {
 					setGraphic(null);
 					return;
 				}
-				setGraphic(button);
-				button.setOnAction(event -> System.out.println(obj.getTitulo()));
+				setGraphic(edit);
+				edit.setOnAction(event -> {
+					Telas telas = new Telas();
+					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj);
+				});
 			}
 		});
 
+		tableColumnDel.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnDel.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
+			private final Button del = new Button("del");
+
+			@Override
+			protected void updateItem(EntregasDTO obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+				setGraphic(del);
+				del.setOnAction(event -> {
+					delEntrega(obj);
+				});
+			}
+		});
+
+	}
+	
+	public void delEntrega(EntregasDTO entrega) {
+		
+		boolean resultado = Alerts.showAlertConfirmation("Excluir entrega", "Você esta prestes a excluir uma entrega...", "Tem certeza?\nTal ação não poderá ser desfeita");
+		
+		if (resultado){
+			
+			try {
+				
+				new DB();
+				Connection conn = DB.getConnection();
+				
+				PreparedStatement st = conn.prepareStatement(
+						"update entrega set visibility = false where id = ?");
+				st.setInt(1, entrega.getId());
+
+				st.executeUpdate();
+				
+				updateTableView();
+			} catch (SQLException e) {
+				Alerts.showAlert("Erro ao acessar banco de dados", "Houve algum problema com a conexão.", "Tente novamente", AlertType.ERROR);
+			}
+			
+			
+		}
+		
 	}
 
 }
