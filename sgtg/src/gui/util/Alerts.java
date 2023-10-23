@@ -15,12 +15,13 @@ public class Alerts {
 		alert.setContentText(content);
 		alert.show();
 	}
-	
+
 	public static boolean showAlertConfirmation(String title, String header, String content) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle(title);
 		alert.setHeaderText(header);
 		alert.setContentText(content);
+
 		
 		ButtonType simButton = new ButtonType("Sim");
         ButtonType naoButton = new ButtonType("Não");

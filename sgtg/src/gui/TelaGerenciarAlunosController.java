@@ -1,29 +1,17 @@
 package gui;
 
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import dto.GerenciarAlunoDTO;
-import gui.util.LoadGerenciarAlunos;
-import gui.util.Telas;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
 
-	private LoadGerenciarAlunos loadAluno;
+
+	public LoadGerenciarAlunos loadAluno;
+	
+	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
+
+	Connection conecta = DB.getConnection();
 	
 	private Telas load = new Telas();
+
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -41,6 +29,8 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEDIT;
 	@FXML
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnFEEDBACK;
+	@FXML
+	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEXCLUIR;
 
 	private ObservableList<GerenciarAlunoDTO> obsList;
 
@@ -110,6 +100,26 @@ public class TelaGerenciarAlunosController implements Initializable {
 				});
 			}
 		});
-	}
+		
+		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
+			private final Button button = new Button("excluir");
 
+			@Override
+			public void updateItem(GerenciarAlunoDTO obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(button);
+				button.setOnAction(
+						event -> {
+							excluiraluno.excluirUser(obj.getId_aluno());
+						}
+				);
+			}
+		});
+	}
 }
