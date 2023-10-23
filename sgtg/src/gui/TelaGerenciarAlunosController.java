@@ -1,14 +1,15 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import conexao.DB;
 import dto.GerenciarAlunoDTO;
 import gui.util.LoadGerenciarAlunos;
+import gui.util.ShowAndEditAluno;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 public class TelaGerenciarAlunosController implements Initializable {
 
 	private LoadGerenciarAlunos loadAluno;
+	
+	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
+
+	Connection conecta = DB.getConnection();
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -40,6 +45,8 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEDIT;
 	@FXML
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnFEEDBACK;
+	@FXML
+	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEXCLUIR;
 
 	private ObservableList<GerenciarAlunoDTO> obsList;
 
@@ -109,6 +116,23 @@ public class TelaGerenciarAlunosController implements Initializable {
 						event -> System.out.println(obj.getNome_aluno()));
 			}
 		});
-	}
+		
+		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
+			private final Button button = new Button("excluir");
 
+			@Override
+			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(button);
+				button.setOnAction(event -> excluiraluno.excluirUser(obj.getId_aluno())
+				);
+			}
+		});
+	}
 }
