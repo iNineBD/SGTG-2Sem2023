@@ -22,23 +22,24 @@ public class Alerts {
 		alert.setHeaderText(header);
 		alert.setContentText(content);
 
+		
 		ButtonType simButton = new ButtonType("Sim");
-		ButtonType naoButton = new ButtonType("Não");
-
-		alert.getButtonTypes().setAll(simButton, naoButton);
-
-		AtomicBoolean status = new AtomicBoolean(false);
-		// Mostra o diálogo e aguarda a escolha do usuário
-		alert.showAndWait().ifPresent(response -> {
-			if (response == simButton) {
-				status.set(true);
-			} else if (response == naoButton) {
-				status.set(false);
-			}
-		});
-
-		boolean resultado = status.get();
-
-		return resultado;
+        ButtonType naoButton = new ButtonType("Não");
+		
+        alert.getButtonTypes().setAll(simButton, naoButton);
+        
+        AtomicBoolean status = new AtomicBoolean(false);
+     // Mostra o diálogo e aguarda a escolha do usuário
+        alert.showAndWait().ifPresent(response -> {
+            if (response == simButton) {
+                status.set(true);
+            } else if (response == naoButton) {
+            	status.set(false);
+            }
+        });
+        
+        boolean resultado = status.get();
+        
+        return resultado;
 	}
 }

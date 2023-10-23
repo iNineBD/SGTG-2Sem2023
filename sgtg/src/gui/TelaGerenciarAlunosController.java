@@ -1,33 +1,17 @@
 package gui;
 
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import conexao.DB;
-import dto.GerenciarAlunoDTO;
-import gui.util.LoadGerenciarAlunos;
-import gui.util.ShowAndEditAluno;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
+
 
 	public LoadGerenciarAlunos loadAluno;
 	
 	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
 
 	Connection conecta = DB.getConnection();
+	
+	private Telas load = new Telas();
+
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -58,7 +42,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		initializeNodes();
-		
+
 	}
 
 	private void initializeNodes() {
@@ -78,7 +62,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 		obsList = FXCollections.observableArrayList(listaAlunos);
 
 		tableViewGerenciarAluno.setItems(obsList);
-		
+
 		initEditButtons();
 	}
 
@@ -95,11 +79,10 @@ public class TelaGerenciarAlunosController implements Initializable {
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+				button.setOnAction(event -> System.out.println(obj.getNome_aluno()));
 			}
 		});
-		
+
 		tableColumnFEEDBACK.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnFEEDBACK.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
 			private final Button button = new Button("feedback");
@@ -112,8 +95,9 @@ public class TelaGerenciarAlunosController implements Initializable {
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+				button.setOnAction(event -> {
+					load.loadView99("/gui/TelaFeedbackView.fxml", obj);
+				});
 			}
 		});
 		

@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaFeedbackViewController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
@@ -24,7 +24,7 @@
                         <Insets bottom="5.0" top="10.0" />
                      </HBox.margin>
                   </Text>
-                  <Label alignment="TOP_LEFT" contentDisplay="TOP" text="*Nome Aluno*">
+                  <Label fx:id="labelNomeAluno" alignment="TOP_LEFT" contentDisplay="TOP" text="*Nome Aluno*">
                      <font>
                         <Font name="Arial" size="25.0" />
                      </font>
@@ -37,10 +37,10 @@
          </children></VBox>
       <TableView prefHeight="500.0" prefWidth="600.0">
         <columns>
-          <TableColumn minWidth="0.0" prefWidth="150.0" text="Entregas" />
-          <TableColumn minWidth="0.0" prefWidth="150.0" text="Descrição" />
-            <TableColumn minWidth="0.0" prefWidth="150.0" text="Nota" />
-            <TableColumn minWidth="0.0" prefWidth="150.0" text="Comentarios" />
+          <TableColumn minWidth="0.0" prefWidth="217.0" text="Entregas" />
+          <TableColumn minWidth="0.0" prefWidth="347.0" text="Descrição" />
+            <TableColumn minWidth="0.0" prefWidth="101.0" text="Nota" />
+            <TableColumn minWidth="0.0" prefWidth="333.0" text="Comentarios" />
         </columns>
          <VBox.margin>
             <Insets />
@@ -50,7 +50,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" text="Avaliar entrega" textAlignment="CENTER">
+                  <Button fx:id="btnAvaliarEntrega" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnAvaliarEntrega" text="Avaliar entrega" textAlignment="CENTER">
                      <font>
                         <Font name="Arial Bold" size="17.0" />
                      </font>
