@@ -40,46 +40,49 @@ public class LoadEntregas {
 
     }
 	
+
+	
 	public static List<EntregasDTO> atualizarDadosComboBox(int id_aluno_selecionada ) throws SQLException{
-		
-		List<EntregasDTO> entregas = new ArrayList<EntregasDTO>();
-		
-		Connection conn = DB.getConnection();		
-		
 
-		PreparedStatement st = conn.prepareStatement("select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ? and visibility = true");
-		st.setInt(1, id_turma_selecionada);
-		
-		ResultSet result2 = st2.executeQuery();
-		
-		while (result2.next()) { 
-			int id_turma_selecionada = result2.getInt("id_turma");
-			PreparedStatement st = conn.prepareStatement(
-					"select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ?");
-			st.setInt(1, id_turma_selecionada);
+        List<EntregasDTO> entregas = new ArrayList<EntregasDTO>();
 
-			
-			
-			ResultSet result = st.executeQuery();
-			
-			while (result.next()) {
-				
-				int id_entrega = result.getInt("id");
-				String titulo = result.getString("titulo_entrega");
-				String descricao = result.getString("descricao");
-				Date data= result.getDate("data_entrega");
-				
-				entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate(),id_turma_selecionada));
-			}
-			
-		}
-		
-		
-		
-		
-		return entregas;
-		
-	}
+        Connection conn = DB.getConnection();
+
+        PreparedStatement st2 = conn.prepareStatement("select id_turma from matricula where id_aluno = ? ");
+        st2.setInt(1, id_aluno_selecionada); 
+
+        ResultSet result2 = st2.executeQuery();
+
+        while (result2.next()) { 
+            int id_turma_selecionada = result2.getInt("id_turma");
+            PreparedStatement st = conn.prepareStatement(
+                    "select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ?");
+            st.setInt(1, id_turma_selecionada);
+
+
+
+            ResultSet result = st.executeQuery();
+
+            while (result.next()) {
+
+                int id_entrega = result.getInt("id");
+                String titulo = result.getString("titulo_entrega");
+                String descricao = result.getString("descricao");
+                Date data= result.getDate("data_entrega");
+
+                entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate(),id_turma_selecionada));
+            }
+
+        }
+
+
+
+
+        return entregas;
+
+    }
+	
+	
 	
 	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj) {
 		

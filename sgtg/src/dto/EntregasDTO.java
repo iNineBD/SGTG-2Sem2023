@@ -23,8 +23,6 @@ public class EntregasDTO {
 		return titulo;
 	}
 
-	private int id_turma;
-
     public EntregasDTO(int id, String titulo, String descricao, LocalDate data_final, int id_turma) {
         super();
         this.id = id;
