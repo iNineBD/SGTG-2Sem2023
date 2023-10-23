@@ -187,7 +187,7 @@ public class Telas {
 				if(aluno.confirmaDados2(controller)) {
 				try {
 					insertBd.atualizaAluno(id_aluno, controller);
-					Alerts.showAlert("IO Exception", "Salvamento de dados", "Aluno salvo com sucesso!", AlertType.INFORMATION);
+					Alerts.showAlert("Sucesso", "Salvamento de dados", "Aluno salvo com sucesso!", AlertType.INFORMATION);
 					loadView2("/gui/TelaGerenciarAlunos.fxml");
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block

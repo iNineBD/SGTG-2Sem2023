@@ -157,6 +157,12 @@ public class TelaEditarAlunoController implements Initializable{
 		}
 		ObservableList<OrientadorDto> orientador = FXCollections.observableArrayList(listaOrientadores);
 		comboxNomeOrientador.getItems().addAll(orientador);
+		
+		comboxNomeOrientador.setOnAction(event ->{
+			OrientadorDto selectdItem = comboxNomeOrientador.getValue();
+			
+			txtEmailInstitucionalOrientador.setText(selectdItem.getEmailOrientador());
+		});
 	}
 
 
