@@ -1,21 +1,5 @@
 package gui.util;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-
-import application.Main;
-import dto.EntregasDTO;
-import entidades.Aluno;
-import gui.TelaConfirmaController;
-import gui.TelaEditarEntregaController;
-import gui.TelaGerenciarAlunosController;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.VBox;
 
 public class Telas {
 
@@ -205,6 +189,53 @@ public class Telas {
         }
     }
     
+    public synchronized void loadView99(String absoluteName, GerenciarAlunoDTO obj) {
+    	
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox newVbox = loader.load();
+
+            Scene mainScene = Main.getMainScene();
+            VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+            Node mainMenu = mainVbox.getChildren().get(0);
+
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(newVbox.getChildren());
+
+            TelaFeedbackViewController controller = loader.getController();
+            
+            PassaDados.passaDadosAlunoViewFeedback(controller, obj);
+            
+        } catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+        }
+    	
+    }
+    
+public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
+    	
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox newVbox = loader.load();
+
+            Scene mainScene = Main.getMainScene();
+            VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+            Node mainMenu = mainVbox.getChildren().get(0);
+
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(newVbox.getChildren());
+
+            TelaFeedbackAlunoController controller = loader.getController();
+            
+            PassaDados.passaDadosFeedbackAluno(controller, obj);
+            controller.carregarEntregas();
+            
+        } catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+        }
+    	
     public synchronized void loadView87(String absoluteName, EntregasDTO obj ) {
     	
 		try {
