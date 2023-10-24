@@ -1,5 +1,6 @@
 package gui.util;
 
+import dto.OrientadorDto;
 import entidades.Aluno;
 import gui.TelaConfirmaController;
 import gui.TelaEditarAlunoController;
@@ -37,6 +38,7 @@ public class ShowAndEditAluno {
     }
     
     public void mostraAluno3(TelaEditarAlunoController controller, Aluno aluno) {
+    	
         controller.setTxtNome(aluno.getNome());
         controller.setTxtEmailInstitucional(aluno.getEmailFatecAluno());
         controller.setTxtdEmailPessoal(aluno.getEmailPessoal());
@@ -106,9 +108,6 @@ public class ShowAndEditAluno {
     	
     	String novoEmailInstitucional = controller.getTxtEmailInstitucional();
     	aluno.setEmailFatecAluno(novoEmailInstitucional);
-    	
-//    	String novoOrientador = controller.getTxtNomeOrientador();
-//    	aluno.setOrientador(novoOrientador);
     	
     	String novoEmailOrientador = controller.getTxtEmailInstitucionalOrientador();
     	aluno.setEmailFatec(novoEmailOrientador);

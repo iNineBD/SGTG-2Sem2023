@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import application.Main;
+import dto.GerenciarAlunoDTO;
+import dto.OrientadorDto;
 import gui.TelaEntregaTurmaController;
 import gui.TelaGerenciarAlunosController;
 import gui.TelaMostrarAlunoController;
@@ -15,7 +17,7 @@ import gui.TelaConfirmaController;
 import gui.TelaEditarAlunoController;
 import gui.util.InsertBd;
 import gui.util.ShowAndEditAluno;
-
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -93,7 +95,7 @@ public class Telas {
 
 	}
 	
-	public synchronized void loadView10(String absoluteName,Aluno alunos, int id_aluno) throws SQLException {
+	public synchronized void loadView10(String absoluteName,Aluno alunos, int id_aluno, GerenciarAlunoDTO obj) throws SQLException {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -132,7 +134,7 @@ public class Telas {
 			
 			controller1.btEditar.setOnAction( event2 ->{
 				try {
-					loadView11("/gui/TelaEditarAluno.fxml",alunoEdit, id_aluno);
+					loadView11("/gui/TelaEditarAluno.fxml",alunoEdit, id_aluno,obj);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -145,7 +147,7 @@ public class Telas {
 
 	}
 	
-	public synchronized void loadView11(String absoluteName,Aluno alunos, int id_aluno) throws SQLException {
+	public synchronized void loadView11(String absoluteName,Aluno alunos, int id_aluno,GerenciarAlunoDTO obj) throws SQLException {
 
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
@@ -169,6 +171,13 @@ public class Telas {
 			
 			TelaEditarAlunoController controller = loader.getController();
 			
+			ObservableList<OrientadorDto> listaChoice = controller.getComboxNomeOrientador();
+			
+			for(OrientadorDto orientador : listaChoice) {
+				if(orientador.getIdOrientador() == obj.getId_orientador()) {
+					controller.setComboxNomeOrientador(orientador);
+				}
+			}
 			
 			Aluno alunoMostrar = alunos;
 			aluno.mostraAluno3(controller, alunos);
@@ -176,7 +185,7 @@ public class Telas {
 			
 			controller.btCancelar.setOnAction( event1 ->{
 				try {
-					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno);
+					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno,obj);
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

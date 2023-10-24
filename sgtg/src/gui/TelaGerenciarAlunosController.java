@@ -84,6 +84,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 			private final Button button = new Button("Visual./Edit.");
 			
 			
+			
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
 				super.updateItem(obj, empty);
@@ -98,7 +99,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 							int id_aluno = obj.getId_aluno();
 							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
 							try {
-								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2, id_aluno);
+								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2, id_aluno,obj);
 							} catch (SQLException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();

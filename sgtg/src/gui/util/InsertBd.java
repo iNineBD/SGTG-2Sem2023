@@ -238,7 +238,7 @@ public class InsertBd {
     	int id = id_aluno;
     	int id_orientador;    	    	
     	try {
-    		stBuscaIdOrientador.setString(1, controller.getComboxNomeOrientador());
+    		stBuscaIdOrientador.setString(1, controller.getNomeOrientador());
     		ResultSet result = stBuscaIdOrientador.executeQuery();
     		result.next();
     		id_orientador = result.getInt("id");
