@@ -46,6 +46,9 @@ public class TelaFeedbackViewController implements Initializable {
 	}
 
 	@FXML
+	private Button btnVoltar;
+	
+	@FXML
     private TableView<FeedbackDTO> tableViewFeedback;
 
     @FXML
@@ -116,5 +119,12 @@ public class TelaFeedbackViewController implements Initializable {
 			e.printStackTrace();
 		}
     }
+    
+    public void onBtnVoltarAction() throws SQLException {
+		Telas tela = new Telas();
+
+		tela.loadView2("/gui/TelaGerenciarAlunos.fxml");
+
+	}
 
 }
