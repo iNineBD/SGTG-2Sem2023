@@ -35,12 +35,12 @@
                </children>
             </HBox>
          </children></VBox>
-      <TableView prefHeight="500.0" prefWidth="600.0">
+      <TableView fx:id="tableViewFeedback" prefHeight="500.0" prefWidth="600.0">
         <columns>
-          <TableColumn minWidth="0.0" prefWidth="217.0" text="Entregas" />
-          <TableColumn minWidth="0.0" prefWidth="347.0" text="Descrição" />
-            <TableColumn minWidth="0.0" prefWidth="101.0" text="Nota" />
-            <TableColumn minWidth="0.0" prefWidth="333.0" text="Comentarios" />
+          <TableColumn fx:id="tableColumnTituloEntrega" minWidth="0.0" prefWidth="217.0" text="Entregas" />
+          <TableColumn fx:id="tableColumnDescricao" minWidth="0.0" prefWidth="347.0" text="Descrição" />
+            <TableColumn fx:id="tableColumnNota" minWidth="0.0" prefWidth="101.0" text="Nota" />
+            <TableColumn fx:id="tableColumnComentario" minWidth="0.0" prefWidth="333.0" text="Comentarios" />
         </columns>
          <VBox.margin>
             <Insets />

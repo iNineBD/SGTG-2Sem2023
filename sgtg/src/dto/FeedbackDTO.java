@@ -2,8 +2,6 @@ package dto;
 
 public class FeedbackDTO {
 	
-	private int id_turma; // tabela entrega
-	
 	private String titulo_entrega; // tabela entrega
 	
 	private String descricao; // tabela entrega
@@ -12,14 +10,12 @@ public class FeedbackDTO {
 	
 	private String comentario; // tabela feedback
 
-	private int id_aluno; // tabela feedback
-
-	public FeedbackDTO(int id_turma, String titulo_entrega, String descricao, int id_aluno, double nota, String comentario) {
+	public FeedbackDTO(String titulo_entrega, String descricao, double nota, String comentario) {
 		super();
-		this.id_turma = id_turma;
+		
 		this.titulo_entrega = titulo_entrega;
 		this.descricao = descricao;
-		this.id_aluno = id_aluno;
+		
 		this.nota = nota;
 		this.comentario = comentario;
 	}
@@ -56,20 +52,5 @@ public class FeedbackDTO {
 		this.comentario = comentario;
 	}
 
-	public int getId_turma() {
-		return id_turma;
-	}
-
-	public void setId_turma(int id_turma) {
-		this.id_turma = id_turma;
-	}
-
-	public int getId_aluno() {
-		return id_aluno;
-	}
-
-	public void setId_aluno(int id_aluno) {
-		this.id_aluno = id_aluno;
-	}
 	
 }
