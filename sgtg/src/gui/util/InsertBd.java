@@ -96,7 +96,7 @@ public class InsertBd {
     }
 
     private int buscarOuInserirAluno(Aluno aluno) throws SQLException {
-        stBuscaIdAluno.setString(1, aluno.getEmailFatecAluno());
+        stBuscaIdAluno.setString(1, aluno.getEmailPessoal());
         ResultSet result3 = stBuscaIdAluno.executeQuery();
 
         if (!result3.next()) {
