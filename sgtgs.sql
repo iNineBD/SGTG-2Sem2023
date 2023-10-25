@@ -1,3 +1,5 @@
+drop database sgtg;
+
 create database if not exists sgtg;
 
 use sgtg;
@@ -5,7 +7,7 @@ use sgtg;
 -- Criando a tabela dos alunos
 create table aluno(
 id int auto_increment,
-email_institucional varchar(50) not null ,
+email_institucional varchar(50),
 nome varchar (100) not null,
 email_pessoal varchar(50) not null,
 id_orientador int not null,

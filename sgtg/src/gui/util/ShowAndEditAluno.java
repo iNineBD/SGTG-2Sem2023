@@ -112,21 +112,6 @@ public class ShowAndEditAluno {
     	String novoEmailOrientador = controller.getTxtEmailInstitucionalOrientador();
     	aluno.setEmailFatec(novoEmailOrientador);
     	
-    	String novaTurmaTg = controller.getTxtTgMatriculado();
-    	aluno.setNomeTurma(novaTurmaTg);
-    	
-    	String novoTipoTg = controller.getTxtTipoTg();
-    	aluno.setTipoTG(novoTipoTg);
-    	
-    	String novoTituloTg = controller.getTxtTituloTg();
-    	aluno.setProblemaResolvidoOuEstudoArtigo(novoTituloTg);
-    	
-    	String novaEmpresa = controller.getTxtEmpresa();
-    	aluno.setEmpresa(novaEmpresa);
-    	
-    	String novaDisciplina = controller.getTxtDisciplina();
-    	aluno.setDisciplina(novaDisciplina);
-    	
     }
     
     public boolean confirmaDados(TelaConfirmaController controller, Aluno aluno) {
@@ -151,7 +136,7 @@ public class ShowAndEditAluno {
 
         // Verifique se o e-mail do aluno termina com @fatec.sp.gov.br
         if (aluno.getEmailFatecAluno() == null || aluno.getEmailFatecAluno().isEmpty()) {
-            dadosCorretos = false;
+            dadosCorretos = true;
         }else if(!aluno.getEmailFatecAluno().endsWith("@fatec.sp.gov.br")){
         	dadosCorretos = false;
         }
