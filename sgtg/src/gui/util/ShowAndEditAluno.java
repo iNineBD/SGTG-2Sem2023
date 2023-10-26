@@ -171,7 +171,7 @@ public class ShowAndEditAluno {
 
         // Verifique se o e-mail do aluno termina com @fatec.sp.gov.br
         if (controller.getTxtEmailInstitucional() == null || controller.getTxtEmailInstitucional().isEmpty()) {
-            dadosCorretos = false;
+            dadosCorretos = true;
         }else if(!controller.getTxtEmailInstitucional().endsWith("@fatec.sp.gov.br")){
         	dadosCorretos = false;
         }

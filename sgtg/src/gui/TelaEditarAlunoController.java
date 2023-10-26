@@ -63,30 +63,43 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	
 	public String getTxtNome() {
-		return txtNome.getText().trim();
+		if(txtNome.getText() == null) {
+			return txtNome.getText();
+		}else {
+			return txtNome.getText().trim();
+		}
 	}
 
 	public void setTxtNome(String text) {
 		txtNome.setEditable(true);
-		txtNome.setText(text.trim());
+		txtNome.setText(text);
 	}
 	
 	public String getTxtdEmailPessoal() {
-		return txtEmailPessoal.getText().trim();
+		if(txtEmailPessoal.getText() == null) {
+			return txtEmailPessoal.getText();
+		}else {
+			return txtEmailPessoal.getText().trim();
+		}
+		
 	}
 	
 	public void setTxtdEmailPessoal(String text) {
 		txtEmailPessoal.setEditable(true);
-		txtEmailPessoal.setText(text.trim());
+		txtEmailPessoal.setText(text);
 	}
 	
 	public String getTxtEmailInstitucional() {
-		return txtEmailInstitucional.getText().trim();
+		if(txtEmailInstitucional.getText() == null) {
+			return txtEmailInstitucional.getText();
+		}else {
+			return txtEmailInstitucional.getText().trim();
+		}
 	}
 	
 	public void setTxtEmailInstitucional(String text) {
 		txtEmailInstitucional.setEditable(true);
-		txtEmailInstitucional.setText(text.trim());
+		txtEmailInstitucional.setText(text);
 	}
 	
 	public ObservableList<OrientadorDto> getComboxNomeOrientador() {
@@ -107,7 +120,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
 		txtEmailInstitucionalOrientador.setEditable(false);
-		txtEmailInstitucionalOrientador.setText(text.trim());
+		txtEmailInstitucionalOrientador.setText(text);
 	}
 	
 	public String getTxtTgMatriculado() {
@@ -116,7 +129,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtTgMatriculado(String text) {
 		txtTgMatriculado.setEditable(false);
-		txtTgMatriculado.setText(text.trim());
+		txtTgMatriculado.setText(text);
 	}
 	
 	public String getTxtTipoTg() {
@@ -125,7 +138,7 @@ public class TelaEditarAlunoController implements Initializable{
 	
 	public void setTxtTipoTg(String text) {
 		txtTipoTg.setEditable(false);
-		txtTipoTg.setText(text.trim());
+		txtTipoTg.setText(text);
 	}
 	
 	public String getTxtTituloTg() {

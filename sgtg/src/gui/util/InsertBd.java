@@ -65,7 +65,7 @@ public class InsertBd {
     private void prepararStatements(Connection conecta) throws SQLException {
         stBuscaEmailOrientador = conecta.prepareStatement("select orientador.id, orientador.email_fatec from orientador where email_fatec like ?");
         stBuscaIdTurma = conecta.prepareStatement("select turma.id, turma.nome from turma where turma.nome = ?");
-        stBuscaIdAluno = conecta.prepareStatement("select aluno.id,aluno.email_institucional from aluno where aluno.email_institucional = ?");
+        stBuscaIdAluno = conecta.prepareStatement("select aluno.id,aluno.email_institucional,aluno.email_pessoal from aluno where aluno.email_pessoal = ?");
         stBuscaIdTipo = conecta.prepareStatement("select tipo.id,tipo.tipo from tipo where tipo.tipo = ?");
         stBuscaSemestreEAno = conecta.prepareStatement("select semestre.semestralizacao, semestre.ano from semestre where semestre.semestralizacao = ? and semestre.ano = ?");
         stAnoESemestre = conecta.prepareStatement("insert into semestre(semestralizacao,ano) values(?,?)");
@@ -106,7 +106,7 @@ public class InsertBd {
             stAluno.setInt(4, buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador()));
             stAluno.executeUpdate();
 
-            stBuscaIdAluno.setString(1, aluno.getEmailFatecAluno());
+            stBuscaIdAluno.setString(1, aluno.getEmailPessoal());
             result3 = stBuscaIdAluno.executeQuery();
             result3.next();
         }
