@@ -29,7 +29,7 @@ public class InsertBd {
     private PreparedStatement stMatricula = null;
     
     private PreparedStatement stAtualizaAluno = null;
-    private PreparedStatement stAtualizaTG = null;
+    private PreparedStatement stAtualizaTg = null;
     private PreparedStatement stAtualizaMatricula = null;
     private PreparedStatement stBuscaIdOrientador = null;
     
@@ -54,8 +54,43 @@ public class InsertBd {
             
 
         }catch(SQLIntegrityConstraintViolationException a) {
-        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
-        	return;
+        	try {
+        		conecta = DB.getConnection();
+        		prepararStatements(conecta);
+        		
+        		int idAluno = buscarOuInserirAluno(aluno);
+        		int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
+                int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano);
+        		int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
+                
+                PreparedStatement stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?;");
+                stAtualizaAluno.setString(1, aluno.getNome());
+				stAtualizaAluno.setString(2, aluno.getEmailFatecAluno());
+				stAtualizaAluno.setString(3, aluno.getEmailPessoal());
+				stAtualizaAluno.setInt(4,idOrientador);
+				stAtualizaAluno.setInt(5, idAluno);
+				stAtualizaAluno.executeUpdate();
+	
+                
+				stAtualizaMatricula = conecta.prepareStatement("update matricula set matricula.id_turma = ? where matricula.id_aluno = ?");
+				stAtualizaMatricula.setInt(1, idTurma);
+				stAtualizaMatricula.setInt(2, idAluno);
+				stAtualizaMatricula.executeUpdate();
+				
+				stAtualizaTg = conecta.prepareStatement("update tg set tg.problema_a_resolver = ?, tg.empresa = ?, tg.disciplina = ?, tg.id_tipo = ? where tg.id_aluno = ?");
+				stAtualizaTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
+				stAtualizaTg.setString(2, aluno.getEmpresa());
+				stAtualizaTg.setString(3,aluno.getDisciplina());
+				stAtualizaTg.setInt(4,idTipo);
+				stAtualizaTg.setInt(5,idAluno);
+				stAtualizaTg.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
+//        	return;
         }catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as needed (e.g., show an error message).
@@ -223,10 +258,7 @@ public class InsertBd {
             stMatricula.setInt(2, idTurma);
             stMatricula.executeUpdate();
         }
-    }
-    
-    
-    
+    }    
     
     public void atualizaAluno(int id_aluno,TelaEditarAlunoController controller) throws SQLException {
     	Connection conecta = conecta = DB.getConnection();
