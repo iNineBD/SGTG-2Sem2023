@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 
 import conexao.DB;
 import dto.GerenciarAlunoDTO;
+import entidades.Aluno;
 import gui.util.LoadGerenciarAlunos;
 import gui.util.ShowAndEditAluno;
 import gui.util.Telas;
@@ -24,7 +25,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
 
-
 	public LoadGerenciarAlunos loadAluno;
 	
 	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
@@ -32,6 +32,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	Connection conecta = DB.getConnection();
 	
 	private Telas load = new Telas();
+
 
 
 	@FXML
@@ -90,8 +91,10 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("edit");
-
+			private final Button button = new Button("Visual./Edit.");
+			
+			
+			
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
 				super.updateItem(obj, empty);
@@ -100,7 +103,19 @@ public class TelaGerenciarAlunosController implements Initializable {
 					return;
 				}
 				setGraphic(button);
-				button.setOnAction(event -> System.out.println(obj.getNome_aluno()));
+				button.setOnAction(
+						event -> {
+							
+							int id_aluno = obj.getId_aluno();
+							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
+							try {
+								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2, id_aluno,obj);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						});
+
 			}
 		});
 

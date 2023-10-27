@@ -8,7 +8,9 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 
 import conexao.DB;
+import dto.GerenciarAlunoDTO;
 import entidades.Aluno;
+import gui.TelaEditarAlunoController;
 import javafx.scene.control.Alert.AlertType;
 
 public class InsertBd {
@@ -25,6 +27,12 @@ public class InsertBd {
     private PreparedStatement stTg = null;
     private PreparedStatement stTipo = null;
     private PreparedStatement stMatricula = null;
+    
+    private PreparedStatement stAtualizaAluno = null;
+    private PreparedStatement stAtualizaTg = null;
+    private PreparedStatement stAtualizaMatricula = null;
+    private PreparedStatement stBuscaIdOrientador = null;
+    
 
     public void insertBd(Aluno aluno) {
         int ano = LocalDate.now().getYear();
@@ -46,8 +54,43 @@ public class InsertBd {
             
 
         }catch(SQLIntegrityConstraintViolationException a) {
-        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
-        	return;
+        	try {
+        		conecta = DB.getConnection();
+        		prepararStatements(conecta);
+        		
+        		int idAluno = buscarOuInserirAluno(aluno);
+        		int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
+                int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano);
+        		int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
+                
+                PreparedStatement stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?;");
+                stAtualizaAluno.setString(1, aluno.getNome());
+				stAtualizaAluno.setString(2, aluno.getEmailFatecAluno());
+				stAtualizaAluno.setString(3, aluno.getEmailPessoal());
+				stAtualizaAluno.setInt(4,idOrientador);
+				stAtualizaAluno.setInt(5, idAluno);
+				stAtualizaAluno.executeUpdate();
+	
+                
+				stAtualizaMatricula = conecta.prepareStatement("update matricula set matricula.id_turma = ? where matricula.id_aluno = ?");
+				stAtualizaMatricula.setInt(1, idTurma);
+				stAtualizaMatricula.setInt(2, idAluno);
+				stAtualizaMatricula.executeUpdate();
+				
+				stAtualizaTg = conecta.prepareStatement("update tg set tg.problema_a_resolver = ?, tg.empresa = ?, tg.disciplina = ?, tg.id_tipo = ? where tg.id_aluno = ?");
+				stAtualizaTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
+				stAtualizaTg.setString(2, aluno.getEmpresa());
+				stAtualizaTg.setString(3,aluno.getDisciplina());
+				stAtualizaTg.setInt(4,idTipo);
+				stAtualizaTg.setInt(5,idAluno);
+				stAtualizaTg.executeUpdate();
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+//        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
+//        	return;
         }catch (SQLException e) {
             e.printStackTrace();
             // Handle the exception as needed (e.g., show an error message).
@@ -57,7 +100,7 @@ public class InsertBd {
     private void prepararStatements(Connection conecta) throws SQLException {
         stBuscaEmailOrientador = conecta.prepareStatement("select orientador.id, orientador.email_fatec from orientador where email_fatec like ?");
         stBuscaIdTurma = conecta.prepareStatement("select turma.id, turma.nome from turma where turma.nome = ?");
-        stBuscaIdAluno = conecta.prepareStatement("select aluno.id,aluno.email_institucional from aluno where aluno.email_institucional = ?");
+        stBuscaIdAluno = conecta.prepareStatement("select aluno.id,aluno.email_institucional,aluno.email_pessoal from aluno where aluno.email_pessoal = ?");
         stBuscaIdTipo = conecta.prepareStatement("select tipo.id,tipo.tipo from tipo where tipo.tipo = ?");
         stBuscaSemestreEAno = conecta.prepareStatement("select semestre.semestralizacao, semestre.ano from semestre where semestre.semestralizacao = ? and semestre.ano = ?");
         stAnoESemestre = conecta.prepareStatement("insert into semestre(semestralizacao,ano) values(?,?)");
@@ -67,6 +110,7 @@ public class InsertBd {
         stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
         stTipo = conecta.prepareStatement("insert into tipo(tipo,regra) values(?,?)");
         stMatricula = conecta.prepareStatement("insert into matricula(id_aluno,id_turma) values(?,?)");
+       
     }
 
     private int buscarOuInserirOrientador(String emailFatecOrientador, String nomeOrientador) throws SQLException {
@@ -87,7 +131,7 @@ public class InsertBd {
     }
 
     private int buscarOuInserirAluno(Aluno aluno) throws SQLException {
-        stBuscaIdAluno.setString(1, aluno.getEmailFatecAluno());
+        stBuscaIdAluno.setString(1, aluno.getEmailPessoal());
         ResultSet result3 = stBuscaIdAluno.executeQuery();
 
         if (!result3.next()) {
@@ -97,7 +141,7 @@ public class InsertBd {
             stAluno.setInt(4, buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador()));
             stAluno.executeUpdate();
 
-            stBuscaIdAluno.setString(1, aluno.getEmailFatecAluno());
+            stBuscaIdAluno.setString(1, aluno.getEmailPessoal());
             result3 = stBuscaIdAluno.executeQuery();
             result3.next();
         }
@@ -214,6 +258,31 @@ public class InsertBd {
             stMatricula.setInt(2, idTurma);
             stMatricula.executeUpdate();
         }
+    }    
+    
+    public void atualizaAluno(int id_aluno,TelaEditarAlunoController controller) throws SQLException {
+    	Connection conecta = conecta = DB.getConnection();
+    	
+    	stBuscaIdOrientador = conecta.prepareStatement("select orientador.id as id, orientador.email_fatec as email_fatec from orientador where orientador.nome = ?");
+        
+        stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?");
+    	
+    	int id = id_aluno;
+    	int id_orientador;    	    	
+    	try {
+    		stBuscaIdOrientador.setString(1, controller.getNomeOrientador());
+    		ResultSet result = stBuscaIdOrientador.executeQuery();
+    		result.next();
+    		id_orientador = result.getInt("id");
+        	stAtualizaAluno.setString(1, controller.getTxtNome());
+        	stAtualizaAluno.setString(2, controller.getTxtEmailInstitucional());
+        	stAtualizaAluno.setString(3, controller.getTxtdEmailPessoal());
+        	stAtualizaAluno.setInt(4, id_orientador);
+        	stAtualizaAluno.setInt(5,id);    
+        	stAtualizaAluno.executeUpdate();
+    	}catch(NullPointerException e) {
+//    		e.printStackTrace();
+    		Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados em branco, por favor verfique os dados", AlertType.WARNING);
+    	}
     }
-
 }
