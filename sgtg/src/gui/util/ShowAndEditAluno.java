@@ -1,5 +1,15 @@
 package gui.util;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import conexao.DB;
+import entidades.Aluno;
+import gui.TelaConfirmaController;
+import gui.TelaEditarAlunoController;
+import gui.TelaMostrarAlunoController;
+import javafx.scene.control.Alert.AlertType;
 
 public class ShowAndEditAluno {
 
@@ -179,6 +189,8 @@ public class ShowAndEditAluno {
 		if (Alerts.showAlertConfirmation("Atenção", "Voce está prestes a excluir um aluno", "Tem certeza?")) {
 			PreparedStatement st2;
 			try {
+				DB db = new DB();
+				Connection conecta = db.getConnection();
 				st2 = conecta.prepareStatement("update sgtg.aluno set visibility = 0 where id = ?");
 				st2.setInt(1, id_usuario);
 				st2.executeUpdate();

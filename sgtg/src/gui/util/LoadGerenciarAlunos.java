@@ -48,7 +48,7 @@ public class LoadGerenciarAlunos {
 	    	int total_entregas = 0;
 	    	int entrega_aluno = 0;
 	    	
-	    	PreparedStatement st2 = conecta.prepareStatement("select count(id) n_entregas from entrega where id_turma = ?");
+	    	PreparedStatement st2 = conecta.prepareStatement("select count(id) n_entregas from entrega where id_turma = ? and visibility = 1");
 	    	st2.setInt(1, id_turma);
 	    	
 	    	ResultSet result2 = st2.executeQuery();
@@ -58,7 +58,7 @@ public class LoadGerenciarAlunos {
 			}
 	    	
 	    	// entregas feitas pelo aluno
-	    	PreparedStatement st3 = conecta.prepareStatement("select count(id_aluno) entrega_aluno from feedback where id_aluno = ?");
+	    	PreparedStatement st3 = conecta.prepareStatement("select count(id_aluno) entrega_aluno from feedback where id_aluno = ? and visibility = 1");
 	    	st3.setInt(1, id);
 	    	
 	    	ResultSet result3 = st3.executeQuery();

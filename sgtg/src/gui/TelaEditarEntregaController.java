@@ -33,9 +33,11 @@ public class TelaEditarEntregaController implements Initializable {
 
 	@FXML
 	private Label lbSemestreAno;
+	
+	
 
 	@FXML
-	private ChoiceBox<TurmasDTO> choiceBoxTurma;
+	private Label lblTurma;
 
 	@FXML
 	private TextField txtFieldTituloEntrega;
@@ -64,14 +66,6 @@ public class TelaEditarEntregaController implements Initializable {
 		this.lbSemestreAno = lbSemestreAno;
 	}
 
-	public ObservableList<TurmasDTO> getItensChoiceBox() {
-		return this.choiceBoxTurma.getItems();
-	}
-	
-	public void setChoiceBox(TurmasDTO turma) {
-		choiceBoxTurma.setValue(turma);
-	}
-
 	public void setTxtFieldTituloEntrega(String txtFieldTituloEntrega) {
 		this.txtFieldTituloEntrega.setText(txtFieldTituloEntrega);
 	}
@@ -82,48 +76,70 @@ public class TelaEditarEntregaController implements Initializable {
 
 	public void setDatePickerDataFinal(LocalDate datePickerDataFinal) {
 		this.datePickerDataFinal.setValue(datePickerDataFinal);
+		
+	}
+	
+	public void setLblTurma(int id_aluno) throws SQLException {
+		
+		Connection conn = DB.getConnection();
+
+		PreparedStatement st2 = conn.prepareStatement("select turma.nome from turma inner join matricula on matricula.id_turma = turma.id inner join aluno on matricula.id_aluno = aluno.id where aluno.id = ?");
+		st2.setInt(1, id_aluno);
+		
+		ResultSet result = st2.executeQuery();
+		
+		while (result.next()) {
+			String turma = result.getString("nome");
+			
+			lblTurma.setText(turma);
+			
+		}
+
+		
 	}
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		// Semestre e ano
-		int semestralizacao = (LocalDate.now().getMonthValue() <= 6) ? 1 : 2;
+		
+//		// Semestre e ano
+//		int semestralizacao = (LocalDate.now().getMonthValue() <= 6) ? 1 : 2;
+//
+//		int anoAtual = LocalDate.now().getYear();
+//
+//		lbSemestreAno.setText(String.format("%d° / %d", semestralizacao, anoAtual));
+//
+//		// preenchimento do ChoiceBox Turma
+//
+//		List<TurmasDTO> listaTurmas = new ArrayList<TurmasDTO>();
+//
+//		try {
+//
+//			listaTurmas = LoadTurmas.carregaTurmas(semestralizacao, anoAtual);
+//
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			Alerts.showAlert("SQLException", "Erro ao buscar turmas",
+//					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
+//		}
+//
+//		if (listaTurmas != null) {
+//			ObservableList<TurmasDTO> turmas = FXCollections.observableArrayList(listaTurmas);
+//			choiceBoxTurma.getItems().addAll(turmas);
+//		}
+		
 
-		int anoAtual = LocalDate.now().getYear();
-
-		lbSemestreAno.setText(String.format("%d° / %d", semestralizacao, anoAtual));
-
-		// preenchimento do ChoiceBox Turma
-
-		List<TurmasDTO> listaTurmas = new ArrayList<TurmasDTO>();
-
-		try {
-
-			listaTurmas = LoadTurmas.carregaTurmas(semestralizacao, anoAtual);
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			Alerts.showAlert("SQLException", "Erro ao buscar turmas",
-					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
-		}
-
-		if (listaTurmas != null) {
-			ObservableList<TurmasDTO> turmas = FXCollections.observableArrayList(listaTurmas);
-			choiceBoxTurma.getItems().addAll(turmas);
-		}
 
 	}
 	
 	
 	public void onBtnSalvarAction() throws SQLException {
 
-		TurmasDTO turma_selecionada = choiceBoxTurma.getValue();
 		String titulo = txtFieldTituloEntrega.getText();
 		String descricao = txtAreaDescricao.getText();
 		LocalDate data = datePickerDataFinal.getValue();
 		List<String> nome_entrega = new ArrayList<String>();
 
-		if (turma_selecionada == null || titulo.trim().isEmpty() || descricao.trim().isEmpty() || data == null) {
+		if (titulo.trim().isEmpty() || descricao.trim().isEmpty() || data == null) {
 			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
 		} else {
 			LocalDate dataAtual = LocalDate.now();
@@ -156,12 +172,11 @@ public class TelaEditarEntregaController implements Initializable {
 							"O titulo inserido já foi ultilizado", AlertType.WARNING);
 				} else {
 					PreparedStatement st = conn.prepareStatement(
-							"update entrega set titulo_entrega = ?, data_entrega = ?, descricao = ?, id_turma = ? where id = ?");
+							"update entrega set titulo_entrega = ?, data_entrega = ?, descricao = ? where id = ?");
 					st.setString(1, titulo);
 					st.setObject(2, data);
 					st.setString(3, descricao);
-					st.setInt(4, turma_selecionada.getId());
-					st.setInt(5, this.id);
+					st.setInt(4, this.id);
 
 					st.executeUpdate();
 					

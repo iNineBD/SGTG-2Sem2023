@@ -90,15 +90,6 @@ public class LoadEntregas {
 		controller.setTxtAreaDescricao(obj.getDescricao());
 		controller.setDatePickerDataFinal(obj.getData_final());
 		
-		ObservableList<TurmasDTO> listaChoice = controller.getItensChoiceBox();
-		
-		for (TurmasDTO turma: listaChoice) {
-			
-			if (turma.getId() == obj.getId_turma()) {
-				controller.setChoiceBox(turma);
-			}
-			
-		}
 		
 		controller.setId(obj.getId());
 		

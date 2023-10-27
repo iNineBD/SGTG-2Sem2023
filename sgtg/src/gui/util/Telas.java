@@ -1,5 +1,29 @@
 package gui.util;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import application.Main;
+import dto.EntregasDTO;
+import dto.GerenciarAlunoDTO;
+import dto.OrientadorDto;
+import entidades.Aluno;
+import gui.TelaConfirmaController;
+import gui.TelaEditarAlunoController;
+import gui.TelaEditarEntregaController;
+import gui.TelaFeedbackAlunoController;
+import gui.TelaFeedbackViewController;
+import gui.TelaGerenciarAlunosController;
+import gui.TelaMostrarAlunoController;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.VBox;
 
 public class Telas {
 	
@@ -342,13 +366,17 @@ public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
 	        mainVbox.getChildren().addAll(newVbox.getChildren());
 
 	        TelaEditarEntregaController controller = loader.getController();
-	        
 	        LoadEntregas.editarEntregaAUX(controller, obj);
+	        controller.setLblTurma(obj.getId());
+	       
 	        
 	        
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Alerts.showAlert("SQL Exception", "Erro ao carregar dados", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
 		}
 
         
