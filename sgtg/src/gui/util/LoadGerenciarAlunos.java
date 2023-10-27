@@ -19,8 +19,7 @@ public class LoadGerenciarAlunos {
 		Connection conecta = DB.getConnection();
 
 		// busca as informações da tela gerenciar aluno
-		
-	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno,aluno.email_institucional email_fatec,aluno.email_pessoal email_pessoal,orientador.nome orientador,orientador.email_fatec email_fatec_orientador,orientador.id id_orientador ,tipo.tipo tipo, tipo.regra regra, turma.nome turma, turma.id id_turma,tg.disciplina disciplina,tg.empresa empresa,tg.problema_a_resolver tema from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id order by aluno.id");
+	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno,aluno.email_institucional email_fatec,aluno.email_pessoal email_pessoal,orientador.nome orientador,orientador.email_fatec email_fatec_orientador,orientador.id id_orientador ,tipo.tipo tipo, tipo.regra regra, turma.nome turma, turma.id id_turma,tg.disciplina disciplina,tg.empresa empresa,tg.problema_a_resolver tema from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.visibility = 1 order by aluno.id");
 
 	    ResultSet result = st.executeQuery();
 	    

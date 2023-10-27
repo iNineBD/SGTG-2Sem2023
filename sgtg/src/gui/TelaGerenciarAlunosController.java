@@ -1,11 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import conexao.DB;
 import dto.GerenciarAlunoDTO;
 import entidades.Aluno;
 import gui.util.LoadGerenciarAlunos;
@@ -24,8 +25,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
 
-	private LoadGerenciarAlunos loadAluno;
+	public LoadGerenciarAlunos loadAluno;
+	
+	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
+
+	Connection conecta = DB.getConnection();
+	
 	private Telas load = new Telas();
+
+
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -43,6 +51,8 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEDIT;
 	@FXML
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnFEEDBACK;
+	@FXML
+	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEXCLUIR;
 
 	private ObservableList<GerenciarAlunoDTO> obsList;
 
@@ -54,7 +64,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		initializeNodes();
-		
+
 	}
 
 	private void initializeNodes() {
@@ -74,7 +84,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 		obsList = FXCollections.observableArrayList(listaAlunos);
 
 		tableViewGerenciarAluno.setItems(obsList);
-		
+
 		initEditButtons();
 	}
 
@@ -105,9 +115,10 @@ public class TelaGerenciarAlunosController implements Initializable {
 								e.printStackTrace();
 							}
 						});
+
 			}
 		});
-		
+
 		tableColumnFEEDBACK.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnFEEDBACK.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
 			private final Button button = new Button("feedback");
@@ -120,10 +131,31 @@ public class TelaGerenciarAlunosController implements Initializable {
 					return;
 				}
 				setGraphic(button);
+				button.setOnAction(event -> {
+					load.loadView99("/gui/TelaFeedbackView.fxml", obj);
+				});
+			}
+		});
+		
+		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
+			private final Button button = new Button("excluir");
+
+			@Override
+			public void updateItem(GerenciarAlunoDTO obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(button);
 				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+						event -> {
+							excluiraluno.excluirUser(obj.getId_aluno());
+						}
+				);
 			}
 		});
 	}
-
 }

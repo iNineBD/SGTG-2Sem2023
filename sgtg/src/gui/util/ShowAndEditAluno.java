@@ -1,15 +1,10 @@
 package gui.util;
 
-import dto.OrientadorDto;
-import entidades.Aluno;
-import gui.TelaConfirmaController;
-import gui.TelaEditarAlunoController;
-import gui.TelaMostrarAlunoController;
 
 public class ShowAndEditAluno {
-	
+
 	Constraints filtro = new Constraints();
-	
+
     // Método somente para exibir os alunos na tela
     public void mostraAluno(TelaConfirmaController controller, Aluno aluno) {
         controller.setTxtNome(aluno.getNome());
@@ -180,5 +175,25 @@ public class ShowAndEditAluno {
 
     }
 
+	public void excluirUser(int id_usuario) {
+		if (Alerts.showAlertConfirmation("Atenção", "Voce está prestes a excluir um aluno", "Tem certeza?")) {
+			PreparedStatement st2;
+			try {
+				st2 = conecta.prepareStatement("update sgtg.aluno set visibility = 0 where id = ?");
+				st2.setInt(1, id_usuario);
+				st2.executeUpdate();
+				
+				Telas loadTelas = new Telas();
+				loadTelas.loadView2("/gui/TelaGerenciarAlunos.fxml");
+
+			} catch (SQLException e) {
+
+				Alerts.showAlert("Erro ao conectar com o Banco", "Atenção", "Ocorreu um erro em excluir o usuario",
+						AlertType.WARNING);
+			}
+			
+		}
+
+	}
 
 }
