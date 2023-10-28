@@ -2,20 +2,19 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEditarAlunoController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaMostrarAlunoController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="labelNome" text="Editar Aluno">
+                  <Label fx:id="labelNome" text="Visualizar Aluno">
                      <font>
                         <Font name="Arial Bold" size="25.0" />
                      </font>
@@ -137,11 +136,11 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </TextField>
-                        <ChoiceBox fx:id="comboxNomeOrientador" prefHeight="25.0" prefWidth="376.0">
+                        <TextField fx:id="txtNomeOrientador" layoutX="10.0" layoutY="60.0">
                            <VBox.margin>
-                              <Insets bottom="7.0" />
+                              <Insets bottom="5.0" />
                            </VBox.margin>
-                        </ChoiceBox>
+                        </TextField>
                         <TextField fx:id="txtEmailInstitucionalOrientador" layoutX="10.0" layoutY="85.0">
                            <VBox.margin>
                               <Insets bottom="5.0" />
@@ -178,27 +177,27 @@
          <children>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="100.0">
                <children>
-                  <Button fx:id="btCancelar" alignment="CENTER" layoutX="284.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Cancelar" textAlignment="CENTER">
+                  <Button fx:id="btVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Voltar" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
                      <HBox.margin>
-                        <Insets left="200.0" right="100.0" />
+                        <Insets left="180.0" right="30.0" />
                      </HBox.margin>
                      <font>
                         <Font name="Arial" size="11.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btSalvar" alignment="CENTER" layoutX="310.0" layoutY="10.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Salvar" textAlignment="CENTER">
+                  <Button fx:id="btEditar" alignment="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Editar Aluno" textAlignment="CENTER">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
                      <font>
                         <Font name="Arial" size="11.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets left="50.0" />
+                     </HBox.margin>
                   </Button>
                </children>
             </HBox>

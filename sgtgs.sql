@@ -1,3 +1,5 @@
+drop database sgtg;
+
 create database if not exists sgtg;
 
 use sgtg;
@@ -5,10 +7,11 @@ use sgtg;
 -- Criando a tabela dos alunos
 create table aluno(
 id int auto_increment,
-email_institucional varchar(50) unique key not null ,
+email_institucional varchar(50),
 nome varchar (100) not null,
-email_pessoal varchar(50),
+email_pessoal varchar(50) not null,
 id_orientador int not null,
+visibility bool not null default true,
 constraint pk_idAluno primary key (id)
 );
 
@@ -56,6 +59,7 @@ id int auto_increment,
 titulo_entrega varchar(30),
 data_entrega date not null,
 descricao varchar (200) not null,
+visibility bool not null default true,
 id_turma int not null,
 constraint pk_idEntrega primary key (id)
 );

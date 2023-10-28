@@ -1,14 +1,17 @@
 package gui;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
-
+import conexao.DB;
 import dto.GerenciarAlunoDTO;
+import entidades.Aluno;
 import gui.util.LoadGerenciarAlunos;
+import gui.util.ShowAndEditAluno;
+import gui.util.Telas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +25,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaGerenciarAlunosController implements Initializable {
 
-	private LoadGerenciarAlunos loadAluno;
+	public LoadGerenciarAlunos loadAluno;
+	
+	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
+
+	Connection conecta = DB.getConnection();
+	
+	private Telas load = new Telas();
+
+
 
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
@@ -40,6 +51,8 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEDIT;
 	@FXML
 	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnFEEDBACK;
+	@FXML
+	private TableColumn<GerenciarAlunoDTO, GerenciarAlunoDTO> tableColumnEXCLUIR;
 
 	private ObservableList<GerenciarAlunoDTO> obsList;
 
@@ -51,7 +64,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
 		initializeNodes();
-		
+
 	}
 
 	private void initializeNodes() {
@@ -71,15 +84,17 @@ public class TelaGerenciarAlunosController implements Initializable {
 		obsList = FXCollections.observableArrayList(listaAlunos);
 
 		tableViewGerenciarAluno.setItems(obsList);
-		
+
 		initEditButtons();
 	}
 
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("edit");
-
+			private final Button button = new Button("Visual./Edit.");
+			
+			
+			
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
 				super.updateItem(obj, empty);
@@ -89,10 +104,21 @@ public class TelaGerenciarAlunosController implements Initializable {
 				}
 				setGraphic(button);
 				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+						event -> {
+							
+							int id_aluno = obj.getId_aluno();
+							Aluno aluno2 = new Aluno(obj.getNome_aluno(),obj.getEmailPessoalAluno(),obj.getEmailFatecAluno(),obj.getNome_orientador(),obj.getEmailOrientador(),obj.getNome_turma(),obj.getTipo_tg(),obj.getRegra(),obj.getTituloTg(),obj.getEmpresa(),obj.getDisciplina());
+							try {
+								load.loadView10("/gui/TelaMostrarAluno.fxml", aluno2, id_aluno,obj);
+							} catch (SQLException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						});
+
 			}
 		});
-		
+
 		tableColumnFEEDBACK.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnFEEDBACK.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
 			private final Button button = new Button("feedback");
@@ -105,10 +131,31 @@ public class TelaGerenciarAlunosController implements Initializable {
 					return;
 				}
 				setGraphic(button);
+				button.setOnAction(event -> {
+					load.loadView99("/gui/TelaFeedbackView.fxml", obj);
+				});
+			}
+		});
+		
+		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
+			private final Button button = new Button("excluir");
+
+			@Override
+			public void updateItem(GerenciarAlunoDTO obj, boolean empty) {
+				super.updateItem(obj, empty);
+				if (obj == null) {
+					setGraphic(null);
+					return;
+				}
+
+				setGraphic(button);
 				button.setOnAction(
-						event -> System.out.println(obj.getNome_aluno()));
+						event -> {
+							excluiraluno.excluirUser(obj.getId_aluno());
+						}
+				);
 			}
 		});
 	}
-
 }
