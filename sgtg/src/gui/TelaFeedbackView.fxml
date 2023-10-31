@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,92 +14,91 @@
 
 <VBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaFeedbackViewController">
    <children>
-      <VBox>
+      <AnchorPane prefHeight="750.0" prefWidth="1000.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1000.0">
+            <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK - ">
-                     <font>
-                        <Font name="Verdana Bold" size="50.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Text>
-                  <Label fx:id="labelNomeAluno" alignment="TOP_LEFT" contentDisplay="TOP" text="*nome do aluno*">
-                     <font>
-                        <Font name="Verdana" size="40.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Label>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK - ">
+                           <font>
+                              <Font name="Verdana Bold" size="50.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Text>
+                        <Label fx:id="labelNomeAluno" alignment="TOP_LEFT" contentDisplay="TOP" text="*nome do aluno*">
+                           <font>
+                              <Font name="Verdana" size="40.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
-         </children>
-      </VBox>
-      <VBox>
-         <children>
-            <TableView fx:id="tableViewFeedback" prefHeight="500.0">
-              <columns>
-                <TableColumn fx:id="tableColumnTituloEntrega" minWidth="0.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Entregas" />
-                <TableColumn fx:id="tableColumnDescricao" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Descrição" />
-                  <TableColumn fx:id="tableColumnNota" minWidth="0.0" prefWidth="50.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Nota" />
-                  <TableColumn fx:id="tableColumnComentario" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Comentários" />
-              </columns>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets left="150.0" right="150.0" />
-               </VBox.margin>
-               <columnResizePolicy>
-                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-               </columnResizePolicy>
-            </TableView>
-         </children>
-         <VBox.margin>
-            <Insets left="150.0" right="150.0" />
-         </VBox.margin>
-      </VBox>
-      <VBox alignment="CENTER">
-         <children>
-            <HBox alignment="CENTER" prefHeight="50.0">
+            </VBox>
+            <VBox alignment="CENTER" layoutX="134.0" layoutY="90.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="170.0">
                <children>
-                  <Button fx:id="btnVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnVoltarAction" prefHeight="40.0" prefWidth="100.0" text="Voltar">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                     <font>
-                        <Font name="Verdana Bold" size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Button fx:id="btnAvaliarEntrega" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnAvaliarEntrega" prefHeight="40.0" prefWidth="200.0" text="Avaliar entrega" textAlignment="CENTER">
-                     <font>
-                        <Font name="Verdana Bold" size="20.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <HBox.margin>
-                        <Insets left="50.0" />
-                     </HBox.margin>
-                  </Button>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <TableView fx:id="tableViewFeedback" prefHeight="500.0" prefWidth="1000.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnTituloEntrega" minWidth="0.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Entregas" />
+                            <TableColumn fx:id="tableColumnDescricao" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Descrição" />
+                              <TableColumn fx:id="tableColumnNota" minWidth="0.0" prefWidth="50.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Nota" />
+                              <TableColumn fx:id="tableColumnComentario" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Comentários" />
+                          </columns>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                     </children>
+                  </HBox>
                </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-            </HBox>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="325.0" layoutY="670.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="675.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="50.0">
+                     <children>
+                        <Button fx:id="btnVoltar" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnVoltarAction" prefHeight="40.0" prefWidth="100.0" text="Voltar">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Verdana Bold" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button fx:id="btnAvaliarEntrega" alignment="CENTER" mnemonicParsing="false" onAction="#onBtnAvaliarEntrega" prefHeight="40.0" prefWidth="200.0" text="Avaliar entrega" textAlignment="CENTER">
+                           <font>
+                              <Font name="Verdana Bold" size="20.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <HBox.margin>
+                              <Insets left="50.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </VBox>
+      </AnchorPane>
    </children>
 </VBox>

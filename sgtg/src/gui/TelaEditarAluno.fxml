@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="1000.0">
          <children>
-            <VBox prefHeight="500.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <VBox prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="80.0" prefWidth="1000.0">
                      <children>
@@ -197,14 +197,14 @@
                                  </font></TextField>
                            </children>
                            <HBox.margin>
-                              <Insets left="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </VBox>
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutY="601.0" prefHeight="80.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <VBox alignment="CENTER" layoutY="601.0" prefHeight="80.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="600.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1000.0">
                      <children>
