@@ -79,23 +79,23 @@ public class LoadGerenciarAlunos {
 	        for (int i = 0; i < listaAlunos.size(); i++) {
 	            GerenciarAlunoDTO alunoAtual = listaAlunos.get(i);
 	            
-	            if (alunoAtual.getNome_turma().equals("TG1 E TG2 Relatório/Artigo")) {
-//					System.out.println(alunoAtual.getNome_aluno() + " - " + alunoAtual.getNome_turma());
-					alunoAtual.setNome_turma("TG1 e TG2");
-				}
 
-	            for (int j = i + 1; j < listaAlunos.size(); j++) {
+	            for (int j = i ; j < listaAlunos.size(); j++) {
 	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())&& alunoAtual.getId_turma() !=(listaAlunos.get(j).getId_turma()) ) {
 	                	alunoAtual.setNome_turma("TG1 e TG2");
 	                	alunoAtual.setTotal_entregas(alunoAtual.getTotal_entregas()+listaAlunos.get(j).getTotal_entregas());
 	                    listaAlunos.remove(j);
 	                }
+		            if (alunoAtual.getNome_turma().equals("TG1 E TG2 Relatório/Artigo")) {
+//						System.out.println(alunoAtual.getNome_aluno() + " - " + alunoAtual.getNome_turma());
+						alunoAtual.setNome_turma("TG1 e TG2");
+					}
 	                
 	                alunoAtual.setEntregas_format(alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
 	            }
-//	            
-//	            System.out.println(alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
-//                System.out.println(alunoAtual.getNome_aluno());
+	            
+//	            System.out.println(alunoAtual.getNome_aluno() + " - " + alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
+//                System.out.println();
 	            
 	        }
 	    }
