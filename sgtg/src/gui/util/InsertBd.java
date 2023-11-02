@@ -167,9 +167,53 @@ public class InsertBd {
                 return idTurmaTG1;
             }
             
-        }else if(nomeTurma.equals("TG1 E TG2") && !aluno.getTipoTG().contains("Portfólio")) {
+        }else if(nomeTurma.equals("TG1 E TG2") && aluno.getTipoTG().contains("Relatório")) {
         	
-        	String turmaEspecial = nomeTurma + " Relatório/Artigo";
+        	String turmaEspecial = nomeTurma + " Relatório";
+            stBuscaIdTurma.setString(1, turmaEspecial);
+            ResultSet result2 = stBuscaIdTurma.executeQuery();
+
+            if (!result2.next()) {
+                try {
+                    stBuscaSemestreEAno.setInt(1, semestre);
+                    stBuscaSemestreEAno.setInt(2, ano);
+                    ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+                    result5.next();
+                    stTurma.setString(1, turmaEspecial);
+                    stTurma.setInt(2, result5.getInt("semestralizacao"));
+                    stTurma.setInt(3, result5.getInt("ano"));
+                    stTurma.executeUpdate();
+
+                    stBuscaIdTurma.setString(1, turmaEspecial);
+                    result2 = stBuscaIdTurma.executeQuery();
+                    result2.next();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    stAnoESemestre.setInt(1, semestre);
+                    stAnoESemestre.setInt(2, ano);
+                    stAnoESemestre.executeUpdate();
+                    
+                    stBuscaSemestreEAno.setInt(1, semestre);
+                    stBuscaSemestreEAno.setInt(2, ano);
+                    ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+                    result5.next();
+                    stTurma.setString(1, turmaEspecial);
+                    stTurma.setInt(2, result5.getInt("semestralizacao"));
+                    stTurma.setInt(3, result5.getInt("ano"));
+                    stTurma.executeUpdate();
+
+                    stBuscaIdTurma.setString(1, turmaEspecial);
+                    result2 = stBuscaIdTurma.executeQuery();
+                    result2.next();
+                }
+            }
+
+            int idTurmaEspecial = result2.getInt("id");
+        	
+        	return idTurmaEspecial;
+        }else if(nomeTurma.equals("TG1 E TG2") && aluno.getTipoTG().contains("Artigo")) {
+        	
+        	String turmaEspecial = nomeTurma + " Artigo";
             stBuscaIdTurma.setString(1, turmaEspecial);
             ResultSet result2 = stBuscaIdTurma.executeQuery();
 
