@@ -78,6 +78,11 @@ public class LoadGerenciarAlunos {
 //	    	verifica os alunos do tg1 e tg2
 	        for (int i = 0; i < listaAlunos.size(); i++) {
 	            GerenciarAlunoDTO alunoAtual = listaAlunos.get(i);
+	            
+	            if (alunoAtual.getNome_turma().equals("TG1 E TG2 Relatório/Artigo")) {
+//					System.out.println(alunoAtual.getNome_aluno() + " - " + alunoAtual.getNome_turma());
+					alunoAtual.setNome_turma("TG1 e TG2");
+				}
 
 	            for (int j = i + 1; j < listaAlunos.size(); j++) {
 	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())&& alunoAtual.getId_turma() !=(listaAlunos.get(j).getId_turma()) ) {

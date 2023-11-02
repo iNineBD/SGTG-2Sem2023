@@ -33,7 +33,7 @@ constraint pk_semestre primary key (semestralizacao, ano)
 -- Criando a tabela turma
 create table turma(
 id int auto_increment,
-nome varchar(10) not null,
+nome varchar(30) not null,
 semestralizacao int not null,
 ano year not null,
 constraint pk_idTurma primary key (id),
@@ -75,6 +75,7 @@ references turma (id);
 create table feedback(
 id int auto_increment,
 comentario varchar (200) not null,
+visibility bool default true,
 nota double(4,2) not null,
 id_entrega int not null,
 id_aluno int not null,
