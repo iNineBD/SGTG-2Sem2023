@@ -20,12 +20,12 @@
                <columns>
                   <TableColumn fx:id="tableColumnNome" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Nome" />
                   <TableColumn fx:id="tableColumnOrientador" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Orientador" />
-                  <TableColumn fx:id="tableColumnTurma" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Turma" />
+                  <TableColumn fx:id="tableColumnTurma" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana; -fx-alignment: center;" text="Turma" />
                   <TableColumn fx:id="tableColumnTipoTG" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Tipo TG" />
-                  <TableColumn fx:id="tableColumnEntregas" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Entregas" />
-                  <TableColumn fx:id="tableColumnEDIT" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Editar" />
-                  <TableColumn fx:id="tableColumnFEEDBACK" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Feedback" />
-                  <TableColumn fx:id="tableColumnEXCLUIR" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Excluir" />
+                  <TableColumn fx:id="tableColumnEntregas" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana; -fx-alignment: center;" text="Entregas" />
+                  <TableColumn fx:id="tableColumnEDIT" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana; -fx-alignment: center;" text="Visualizar/Editar" />
+                  <TableColumn fx:id="tableColumnFEEDBACK" editable="false" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana; -fx-alignment: center;" text="Feedback" />
+                  <TableColumn fx:id="tableColumnEXCLUIR" prefWidth="-1.0" style="-fx-font-size: 18; -fx-font-family: verdana; -fx-alignment: center;" text="Excluir" />
                </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

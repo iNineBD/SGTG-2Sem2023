@@ -143,17 +143,17 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="80.0">
                      <children>
-                        <Button fx:id="btnCancelar" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCancelarAction" prefHeight="40.0" prefWidth="110.0" text="Cancelar" textAlignment="CENTER">
+                        <Button fx:id="btnCancelar" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnCancelarAction" prefHeight="40.0" prefWidth="115.0" text="Cancelar" textAlignment="CENTER">
                            <font>
-                              <Font name="Verdana" size="18.0" />
+                              <Font name="Verdana Bold" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets right="25.0" />
                            </HBox.margin>
                         </Button>
-                        <Button fx:id="btnSalvar" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnSalvarAction" prefHeight="40.0" prefWidth="110.0" text="Salvar" textAlignment="CENTER">
+                        <Button fx:id="btnSalvar" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#onBtnSalvarAction" prefHeight="40.0" prefWidth="115.0" text="Salvar" textAlignment="CENTER">
                            <font>
-                              <Font name="Verdana" size="18.0" />
+                              <Font name="Verdana Bold" size="18.0" />
                            </font>
                            <HBox.margin>
                               <Insets left="25.0" />

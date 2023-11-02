@@ -48,7 +48,7 @@
                           <columns>
                             <TableColumn fx:id="tableColumnTituloEntrega" minWidth="0.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Entregas" />
                             <TableColumn fx:id="tableColumnDescricao" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Descrição" />
-                              <TableColumn fx:id="tableColumnNota" minWidth="0.0" prefWidth="50.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Nota" />
+                              <TableColumn fx:id="tableColumnNota" minWidth="0.0" prefWidth="50.0" style="-fx-font-size: 15px; -fx-font-family: verdana; -fx-alignment: center;" text="Nota" />
                               <TableColumn fx:id="tableColumnComentario" minWidth="0.0" prefWidth="130.0" style="-fx-font-size: 15px; -fx-font-family: verdana;" text="Comentários" />
                           </columns>
                            <cursor>
