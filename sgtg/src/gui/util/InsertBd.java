@@ -46,8 +46,8 @@ public class InsertBd {
 
             int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
             int idAluno = buscarOuInserirAluno(aluno);
-            int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano);
-            inserirMatricula(idAluno, idTurma,semestre,ano);
+            int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano,aluno);
+            inserirMatricula(idAluno, idTurma,semestre,ano,aluno);
 
             int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
             inserirTg(aluno, idAluno, idTipo);
@@ -60,7 +60,7 @@ public class InsertBd {
         		
         		int idAluno = buscarOuInserirAluno(aluno);
         		int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
-                int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano);
+                int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano,aluno);
         		int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
                 
                 PreparedStatement stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?;");
@@ -149,10 +149,11 @@ public class InsertBd {
         return result3.getInt("id");
     }
 
-    private int buscarOuInserirTurma(String nomeTurma, int semestre, int ano) throws SQLException {
-        if (nomeTurma.equals("TG1 E TG2")) {
-            int idTurmaTG1 = buscarOuInserirTurma("TG1", semestre, ano);
-            int idTurmaTG2 = buscarOuInserirTurma("TG2", semestre, ano);
+    private int buscarOuInserirTurma(String nomeTurma, int semestre, int ano, Aluno aluno) throws SQLException {
+        if (nomeTurma.equals("TG1 E TG2") && aluno.getTipoTG().contains("Portfólio")) {
+            int idTurmaTG1 = buscarOuInserirTurma("TG1", semestre, ano,aluno);
+            int idTurmaTG2 = buscarOuInserirTurma("TG2", semestre, ano,aluno);
+            
             
             // Verifique se ambas as turmas TG1 e TG2 existem antes de retornar a nova turma.
             if (idTurmaTG1 != -1 && idTurmaTG2 != -1) {
@@ -165,6 +166,51 @@ public class InsertBd {
                 // Apenas TG1 está faltando, insira TG1.
                 return idTurmaTG1;
             }
+            
+        }else if(nomeTurma.equals("TG1 E TG2") && !aluno.getTipoTG().contains("Portfólio")) {
+        	
+        	String turmaEspecial = nomeTurma + " Relatório/Artigo";
+            stBuscaIdTurma.setString(1, turmaEspecial);
+            ResultSet result2 = stBuscaIdTurma.executeQuery();
+
+            if (!result2.next()) {
+                try {
+                    stBuscaSemestreEAno.setInt(1, semestre);
+                    stBuscaSemestreEAno.setInt(2, ano);
+                    ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+                    result5.next();
+                    stTurma.setString(1, turmaEspecial);
+                    stTurma.setInt(2, result5.getInt("semestralizacao"));
+                    stTurma.setInt(3, result5.getInt("ano"));
+                    stTurma.executeUpdate();
+
+                    stBuscaIdTurma.setString(1, turmaEspecial);
+                    result2 = stBuscaIdTurma.executeQuery();
+                    result2.next();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    stAnoESemestre.setInt(1, semestre);
+                    stAnoESemestre.setInt(2, ano);
+                    stAnoESemestre.executeUpdate();
+                    
+                    stBuscaSemestreEAno.setInt(1, semestre);
+                    stBuscaSemestreEAno.setInt(2, ano);
+                    ResultSet result5 = stBuscaSemestreEAno.executeQuery();
+                    result5.next();
+                    stTurma.setString(1, turmaEspecial);
+                    stTurma.setInt(2, result5.getInt("semestralizacao"));
+                    stTurma.setInt(3, result5.getInt("ano"));
+                    stTurma.executeUpdate();
+
+                    stBuscaIdTurma.setString(1, turmaEspecial);
+                    result2 = stBuscaIdTurma.executeQuery();
+                    result2.next();
+                }
+            }
+
+            int idTurmaEspecial = result2.getInt("id");
+        	
+        	return idTurmaEspecial;
         }
         
         stBuscaIdTurma.setString(1, nomeTurma);
@@ -235,12 +281,12 @@ public class InsertBd {
         stTg.executeUpdate();
     }
 
-    private void inserirMatricula(int idAluno, int idTurma, int semestre, int ano) throws SQLException {
+    private void inserirMatricula(int idAluno, int idTurma, int semestre, int ano,Aluno aluno) throws SQLException {
         // Verifique se a turma é "TG1 E TG2".
         if (idTurma == -1) {
             // Inserir o aluno nas turmas "TG1" e "TG2" se ele estiver matriculado na turma composta "TG1 E TG2".
-            int idTurmaTG1 = buscarOuInserirTurma("TG1", semestre, ano);
-            int idTurmaTG2 = buscarOuInserirTurma("TG2", semestre, ano);
+            int idTurmaTG1 = buscarOuInserirTurma("TG1", semestre, ano,aluno);
+            int idTurmaTG2 = buscarOuInserirTurma("TG2", semestre, ano,aluno);
 
             if (idTurmaTG1 != -1 && idTurmaTG2 != -1) {
                 // O aluno não está matriculado em nenhuma das turmas individuais, então matricule-o em ambas.
