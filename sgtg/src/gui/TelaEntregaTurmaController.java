@@ -117,7 +117,7 @@ public class TelaEntregaTurmaController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEditar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEditar.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
-			private final Button edit = new Button("edit");
+			private final Button button = new Button("‍✏");
 
 			@Override
 			protected void updateItem(EntregasDTO obj, boolean empty) {
@@ -126,8 +126,8 @@ public class TelaEntregaTurmaController implements Initializable {
 					setGraphic(null);
 					return;
 				}
-				setGraphic(edit);
-				edit.setOnAction(event -> {
+				setGraphic(button);
+				button.setOnAction(event -> {
 					Telas telas = new Telas();
 					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj);
 				});
@@ -136,7 +136,7 @@ public class TelaEntregaTurmaController implements Initializable {
 
 		tableColumnDel.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnDel.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
-			private final Button del = new Button("del");
+			private final Button del = new Button("❌");
 
 			@Override
 			protected void updateItem(EntregasDTO obj, boolean empty) {
