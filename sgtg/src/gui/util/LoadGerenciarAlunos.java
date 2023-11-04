@@ -86,10 +86,6 @@ public class LoadGerenciarAlunos {
 	                	alunoAtual.setTotal_entregas(alunoAtual.getTotal_entregas()+listaAlunos.get(j).getTotal_entregas());
 	                    listaAlunos.remove(j);
 	                }
-		            if (alunoAtual.getNome_turma().contains("TG1 E TG2 Relatório") || alunoAtual.getNome_turma().contains("TG1 E TG2 Artigo")) {
-//						System.out.println(alunoAtual.getNome_aluno() + " - " + alunoAtual.getNome_turma());
-						alunoAtual.setNome_turma("TG1 e TG2");
-					}
 	                
 	                alunoAtual.setEntregas_format(alunoAtual.getEntregas_feitas() + "/" + alunoAtual.getTotal_entregas());
 	            }
