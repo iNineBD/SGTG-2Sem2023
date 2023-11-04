@@ -4,15 +4,16 @@ package gui;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import gui.util.Telas;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 
 
 
 public class TelaConfirmaController implements Initializable{
-	
 	
 	@FXML
 	private TextField txtNome = new TextField();
@@ -51,83 +52,134 @@ public class TelaConfirmaController implements Initializable{
 	@FXML
 	public Button btConfirmaTodos;
 	
+	
 	public String getTxtNome() {
-		return txtNome.getText();
+		if(txtNome.getText() == null) {
+			return txtNome.getText();
+		}else {
+			return txtNome.getText().trim();
+		}
 	}
 
 	public void setTxtNome(String text) {
+		txtNome.setEditable(true);
 		txtNome.setText(text);
 	}
 	
 	public String getTxtdEmailPessoal() {
-		return txtEmailPessoal.getText();
+		if(txtEmailPessoal.getText() == null) {
+			return txtEmailPessoal.getText();
+		}else {
+			return txtEmailPessoal.getText().trim();
+		}
 	}
 	
 	public void setTxtdEmailPessoal(String text) {
+		txtEmailPessoal.setEditable(true);
 		txtEmailPessoal.setText(text);
 	}
 	
 	public String getTxtEmailInstitucional() {
-		return txtEmailInstitucional.getText();
+		if(txtEmailInstitucional.getText() == null) {
+			return txtEmailInstitucional.getText();
+		}else {
+			return txtEmailInstitucional.getText().trim();
+		}
 	}
 	
 	public void setTxtEmailInstitucional(String text) {
+		txtNomeOrientador.setEditable(true);
 		txtEmailInstitucional.setText(text);
 	}
 	
 	public String getTxtNomeOrientador() {
-		return txtNomeOrientador.getText();
+		if(txtNomeOrientador.getText() == null) {
+			return txtNomeOrientador.getText();
+		}else {
+			return txtNomeOrientador.getText().trim();
+		}
 	}
 	
 	public void setTxtNomeOrientador(String text) {
+		txtNomeOrientador.setEditable(true);
 		txtNomeOrientador.setText(text);
 	}
 	
 	public String getTxtEmailInstitucionalOrientador() {
-		return txtEmailInstitucionalOrientador.getText();
+		if(txtEmailInstitucionalOrientador.getText() == null) {
+			return txtEmailInstitucionalOrientador.getText();
+		}else {
+			return txtEmailInstitucionalOrientador.getText().trim();
+		}
 	}
 	
 	public void setTxtEmailInstitucionalOrientador(String text) {
+		txtEmailInstitucionalOrientador.setEditable(true);
 		txtEmailInstitucionalOrientador.setText(text);
 	}
 	
 	public String getTxtTgMatriculado() {
-		return txtTgMatriculado.getText();
+		if (txtTgMatriculado.getText() == null) {
+			return txtTgMatriculado.getText();
+		}else {
+			return txtTgMatriculado.getText().trim();
+		}
 	}
 	
 	public void setTxtTgMatriculado(String text) {
+		txtTgMatriculado.setEditable(true);
 		txtTgMatriculado.setText(text);
 	}
 	
 	public String getTxtTipoTg() {
-		return txtTipoTg.getText();
+		if(txtTipoTg.getText() == null) {
+			return txtTipoTg.getText();
+		}else {
+		return txtTipoTg.getText().trim();
+		}
 	}
 	
 	public void setTxtTipoTg(String text) {
+		txtTipoTg.setEditable(true);
 		txtTipoTg.setText(text);
 	}
 	
 	public String getTxtTituloTg() {
-		return txtTituloTg.getText();
+		if(txtTituloTg.getText() == null) {
+			return txtTituloTg.getText();
+		}else {
+			return txtTituloTg.getText().trim();
+		}
 	}
 	
 	public void setTxtTituloTg(String text) {
+		txtTituloTg.setEditable(true);
 		txtTituloTg.setText(text);
 	}
 	
 	public String getTxtEmpresa() {
-		return txtEmpresa.getText();
+		if(txtEmpresa.getText() == null) {
+			return txtEmpresa.getText();
+		}else {
+			return txtEmpresa.getText().trim();
+		}
 	}
 	
 	public void setTxtEmpresa(String text) {
+		txtEmpresa.setEditable(true);
 		txtEmpresa.setText(text);
 	}
 	
 	public String getTxtDisciplina() {
-		return txtDisciplina.getText();
+		if(txtDisciplina.getText() == null) {
+			return txtDisciplina.getText();
+		}else {
+			return txtDisciplina.getText().trim();
+		}
 	}
 	
 	public void setTxtDisciplina(String text) {
+		txtDisciplina.setEditable(true);
 		txtDisciplina.setText(text);
 	}
 	
