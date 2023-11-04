@@ -197,6 +197,7 @@
                                  </font></TextField>
                            </children>
                            <HBox.margin>
+
                               <Insets />
                            </HBox.margin>
                         </VBox>
