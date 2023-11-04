@@ -14,7 +14,6 @@
 <?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEditarEntregaController">
-
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="1000.0">
          <children>
@@ -123,10 +122,7 @@
                            </HBox.margin>
                         </VBox>
                      </children>
-                     <HBox.margin>
-                        <Insets left="2.5" right="2.5" />
-                     </HBox.margin>
-                  </VBox>
+                  </HBox>
                </children>
             </VBox>
             <VBox alignment="CENTER" layoutY="496.0" prefHeight="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="500.0">
@@ -154,7 +150,6 @@
                         <Insets />
                      </VBox.margin>
                   </HBox>
-
                </children>
             </VBox>
          </children>

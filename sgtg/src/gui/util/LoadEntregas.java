@@ -56,7 +56,7 @@ public class LoadEntregas {
         while (result2.next()) { 
             int id_turma_selecionada = result2.getInt("id_turma");
             PreparedStatement st = conn.prepareStatement(
-                    "select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ?");
+                    "select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ? and visibility = 1");
             st.setInt(1, id_turma_selecionada);
 
 
