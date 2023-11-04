@@ -34,7 +34,7 @@
                         <Insets />
                      </VBox.margin>
                      <font>
-                        <Font name="Verdana Bold" size="30.0" />
+                        <Font name="System Bold" size="30.0" />
                      </font>
                   </Label>
                   <VBox alignment="CENTER" prefHeight="50.0" prefWidth="100.0">

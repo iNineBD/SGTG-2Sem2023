@@ -14,7 +14,7 @@
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="1000.0">
          <children>
-            <VBox prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <VBox prefHeight="500.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
                   <VBox alignment="CENTER" prefHeight="80.0" prefWidth="1000.0">
                      <children>
@@ -233,7 +233,7 @@
                                  </cursor></TextField>
                            </children>
                            <HBox.margin>
-                              <Insets />
+                              <Insets left="10.0" />
                            </HBox.margin>
                         </VBox>
                      </children>
@@ -243,16 +243,16 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox alignment="CENTER" layoutX="-7.0" layoutY="600.0" prefHeight="80.0" prefWidth="1000.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="600.0">
+            <VBox alignment="CENTER" layoutX="-7.0" layoutY="600.0" prefHeight="80.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1000.0">
                      <children>
-                        <Button fx:id="btVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Voltar" textAlignment="CENTER">
+                        <Button fx:id="btVoltar" alignment="CENTER" mnemonicParsing="false" prefHeight="40.0" prefWidth="115.0" text="Voltar" textAlignment="CENTER">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <HBox.margin>
-                              <Insets left="405.0" right="30.0" />
+                              <Insets left="430.0" right="30.0" />
                            </HBox.margin>
                            <font>
                               <Font name="Verdana Bold" size="15.0" />
@@ -269,7 +269,7 @@
                               <Font name="Verdana Bold" size="15.0" />
                            </font>
                            <HBox.margin>
-                              <Insets left="30.0" />
+                              <Insets left="50.0" />
                            </HBox.margin>
                            <cursor>
                               <Cursor fx:constant="HAND" />

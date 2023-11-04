@@ -5,266 +5,188 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaConfirmaController">
+<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaConfirmaController">
 
    <children>
-      <AnchorPane prefHeight="700.0" prefWidth="1000.0">
+      <VBox alignment="CENTER" prefHeight="327.0" prefWidth="600.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="500.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+            <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="30.0" prefWidth="100.0">
+                  <Label text="Confirme as Informações" textAlignment="CENTER">
+                     <font>
+                        <Font name="Arial Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox alignment="CENTER" prefHeight="268.0" prefWidth="600.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" prefHeight="267.0" prefWidth="224.0">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="1000.0" text="CONFIRME AS INFORMAÇÕES" textAlignment="CENTER">
+                        <Label prefHeight="16.0" prefWidth="110.0" text="Nome completo:" textAlignment="CENTER">
                            <font>
-                              <Font name="Verdana Bold" size="50.0" />
+                              <Font name="Arial" size="15.0" />
                            </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Email Institucional:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Email Pessoal:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Nome Orientador:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Email Institucional Orientador:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="TG Matriculado:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Tipo de TG:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Título TG:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Empresa:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label text="Disciplina:" textAlignment="CENTER">
+                           <font>
+                              <Font name="Arial" size="15.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="9.0" left="5.0" />
+                           </VBox.margin>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER" prefWidth="1000.0">
+                  <VBox prefHeight="239.0" prefWidth="370.0">
                      <children>
-                        <VBox alignment="CENTER_LEFT" prefWidth="400.0">
-                           <children>
-                              <Label text="Nome completo:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Email Institucional:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Email Pessoal:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Nome Orientador:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Email Institucional Orientador:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="TG Matriculado:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Tipo de TG:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Título TG:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Empresa:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets bottom="10.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label text="Disciplina:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="Verdana" size="25.0" />
-                                 </font>
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox prefWidth="500.0">
-                           <children>
-                              <TextField fx:id="txtNome" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtEmailInstitucional" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtEmailPessoal" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtNomeOrientador" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtEmailInstitucionalOrientador" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtTgMatriculado" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtTipoTg" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtTituloTg" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      						<TextField fx:id="txtEmpresa" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets bottom="13.0" />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-                              <TextField fx:id="txtDisciplina" prefHeight="30.0">
-                                 <VBox.margin>
-                                    <Insets />
-                                 </VBox.margin>
-                                 <font>
-                                    <Font name="Verdana" size="15.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="TEXT" />
-                                 </cursor>
-                              </TextField>
-      
-                           </children>
-                        </VBox>
+                        <TextField fx:id="txtNome">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailInstitucional">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailPessoal">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtNomeOrientador">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmailInstitucionalOrientador">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTgMatriculado">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTipoTg">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtTituloTg">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+						<TextField fx:id="txtEmpresa">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin></TextField>
+                        <TextField fx:id="txtDisciplina">
+                           <VBox.margin>
+                              <Insets bottom="1.0" />
+                           </VBox.margin>
+                        </TextField>
+
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
-            <VBox alignment="CENTER" layoutY="600.0" prefHeight="80.0" prefWidth="1000.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-               <children>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="1000.0">
-                     <children>
-                        <Button fx:id="btConfirma" mnemonicParsing="false" prefHeight="40.0" prefWidth="130.0" text="Confirmar">
-                           <font>
-                              <Font name="Verdana Bold" size="15.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <HBox.margin>
-                              <Insets left="405.0" right="30.0" />
-                           </HBox.margin>
-                        </Button>
-                        <Button fx:id="btConfirmaTodos" mnemonicParsing="false" prefHeight="40.0" prefWidth="160.0" text="Confirmar todos">
-                           <font>
-                              <Font name="Verdana Bold" size="15.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <HBox.margin>
-                              <Insets left="30.0" />
-                           </HBox.margin>
-                        </Button>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
+            </HBox>
          </children>
-      </AnchorPane>
+         <VBox.margin>
+            <Insets top="20.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="btConfirma" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Confirmar">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="btConfirmaTodos" mnemonicParsing="false" prefHeight="30.0" prefWidth="119.0" text="Confirmar todos">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
    </children>
 </VBox>
