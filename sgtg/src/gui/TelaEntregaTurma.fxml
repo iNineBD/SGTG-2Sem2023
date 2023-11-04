@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEntregaTurmaController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaEntregaTurmaController">
 	<children>
-<<<<<<< HEAD
       <AnchorPane prefHeight="700.0" prefWidth="1000.0">
          <children>
       		<VBox alignment="CENTER" prefHeight="80.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
@@ -53,7 +54,6 @@
       		</VBox>
          </children>
       </AnchorPane>
-=======
 		<VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0">
 			<children>
 				<Label text="Visualizar Entregas">
@@ -88,6 +88,5 @@
 				</HBox>
 			</children>
 		</VBox>
->>>>>>> parent of d6d63b5 (fix: finalizando as alterações da tela)
 	</children>
 </VBox>

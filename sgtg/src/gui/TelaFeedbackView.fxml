@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -13,11 +14,10 @@
 
 <VBox alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaFeedbackViewController">
    <children>
-      <VBox>
+      <AnchorPane prefHeight="750.0" prefWidth="1000.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="80.0" prefWidth="1000.0">
+            <VBox AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
-<<<<<<< HEAD
                   <HBox alignment="CENTER">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK - ">
@@ -90,13 +90,11 @@
                         </Button>
                      </children>
                      <opaqueInsets>
-=======
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FEEDBACK - ">
                      <font>
                         <Font name="Verdana Bold" size="50.0" />
                      </font>
                      <HBox.margin>
->>>>>>> parent of d6d63b5 (fix: finalizando as alterações da tela)
                         <Insets />
                      </HBox.margin>
                   </Text>
