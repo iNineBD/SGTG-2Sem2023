@@ -2,27 +2,33 @@ package gui.util;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
-import application.Main;
-import gui.TelaEntregaTurmaController;
-import gui.TelaGerenciarAlunosController;
-
 import java.util.ArrayList;
 
+import application.Main;
+import dto.EntregasDTO;
+import dto.GerenciarAlunoDTO;
+import dto.OrientadorDto;
 import entidades.Aluno;
 import gui.TelaConfirmaController;
-import gui.util.InsertBd;
-import gui.util.ShowAndEditAluno;
-
+import gui.TelaEditarAlunoController;
+import gui.TelaEditarEntregaController;
+import gui.TelaFeedbackAlunoController;
+import gui.TelaFeedbackViewController;
+import gui.TelaGerenciarAlunosController;
+import gui.TelaMostrarAlunoController;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class Telas {
+	
+	private InsertBd insertBd = new InsertBd();
+	private ShowAndEditAluno aluno = new ShowAndEditAluno();
 
 
 	public synchronized void loadView(String absoluteName) {
@@ -88,42 +94,128 @@ public class Telas {
 
 	}
 	
-	
-//	public synchronized void loadView10(String absoluteName) throws SQLException {
-//
-//		try {
-//			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-//
-//			VBox newVbox = loader.load();
-//
-//			Scene mainScene = Main.getMainScene();
-//
-//			VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
-//
-//			Node mainMenu = mainVbox.getChildren().get(0);
-//
-//			mainVbox.getChildren().clear();
-//
-//			mainVbox.getChildren().add(mainMenu);
-//
-//			mainVbox.getChildren().addAll(newVbox.getChildren());
-//			
-//			TelaEntregaTurmaController controller = loader.getController();
-//			controller.setLoadEntregas(new LoadEntregas());
-//			
-//			controller.updateTableView();
-//
-//		} catch (IOException e) {
-//			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
-//		}
-//	}
+	public synchronized void loadView10(String absoluteName,Aluno alunos, int id_aluno, GerenciarAlunoDTO obj) throws SQLException {
 
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+
+			VBox newVbox = loader.load();
+
+			Scene mainScene = Main.getMainScene();
+
+			VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+
+			Node mainMenu = mainVbox.getChildren().get(0);
+
+			mainVbox.getChildren().clear();
+
+			mainVbox.getChildren().add(mainMenu);
+
+			mainVbox.getChildren().addAll((newVbox.getChildren()));
+			
+			mainVbox.prefHeightProperty().bind(mainScene.heightProperty());
+			mainVbox.prefWidthProperty().bind(mainScene.widthProperty());
+			
+			TelaMostrarAlunoController controller1 = loader.getController();
+					
+			aluno.mostraAluno2(controller1, alunos);
+			aluno.mostraAlunoTravado(controller1);
+			Aluno alunoEdit = alunos;
+			
+			controller1.btVoltar.setOnAction( event1 ->{
+				try {
+					loadView2("/gui/TelaGerenciarAlunos.fxml");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			
+			controller1.btEditar.setOnAction( event2 ->{
+				try {
+					loadView11("/gui/TelaEditarAluno.fxml",alunoEdit, id_aluno,obj);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
+		} catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+		}
+
+	}
+	
+	public synchronized void loadView11(String absoluteName,Aluno alunos, int id_aluno,GerenciarAlunoDTO obj) throws SQLException {
+
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+
+			VBox newVbox = loader.load();
+
+			Scene mainScene = Main.getMainScene();
+
+			VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+
+			Node mainMenu = mainVbox.getChildren().get(0);
+
+			mainVbox.getChildren().clear();
+
+			mainVbox.getChildren().add(mainMenu);
+
+			mainVbox.getChildren().addAll((newVbox.getChildren()));
+			
+			mainVbox.prefHeightProperty().bind(mainScene.heightProperty());
+			mainVbox.prefWidthProperty().bind(mainScene.widthProperty());
+			
+			TelaEditarAlunoController controller = loader.getController();
+			
+			ObservableList<OrientadorDto> listaChoice = controller.getComboxNomeOrientador();
+			
+			for(OrientadorDto orientador : listaChoice) {
+				if(orientador.getIdOrientador() == obj.getId_orientador()) {
+					controller.setComboxNomeOrientador(orientador);
+				}
+			}
+			
+			Aluno alunoMostrar = alunos;
+			aluno.mostraAluno3(controller, alunos);
+			aluno.editaInformacao2(controller,alunos);
+			
+			controller.btCancelar.setOnAction( event1 ->{
+				try {
+					loadView10("/gui/TelaMostrarAluno.fxml",alunoMostrar,id_aluno,obj);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			controller.btSalvar.setOnAction( event1 ->{
+				try {
+				if(aluno.confirmaDados2(controller)) {
+				try {
+					insertBd.atualizaAluno(id_aluno, controller);
+					Alerts.showAlert("Sucesso", "Salvamento de dados", "Aluno salvo com sucesso!", AlertType.INFORMATION);
+					loadView2("/gui/TelaGerenciarAlunos.fxml");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}}else {
+					Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados inválidos", AlertType.WARNING);
+				}
+			}catch(NullPointerException a) {
+				Alerts.showAlert("IO Exception", "Erros ao salvar dados", "Dados em branco, por favor verfique os dados", AlertType.WARNING);
+			}});
+
+		} catch (IOException e) {
+			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+		}
+
+	}
 
     private int currentAlunoIndex = 0;
 
     public synchronized void loadView3(String absoluteName, ArrayList<Aluno> alunos) {
-    	InsertBd insertBd = new InsertBd();
-    	ShowAndEditAluno aluno = new ShowAndEditAluno();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVbox = loader.load();
@@ -208,6 +300,86 @@ public class Telas {
         } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
         }
+    }
+    
+    public synchronized void loadView99(String absoluteName, GerenciarAlunoDTO obj) {
+    	
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox newVbox = loader.load();
+
+            Scene mainScene = Main.getMainScene();
+            VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+            Node mainMenu = mainVbox.getChildren().get(0);
+
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(newVbox.getChildren());
+
+            TelaFeedbackViewController controller = loader.getController();
+            
+            PassaDados.passaDadosAlunoViewFeedback(controller, obj);
+            
+        } catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+        }
+    	
+    }
+    
+public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
+    	
+    	try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+            VBox newVbox = loader.load();
+
+            Scene mainScene = Main.getMainScene();
+            VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+            Node mainMenu = mainVbox.getChildren().get(0);
+
+            mainVbox.getChildren().clear();
+            mainVbox.getChildren().add(mainMenu);
+            mainVbox.getChildren().addAll(newVbox.getChildren());
+
+            TelaFeedbackAlunoController controller = loader.getController();
+            
+            PassaDados.passaDadosFeedbackAluno(controller, obj);
+            controller.carregarEntregas();
+            
+        } catch (IOException e) {
+            Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
+        }
+}
+    	
+    public synchronized void loadView87(String absoluteName, EntregasDTO obj ) {
+    	
+		try {
+			
+			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
+	        VBox newVbox = loader.load();
+			
+			Scene mainScene = Main.getMainScene();
+	        VBox mainVbox = (VBox) (((ScrollPane) mainScene.getRoot()).getContent());
+	        Node mainMenu = mainVbox.getChildren().get(0);
+
+	        mainVbox.getChildren().clear();
+	        mainVbox.getChildren().add(mainMenu);
+	        mainVbox.getChildren().addAll(newVbox.getChildren());
+
+	        TelaEditarEntregaController controller = loader.getController();
+	        LoadEntregas.editarEntregaAUX(controller, obj);
+	        controller.setLblTurma(obj.getId());
+	       
+	        
+	        
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Alerts.showAlert("SQL Exception", "Erro ao carregar dados", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
+		}
+
+        
     }
     
 	public synchronized void clearView() {

@@ -165,10 +165,5 @@ defesa, fechamento de semestre e transporte de notas.
 
 <div align="left"><hr width=70%></div>
 
-<span id="burndown">
-
-## ◻️ Burndown
-
-![image](https://github.com/iNineBD/SGTG-2Sem2023/assets/117841950/8f424740-789e-4dfd-868d-7f9b04132afc)
 
 

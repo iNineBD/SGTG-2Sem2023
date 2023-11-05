@@ -30,8 +30,12 @@ public class OrientadorDto {
 		return this.emailOrientador;
 	}
 	
+	@Override
+	public String toString() {
+		return nomeOrientador;
+	}
+
 	public void setEmailOrientador(String email) {
 		this.emailOrientador = email;
-		
 	}
 }

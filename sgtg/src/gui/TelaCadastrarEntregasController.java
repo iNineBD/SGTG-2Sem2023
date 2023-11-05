@@ -101,11 +101,21 @@ public class TelaCadastrarEntregasController implements Initializable {
 					Alerts.showAlert("Sucesso", "Entrega cadastrada!!!",
 							"A entrega foi cadastrada com sucesso", AlertType.INFORMATION);
 					
+					txtAreaDescricao.setText("");
+					
+					txtFieldTituloEntrega.setText("");
+					
+					datePickerDataFinal.setValue(null);
+					
+					choiceBoxTurma.setValue(null);
+					
 				}
 
 			}
 
 		}
+		
+		
 
 	}
 
