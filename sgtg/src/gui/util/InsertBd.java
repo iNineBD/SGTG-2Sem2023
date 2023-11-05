@@ -87,12 +87,13 @@ public class InsertBd {
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
 			}
-//        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
+//        	
 //        	return;
         }catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
             // Handle the exception as needed (e.g., show an error message).
         }
     }
