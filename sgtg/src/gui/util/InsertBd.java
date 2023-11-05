@@ -141,7 +141,7 @@ public class InsertBd {
                 result2 = stBuscaIdTurma.executeQuery();
                 result2.next();
             } catch (SQLException e) {
-                e.printStackTrace();
+                
                 stAnoESemestre.setInt(1, semestre);
                 stAnoESemestre.setInt(2, ano);
                 stAnoESemestre.executeUpdate();
