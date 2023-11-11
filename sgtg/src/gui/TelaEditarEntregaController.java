@@ -62,8 +62,8 @@ public class TelaEditarEntregaController implements Initializable {
 		this.id = id;
 	}
 
-	public void setLbSemestreAno(Label lbSemestreAno) {
-		this.lbSemestreAno = lbSemestreAno;
+	public void setLbSemestreAno(String lbSemestreAno) {
+		this.lbSemestreAno.setText(lbSemestreAno);
 	}
 
 	public void setTxtFieldTituloEntrega(String txtFieldTituloEntrega) {
@@ -79,56 +79,10 @@ public class TelaEditarEntregaController implements Initializable {
 		
 	}
 	
-	public void setLblTurma(int id_aluno) throws SQLException {
-		
-		Connection conn = DB.getConnection();
-
-		PreparedStatement st2 = conn.prepareStatement("select turma.nome from turma inner join matricula on matricula.id_turma = turma.id inner join aluno on matricula.id_aluno = aluno.id where aluno.id = ?");
-		st2.setInt(1, id_aluno);
-		
-		ResultSet result = st2.executeQuery();
-		
-		while (result.next()) {
-			String turma = result.getString("nome");
-			
-			lblTurma.setText(turma);
-			
-		}
-
-		
-	}
+	
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-//		// Semestre e ano
-//		int semestralizacao = (LocalDate.now().getMonthValue() <= 6) ? 1 : 2;
-//
-//		int anoAtual = LocalDate.now().getYear();
-//
-//		lbSemestreAno.setText(String.format("%d° / %d", semestralizacao, anoAtual));
-//
-//		// preenchimento do ChoiceBox Turma
-//
-//		List<TurmasDTO> listaTurmas = new ArrayList<TurmasDTO>();
-//
-//		try {
-//
-//			listaTurmas = LoadTurmas.carregaTurmas(semestralizacao, anoAtual);
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			Alerts.showAlert("SQLException", "Erro ao buscar turmas",
-//					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
-//		}
-//
-//		if (listaTurmas != null) {
-//			ObservableList<TurmasDTO> turmas = FXCollections.observableArrayList(listaTurmas);
-//			choiceBoxTurma.getItems().addAll(turmas);
-//		}
-		
-
-
 	}
 	
 	

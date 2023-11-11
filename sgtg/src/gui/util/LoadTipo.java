@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import conexao.DB;
@@ -29,6 +30,15 @@ public class LoadTipo {
 			
 			TipoDTO tipoDTO = new TipoDTO(id, tipo, regra);
 			listaTipos.add(tipoDTO);		
+		}
+		
+		for (int i = 0; i < listaTipos.size(); i++) {
+			if (listaTipos.get(i).getTipo().equals("Relatório técnico - disciplina")){
+				listaTipos.get(i).setTipo("Relatórios (disciplina e estágio)");
+			}
+			if (listaTipos.get(i).getTipo().equals("Relatório técnico - estágio")){
+				listaTipos.remove(i);
+			}
 		}
 		
 		return listaTipos;

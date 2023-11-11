@@ -70,6 +70,7 @@ public class TelaEntregaTurmaController implements Initializable {
 				try {
 					this.loadEntregas = new LoadEntregas();
 					updateTableView();
+					System.out.println(newValue.getId());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					Alerts.showAlert("SQLException", "Erro ao buscar entregas",
@@ -135,7 +136,7 @@ public class TelaEntregaTurmaController implements Initializable {
 				setGraphic(button);
 				button.setOnAction(event -> {
 					Telas telas = new Telas();
-					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj);
+					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj, comboBoxTurma.getValue().getTipo());
 				});
 			}
 		});

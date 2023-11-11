@@ -14,6 +14,7 @@ import dto.EntregasDTO;
 import dto.TurmasDTO;
 import gui.TelaEditarEntregaController;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 
 public class LoadEntregas {
 	public List<EntregasDTO> atualizarDados(int tipo_selecionado) throws SQLException {
@@ -97,11 +98,16 @@ public class LoadEntregas {
 //    }
 //	
 
-	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj) {
+	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj, String tipo) {
+		
+		if (tipo.equals("Relatório técnico - disciplina") || tipo.equals("Relatório técnico - estágio")) {
+			tipo = "Relatórios (disciplina e estágio)";
+		}
 
 		controller.setTxtFieldTituloEntrega(obj.getTitulo());
 		controller.setTxtAreaDescricao(obj.getDescricao());
 		controller.setDatePickerDataFinal(obj.getData_final());
+		controller.setLbSemestreAno(tipo + " - " + obj.getNome_turma());
 
 		controller.setId(obj.getId());
 
