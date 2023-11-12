@@ -3,15 +3,13 @@ package gui;
 import java.net.URL;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import com.mysql.cj.protocol.Resultset;
 
 import conexao.DB;
 import dto.TipoDTO;
@@ -38,7 +36,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 	@FXML
 	private ChoiceBox<TipoDTO> choiceBoxTipo = new ChoiceBox<TipoDTO>();
-	
+
 	@FXML
 	private CheckBox check1;
 	@FXML
@@ -61,38 +59,93 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 	public void onBtnSalvarAction() throws SQLException {
 
+		DB db = new DB();
+		Connection con = db.getConnection();
+
+		// cadastro entrega
+
+		int id_entrega = 0;
 		TipoDTO tipo = choiceBoxTipo.getValue();
 		String titulo = txtFieldTituloEntrega.getText();
 		String descricao = txtAreaDescricao.getText();
 		LocalDate data = datePickerDataFinal.getValue();
-		
+		List<String> nome_entrega = new ArrayList<String>();
+
 		if (tipo == null || titulo.trim().isEmpty() || descricao.trim().isEmpty() || data == null) {
 			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
+		}
+
+		PreparedStatement st2 = con.prepareStatement("select titulo_entrega from entrega, entrega_tipo, tipo where entrega.id = entrega_tipo.id_entrega and entrega_tipo.id_tipo = tipo.id and tipo.id = ?");
+		st2.setInt(1, tipo.getId());
+
+		ResultSet result2 = st2.executeQuery();
+
+		while (result2.next()) {
+			nome_entrega.add(result2.getString("titulo_entrega"));
+		}
+		boolean nome_repetido = false;
+		for (String nome : nome_entrega) {
+			if (nome.equals(titulo)) {
+				nome_repetido = true;
+				break;
+			}
+
+		}
+		if (nome_repetido) {
+			Alerts.showAlert("Titulo de entrega", "Titulo de entrega ja cadastrado",
+					"O titulo inserido já foi ultilizado", AlertType.WARNING);
 		} else {
-			DB db = new DB();
-			Connection con = db.getConnection();
+
+			// cadastro entrega
+
 			CallableStatement cs = con.prepareCall("{CALL pr_insert_entrega(?, ?, ?)}");
-			
+
 			cs.setString(1, titulo);
 			cs.setObject(2, data);
 			cs.setString(3, descricao);
 			ResultSet result = cs.executeQuery();
 			while (result.next()) {
-				int id_entrega = result.getInt("id");
-				System.out.println(id_entrega);
+				id_entrega = result.getInt("id");
+			}
+			cs.close();
+
+			ResultSet list_id_tipos = null;
+			// relacao entrega_tipo
+			if (tipo.getTipo().equals("Relatórios (disciplina e estágio)")) {
+				PreparedStatement st = con.prepareStatement(
+						"select id from tipo where tipo != 'Portifólio' and tipo != 'Artigo tecnológico ou cientifico'");
+				list_id_tipos = st.executeQuery();
+			} else {
+				PreparedStatement st = con.prepareStatement("select id from tipo where tipo = ?");
+				st.setString(1, tipo.getTipo());
+				list_id_tipos = st.executeQuery();
+			}
+
+	
+			while (list_id_tipos.next()) {
+				int id = list_id_tipos.getInt("id");
+				PreparedStatement st3 = con
+						.prepareStatement("insert into entrega_tipo (id_entrega, id_tipo) values (?, ?)");
+				st3.setInt(1, id_entrega);
+				st3.setInt(2, id);
+				st3.executeUpdate();
 			}
 			
-			cs.close();
+			Alerts.showAlert("Sucesso", "Entrega cadastrada!!!",
+					"A entrega foi cadastrada com sucesso", AlertType.INFORMATION);
 			
+			txtAreaDescricao.setText("");
 			
+			txtFieldTituloEntrega.setText("");
+			
+			datePickerDataFinal.setValue(null);
+			
+			choiceBoxTipo.setValue(null);
 		}
-		
-		
-
 
 	}
 
-	public void onBtnCancelarAction() {	
+	public void onBtnCancelarAction() {
 		Telas tela = new Telas();
 
 		tela.loadView("/gui/TelaInicial.fxml");
@@ -122,13 +175,12 @@ public class TelaCadastrarEntregasController implements Initializable {
 			Alerts.showAlert("SQLException", "Erro ao buscar turmas",
 					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
 		}
-		
 
 		if (listaTipo != null) {
 			ObservableList<TipoDTO> tipos = FXCollections.observableArrayList(listaTipo);
 			choiceBoxTipo.setItems(tipos);
 		}
-		
+
 		choiceBoxTipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
 				if (newValue.getTipo().equals("Portifólio")) {
@@ -140,8 +192,6 @@ public class TelaCadastrarEntregasController implements Initializable {
 				}
 			}
 		});
-
-
 
 	}
 
