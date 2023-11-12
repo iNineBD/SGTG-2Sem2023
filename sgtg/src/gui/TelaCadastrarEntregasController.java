@@ -71,78 +71,141 @@ public class TelaCadastrarEntregasController implements Initializable {
 		LocalDate data = datePickerDataFinal.getValue();
 		List<String> nome_entrega = new ArrayList<String>();
 
+		LocalDate dataAtual = LocalDate.now();
+
 		if (tipo == null || titulo.trim().isEmpty() || descricao.trim().isEmpty() || data == null) {
 			Alerts.showAlert("Campo nulo", "Cuidado", "Todos os campos devem ser preenchidos", AlertType.WARNING);
-		}
-
-		PreparedStatement st2 = con.prepareStatement("select titulo_entrega from entrega, entrega_tipo, tipo where entrega.id = entrega_tipo.id_entrega and entrega_tipo.id_tipo = tipo.id and tipo.id = ?");
-		st2.setInt(1, tipo.getId());
-
-		ResultSet result2 = st2.executeQuery();
-
-		while (result2.next()) {
-			nome_entrega.add(result2.getString("titulo_entrega"));
-		}
-		boolean nome_repetido = false;
-		for (String nome : nome_entrega) {
-			if (nome.equals(titulo)) {
-				nome_repetido = true;
-				break;
-			}
-
-		}
-		if (nome_repetido) {
-			Alerts.showAlert("Titulo de entrega", "Titulo de entrega ja cadastrado",
-					"O titulo inserido já foi ultilizado", AlertType.WARNING);
+		} else if (data.isBefore(dataAtual)) {
+			Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data selecionada é anterior a data atual",
+					AlertType.WARNING);
+		} else if (check1.isSelected() && check2.isSelected()) {
+			Alerts.showAlert("Case Portifólio", "Muitas turmas selecionadas",
+					"Para portifólio, as entregas devem ser individuais por turma. Selecione apenas uma turma!",
+					AlertType.WARNING);
+		} else if (choiceBoxTipo.getValue().getTipo().equals("Portifólio") && !check1.isSelected()
+				&& !check2.isSelected()) {
+			Alerts.showAlert("Case Portifólio", "Selecione uma turma",
+					"Para portifólio, as entregas devem ser individuais por turma. Selecione uma turma!",
+					AlertType.WARNING);
 		} else {
 
-			// cadastro entrega
+			PreparedStatement st2 = con.prepareStatement(
+					"select titulo_entrega from entrega, entrega_tipo, tipo where entrega.id = entrega_tipo.id_entrega and entrega_tipo.id_tipo = tipo.id and tipo.id = ?");
+			st2.setInt(1, tipo.getId());
 
-			CallableStatement cs = con.prepareCall("{CALL pr_insert_entrega(?, ?, ?)}");
+			ResultSet result2 = st2.executeQuery();
 
-			cs.setString(1, titulo);
-			cs.setObject(2, data);
-			cs.setString(3, descricao);
-			ResultSet result = cs.executeQuery();
-			while (result.next()) {
-				id_entrega = result.getInt("id");
+			while (result2.next()) {
+				nome_entrega.add(result2.getString("titulo_entrega"));
 			}
-			cs.close();
+			boolean nome_repetido = false;
+			for (String nome : nome_entrega) {
+				if (nome.equals(titulo)) {
+					nome_repetido = true;
+					break;
+				}
 
-			ResultSet list_id_tipos = null;
-			// relacao entrega_tipo
-			if (tipo.getTipo().equals("Relatórios (disciplina e estágio)")) {
-				PreparedStatement st = con.prepareStatement(
-						"select id from tipo where tipo != 'Portifólio' and tipo != 'Artigo tecnológico ou cientifico'");
-				list_id_tipos = st.executeQuery();
+			}
+			if (nome_repetido) {
+				Alerts.showAlert("Titulo de entrega", "Titulo de entrega ja cadastrado",
+						"O titulo inserido já foi ultilizado", AlertType.WARNING);
 			} else {
-				PreparedStatement st = con.prepareStatement("select id from tipo where tipo = ?");
-				st.setString(1, tipo.getTipo());
-				list_id_tipos = st.executeQuery();
-			}
 
-	
-			while (list_id_tipos.next()) {
-				int id = list_id_tipos.getInt("id");
-				PreparedStatement st3 = con
-						.prepareStatement("insert into entrega_tipo (id_entrega, id_tipo) values (?, ?)");
-				st3.setInt(1, id_entrega);
-				st3.setInt(2, id);
-				st3.executeUpdate();
+				// cadastro entrega
+
+				CallableStatement cs = con.prepareCall("{CALL pr_insert_entrega(?, ?, ?)}");
+
+				cs.setString(1, titulo);
+				cs.setObject(2, data);
+				cs.setString(3, descricao);
+				ResultSet result = cs.executeQuery();
+				while (result.next()) {
+					id_entrega = result.getInt("id");
+				}
+				cs.close();
+
+				ResultSet list_id_tipos = null;
+				// relacao entrega_tipo
+				if (tipo.getTipo().equals("Relatórios (disciplina e estágio)")) {
+					PreparedStatement st = con.prepareStatement(
+							"select id from tipo where tipo != 'Portifólio' and tipo != 'Artigo tecnológico ou cientifico'");
+					list_id_tipos = st.executeQuery();
+				} else {
+					PreparedStatement st = con.prepareStatement("select id from tipo where tipo = ?");
+					st.setString(1, tipo.getTipo());
+					list_id_tipos = st.executeQuery();
+				}
+
+				while (list_id_tipos.next()) {
+					int id = list_id_tipos.getInt("id");
+					PreparedStatement st3 = con
+							.prepareStatement("insert into entrega_tipo (id_entrega, id_tipo) values (?, ?)");
+					st3.setInt(1, id_entrega);
+					st3.setInt(2, id);
+					st3.executeUpdate();
+				}
+
+				// relacao entrega_turma
+
+				int semestralizacao = (LocalDate.now().getMonthValue() <= 6) ? 1 : 2;
+
+				int anoAtual = LocalDate.now().getYear();
+
+				PreparedStatement st7 = con
+						.prepareStatement("select id, nome from turma where semestralizacao = ? and ano = ?");
+				st7.setInt(1, semestralizacao);
+				st7.setInt(2, anoAtual);
+				ResultSet turmas = st7.executeQuery();
+
+				if (tipo.getTipo().equals("Portifólio")) {
+					
+					String turma_sel;
+					if (check1.isSelected()) {
+						turma_sel = "TG1";
+					} else {
+						turma_sel = "TG2";
+					}
+					
+					
+
+					while (turmas.next()) {
+						String turma_atual_pont = turmas.getString("nome");
+						int id_turma_atual_pont = turmas.getInt("id");
+
+						if (turma_atual_pont.equals(turma_sel)) {
+							PreparedStatement st10 = con
+									.prepareStatement("insert into entrega_turma(id_turma, id_entrega) values (?,?)");
+							st10.setInt(1, id_turma_atual_pont);
+							st10.setInt(2, id_entrega);
+							st10.executeUpdate();
+						}
+					}
+
+				} else {
+					// ambas as turmas (tipo != portifolio
+					while (turmas.next()) {
+						int id_turma_atual_pont = turmas.getInt("id");
+						PreparedStatement st10 = con
+								.prepareStatement("insert into entrega_turma(id_turma, id_entrega) values (?,?)");
+						st10.setInt(1, id_turma_atual_pont);
+						st10.setInt(2, id_entrega);
+						st10.executeUpdate();
+
+					}
+				}
+				Alerts.showAlert("Sucesso", "Entrega cadastrada!!!", "A entrega foi cadastrada com sucesso",
+						AlertType.INFORMATION);
+
+				txtAreaDescricao.setText("");
+
+				txtFieldTituloEntrega.setText("");
+
+				datePickerDataFinal.setValue(null);
+
+				choiceBoxTipo.setValue(null);
+
 			}
-			
-			Alerts.showAlert("Sucesso", "Entrega cadastrada!!!",
-					"A entrega foi cadastrada com sucesso", AlertType.INFORMATION);
-			
-			txtAreaDescricao.setText("");
-			
-			txtFieldTituloEntrega.setText("");
-			
-			datePickerDataFinal.setValue(null);
-			
-			choiceBoxTipo.setValue(null);
 		}
-
 	}
 
 	public void onBtnCancelarAction() {
