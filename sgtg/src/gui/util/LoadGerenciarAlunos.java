@@ -19,20 +19,20 @@ public class LoadGerenciarAlunos {
 		Connection conecta = DB.getConnection();
 
 		// busca as informações da tela gerenciar aluno
-	    PreparedStatement st = conecta.prepareStatement("select aluno.id aluno_id, aluno.nome aluno,aluno.email_institucional email_fatec,aluno.email_pessoal email_pessoal,orientador.nome orientador,orientador.email_fatec email_fatec_orientador,orientador.id id_orientador ,tipo.tipo tipo, tipo.regra regra, turma.nome turma, turma.id id_turma,tg.disciplina disciplina,tg.empresa empresa,tg.problema_a_resolver tema from aluno, orientador, tg, tipo, turma, matricula where aluno.id_orientador = orientador.id and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.id = matricula.id_aluno and turma.id = matricula.id_turma and tg.id_aluno = aluno.id and tg.id_tipo = tipo.id and aluno.visibility = 1 order by aluno.id");
+	    PreparedStatement st = conecta.prepareStatement("select aluno.id as id_aluno,aluno.nome as nome_aluno,aluno.email_institucional as email_fatec_aluno,aluno.email_pessoal as email_pessoal, aluno.id_tipo as id_tipo, tipo.tipo as nome_tipo, tipo.regra as regra, orientador.id as id_orientador,orientador.nome as nome_orientador,orientador.email_fatec as email_fatec_orientador,turma.id as id_turma,turma.nome as nome_turma, tg.problema_a_resolver as tema,tg.empresa as empresa,tg.disciplina as disciplina from aluno inner join orientador on aluno.id_orientador = orientador.id inner join tg on aluno.id = tg.id_aluno inner join matricula on aluno.id = matricula.id_aluno inner join turma on matricula.id_turma = turma.id inner join tipo on aluno.id_tipo = tipo.id where aluno.visibility = 1 order by aluno.id;");
 
 	    ResultSet result = st.executeQuery();
 	    
 	    while (result.next()) {
 	    	
-	    	int id = result.getInt("aluno_id");
-	    	String nome_aluno = result.getString("aluno");
-	    	String emailAlunoFatec = result.getString("email_fatec");
+	    	int id = result.getInt("id_aluno");
+	    	String nome_aluno = result.getString("nome_aluno");
+	    	String emailAlunoFatec = result.getString("email_fatec_aluno");
 	    	String emailAlunoPessoal = result.getString("email_pessoal");
-	    	String nome_orientador = result.getString("orientador");
+	    	String nome_orientador = result.getString("nome_orientador");
 	    	String emailOrientador = result.getString("email_fatec_orientador");
-	    	String tipo_tg = result.getString("tipo");
-	    	String nome_turma = result.getString("turma");
+	    	String tipo_tg = result.getString("nome_tipo");
+	    	String nome_turma = result.getString("nome_turma");
 	    	String disciplina = result.getString("disciplina");
 	    	String tituloTg = result.getString("tema");
 	    	String regra = result.getString("regra");
@@ -48,7 +48,7 @@ public class LoadGerenciarAlunos {
 	    	int total_entregas = 0;
 	    	int entrega_aluno = 0;
 	    	
-	    	PreparedStatement st2 = conecta.prepareStatement("select count(id) n_entregas from entrega where id_turma = ? and visibility = 1");
+	    	PreparedStatement st2 = conecta.prepareStatement("select count(id_entrega) n_entregas from entrega_turma inner join entrega on entrega.id = entrega_turma.id_entrega where id_turma = ? and entrega.visibility = 1");
 	    	st2.setInt(1, id_turma);
 	    	
 	    	ResultSet result2 = st2.executeQuery();
