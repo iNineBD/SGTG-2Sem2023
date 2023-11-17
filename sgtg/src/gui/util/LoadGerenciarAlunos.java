@@ -19,7 +19,7 @@ public class LoadGerenciarAlunos {
 		Connection conecta = DB.getConnection();
 
 		// busca as informações da tela gerenciar aluno
-	    PreparedStatement st = conecta.prepareStatement("select aluno.id as id_aluno,aluno.nome as nome_aluno,aluno.email_institucional as email_fatec_aluno,aluno.email_pessoal as email_pessoal, aluno.id_tipo as id_tipo, tipo.tipo as nome_tipo, tipo.regra as regra, orientador.id as id_orientador,orientador.nome as nome_orientador,orientador.email_fatec as email_fatec_orientador,turma.id as id_turma,turma.nome as nome_turma, tg.problema_a_resolver as tema,tg.empresa as empresa,tg.disciplina as disciplina from aluno inner join orientador on aluno.id_orientador = orientador.id inner join tg on aluno.id = tg.id_aluno inner join matricula on aluno.id = matricula.id_aluno inner join turma on matricula.id_turma = turma.id inner join tipo on aluno.id_tipo = tipo.id where aluno.visibility = 1 order by aluno.id;");
+	    PreparedStatement st = conecta.prepareStatement("select aluno.id as id_aluno,aluno.nome as nome_aluno,aluno.email_institucional as email_fatec_aluno,aluno.email_pessoal as email_pessoal, aluno.id_tipo as id_tipo, tipo.tipo as nome_tipo,tipo.id as id_tipo, tipo.regra as regra, orientador.id as id_orientador,orientador.nome as nome_orientador,orientador.email_fatec as email_fatec_orientador,turma.id as id_turma,turma.nome as nome_turma, tg.problema_a_resolver as tema,tg.empresa as empresa,tg.disciplina as disciplina from aluno inner join orientador on aluno.id_orientador = orientador.id inner join tg on aluno.id = tg.id_aluno inner join matricula on aluno.id = matricula.id_aluno inner join turma on matricula.id_turma = turma.id inner join tipo on aluno.id_tipo = tipo.id where aluno.visibility = 1 order by aluno.id;");
 
 	    ResultSet result = st.executeQuery();
 	    
@@ -38,6 +38,7 @@ public class LoadGerenciarAlunos {
 	    	String regra = result.getString("regra");
 	    	String empresa = result.getString("empresa");
 	    	int id_turma = result.getInt("id_turma");
+	    	int id_tipo = result.getInt("id_tipo");
 	    	int id_orientador = result.getInt("id_orientador");
 	    	
 //	    	System.out.println(id +" - "+ nome_aluno+" - "+ nome_orientador+" - "+ turma+" - "+ tipo+" - "+ id_turma);	
@@ -48,8 +49,9 @@ public class LoadGerenciarAlunos {
 	    	int total_entregas = 0;
 	    	int entrega_aluno = 0;
 	    	
-	    	PreparedStatement st2 = conecta.prepareStatement("select count(id_entrega) n_entregas from entrega_turma inner join entrega on entrega.id = entrega_turma.id_entrega where id_turma = ? and entrega.visibility = 1");
-	    	st2.setInt(1, id_turma);
+	    	PreparedStatement st2 = conecta.prepareStatement("select count(entrega.id) as n_entrega from entrega_tipo inner join entrega on entrega.id = entrega_tipo.id_entrega inner join entrega_turma on entrega.id = entrega_turma.id_entrega where id_tipo = ? and id_turma = ? and entrega.visibility = 1");
+	    	st2.setInt(1, id_tipo);
+	    	st2.setInt(2, id_turma);
 	    	
 	    	ResultSet result2 = st2.executeQuery();
 	    	

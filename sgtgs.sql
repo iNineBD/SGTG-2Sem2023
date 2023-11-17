@@ -171,6 +171,3 @@ alter table tg
 add constraint fk_id_aluno_tg
 foreign key (id_aluno)
 references aluno (id);
-
-
-
