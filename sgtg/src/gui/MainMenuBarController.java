@@ -29,6 +29,9 @@ public class MainMenuBarController implements Initializable{
 	private MenuItem menuItemNovaEntrega;
 	
 	@FXML
+	private MenuItem menuTransporteNotas;
+	
+	@FXML
 	private MenuItem menuItemSobre;
 	
 	
@@ -51,6 +54,11 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	public void onMenuItemVisualizarEntregas() {
 		loadTelas.loadView("/gui/TelaEntregaTurma.fxml");
+	}
+	
+	@FXML
+	public void onMenuItemTransporteNotas() {
+		loadTelas.loadView("/gui/TelaTransporteNotas.fxml");
 	}
 	
 	@FXML
