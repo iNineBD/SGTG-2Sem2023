@@ -44,7 +44,7 @@ public class LoadEntregas {
 
 		if (entregas.size() > 1) {
 			for (int i = 0; i < entregas.size(); i++) {
-				for (int j = i+1; j < entregas.size(); j++) {
+				for (int j = i + 1; j < entregas.size(); j++) {
 					if (entregas.get(i).getId() == entregas.get(j).getId()) {
 						entregas.get(i).setNome_turma("TG1 e TG2");
 						entregas.remove(j);
@@ -57,49 +57,46 @@ public class LoadEntregas {
 
 	}
 
-//	public static List<EntregasDTO> atualizarDadosComboBox(int id_aluno_selecionada ) throws SQLException{
-//
-//        List<EntregasDTO> entregas = new ArrayList<EntregasDTO>();
-//
-//        Connection conn = DB.getConnection();
-//
-//        PreparedStatement st2 = conn.prepareStatement("select id_turma from matricula where id_aluno = ? ");
-//        st2.setInt(1, id_aluno_selecionada); 
-//
-//        ResultSet result2 = st2.executeQuery();
-//
-//        while (result2.next()) { 
-//            int id_turma_selecionada = result2.getInt("id_turma");
-//            PreparedStatement st = conn.prepareStatement(
-//                    "select id, titulo_entrega, data_entrega, descricao from entrega where id_turma = ? and visibility = 1");
-//            st.setInt(1, id_turma_selecionada);
-//
-//
-//
-//            ResultSet result = st.executeQuery();
-//
-//            while (result.next()) {
-//
-//                int id_entrega = result.getInt("id");
-//                String titulo = result.getString("titulo_entrega");
-//                String descricao = result.getString("descricao");
-//                Date data= result.getDate("data_entrega");
-//
-//                entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate(),id_turma_selecionada));
-//            }
-//
-//        }
-//
-//
-//
-//
-//        return entregas;
-//
-//    }
-//	
+	public static List<EntregasDTO> atualizarDadosComboBox(int id_aluno_selecionada) throws SQLException {
+
+		List<EntregasDTO> entregas = new ArrayList<EntregasDTO>();
+
+		Connection conn = DB.getConnection();
+
+		
+		PreparedStatement st = conn.prepareStatement(
+				"select entrega.id, entrega.titulo_entrega, entrega.data_entrega, entrega.descricao from entrega, entrega_tipo, aluno, matricula, entrega_turma where entrega_tipo.id_entrega = entrega.id and entrega_tipo.id_tipo = aluno.id_tipo and matricula.id_aluno = aluno.id and matricula.id_turma = entrega_turma.id_turma and entrega.visibility = 1 and entrega_turma.id_entrega = entrega.id and aluno.id = ?");
+		st.setInt(1, id_aluno_selecionada);
+
+		ResultSet result = st.executeQuery();
+
+		while (result.next()) {
+
+			int id_entrega = result.getInt("id");
+			String titulo = result.getString("titulo_entrega");
+			String descricao = result.getString("descricao");
+			Date data = result.getDate("data_entrega");
+
+			entregas.add(new EntregasDTO(id_entrega, titulo, descricao, data.toLocalDate(), 0, ""));
+		}
+		
+		///arrumando lista
+		
+		for (int i = 0; i < entregas.size(); i++) {
+			int id_atual = entregas.get(i).getId();
+			for (int j = i + 1; j < entregas.size(); j++) {
+				if (id_atual == entregas.get(j).getId()) {
+					entregas.remove(j);
+				}
+			}
+		}
+
+		return entregas;
+
+	}
 
 	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj, String tipo) {
-		
+
 		if (tipo.equals("Relatório técnico - disciplina") || tipo.equals("Relatório técnico - estágio")) {
 			tipo = "Relatórios (disciplina e estágio)";
 		}
