@@ -114,15 +114,15 @@ public class TelaFeedbackAlunoController implements Initializable {
 		// preenchimento do ComboBox Entrega
 		List<EntregasDTO> listaEntrega = new ArrayList<EntregasDTO>();
 		// TODO Auto-generated method stub
-		try {
-			int id_aluno_selecionada = this.aluno.getId_aluno();
-
-			listaEntrega = LoadEntregas.atualizarDadosComboBox(id_aluno_selecionada);// Oq eu preciso passar no parenteses
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			Alerts.showAlert("SQLException", "Erro ao buscar entregas",
-					"Ocorreu um erro ao buscar as entregas por aluno.", AlertType.ERROR);
-		}
+//		try {
+//			int id_aluno_selecionada = this.aluno.getId_aluno();
+//
+//			listaEntrega = LoadEntregas.atualizarDadosComboBox(id_aluno_selecionada);// Oq eu preciso passar no parenteses
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			Alerts.showAlert("SQLException", "Erro ao buscar entregas",
+//					"Ocorreu um erro ao buscar as entregas por aluno.", AlertType.ERROR);
+//		}
 		if (listaEntrega != null) {
 			ObservableList<EntregasDTO> entregas = FXCollections.observableArrayList(listaEntrega);
 			comboBoxEntrega.getItems().addAll(entregas);

@@ -11,9 +11,26 @@ email_institucional varchar(50),
 nome varchar (100) not null,
 email_pessoal varchar(50) not null,
 id_orientador int not null,
+id_tipo int not null,
 visibility bool not null default true,
 constraint pk_idAluno primary key (id)
 );
+
+-- Criando a tabela tipo
+create table tipo(
+id int auto_increment,
+tipo varchar(100) not null,
+regra varchar(100),
+constraint pk_idTipo primary key (id),
+constraint uk_tipo unique (tipo)
+);
+
+-- Criando a relação de aluno com tipo
+-- Devido a relação ser 1:N não a necessidade de criação de tabela auxiliar
+alter table aluno
+add constraint fk_id_tipo_aluno
+foreign key (id_tipo)
+references tipo(id);
 
 -- Criando a tabela matricula
 create table matricula(
@@ -21,7 +38,6 @@ id_aluno int not null,
 id_turma int not null,
 constraint pk_idAluno_e_idTurma primary key (id_aluno,id_turma)
 );
-
 
 -- Criando tabela Semestre
 create table semestre(
@@ -60,16 +76,43 @@ titulo_entrega varchar(30),
 data_entrega date not null,
 descricao varchar (200) not null,
 visibility bool not null default true,
-id_turma int not null,
 constraint pk_idEntrega primary key (id)
 );
 
--- Criando a relação da tabela entrega com a tabela turma
--- Devido a relação 1:N da turma com a entrega não é necessária a criação de tabela auxiliar.
-alter table entrega
-add constraint fk_id_turma_entrega
-foreign key (id_turma)
-references turma (id);
+create table entrega_turma(
+id_turma int not null,
+id_entrega int not null,
+constraint pk_idTurma_e_id_entrega primary key(id_turma,id_entrega)
+);
+
+alter table entrega_turma
+add constraint fk_id_turma_table_entrega_turma
+foreign key(id_turma)
+references turma(id);
+
+alter table entrega_turma
+add constraint fk_id_tipo_table_entrega_turma
+foreign key (id_entrega)
+references entrega(id);
+
+-- Criando a tabela da relação de tipo e entrega
+-- Devida a relação de N:N de tipo com entrega é necessário a criação de tabela auxiliar
+
+create table entrega_tipo(
+id_entrega int not null,
+id_tipo int not null,
+constraint pk_id_entrega_e_id_tipo primary key (id_entrega,id_tipo)
+);
+
+alter table entrega_tipo
+add constraint fk_id_tipo_entrega
+foreign key (id_tipo)
+references tipo (id);
+
+alter table entrega_tipo
+add constraint fk_id_entrega_tipo
+foreign key (id_entrega)
+references entrega (id);
 
 -- Criando a tabela feedback
 create table feedback(
@@ -119,7 +162,6 @@ problema_a_resolver varchar(200),
 empresa varchar(50),
 disciplina varchar(50),
 id_aluno int not null,
-id_tipo int not null,
 constraint pk_idTg primary key(id)
 );
 
@@ -129,19 +171,3 @@ alter table tg
 add constraint fk_id_aluno_tg
 foreign key (id_aluno)
 references aluno (id);
-
--- Criando a tabela tipo
-create table tipo(
-id int auto_increment,
-tipo varchar(100) not null,
-regra varchar(100),
-constraint pk_idTipo primary key (id)
-);
-
--- Criando a relação do tg com tipo
--- Devido a relação N:1 do tg com tipo não é necessária a criação de tabela auxiliar
-alter table tg
-add constraint fk_id_tipo
-foreign key (id_tipo)
-references tipo(id);
-
