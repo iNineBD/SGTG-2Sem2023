@@ -79,13 +79,13 @@ public class TelaCadastrarEntregasController implements Initializable {
 			Alerts.showAlert("Data Anterior a Atual", "Atenção", "A data selecionada é anterior a data atual",
 					AlertType.WARNING);
 		} else if (check1.isSelected() && check2.isSelected()) {
-			Alerts.showAlert("Case Portifólio", "Muitas turmas selecionadas",
-					"Para portifólio, as entregas devem ser individuais por turma. Selecione apenas uma turma!",
+			Alerts.showAlert("Case Portfólio", "Muitas turmas selecionadas",
+					"Para portfólio, as entregas devem ser individuais por turma. Selecione apenas uma turma!",
 					AlertType.WARNING);
-		} else if (choiceBoxTipo.getValue().getTipo().equals("Portifólio") && !check1.isSelected()
+		} else if (choiceBoxTipo.getValue().getTipo().equals("Portfólio") && !check1.isSelected()
 				&& !check2.isSelected()) {
-			Alerts.showAlert("Case Portifólio", "Selecione uma turma",
-					"Para portifólio, as entregas devem ser individuais por turma. Selecione uma turma!",
+			Alerts.showAlert("Case Portfólio", "Selecione uma turma",
+					"Para portfólio, as entregas devem ser individuais por turma. Selecione uma turma!",
 					AlertType.WARNING);
 		} else {
 
@@ -128,7 +128,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 				// relacao entrega_tipo
 				if (tipo.getTipo().equals("Relatórios (disciplina e estágio)")) {
 					PreparedStatement st = con.prepareStatement(
-							"select id from tipo where tipo != 'Portifólio' and tipo != 'Artigo tecnológico ou cientifico'");
+							"select id from tipo where tipo != 'Portfólio' and tipo != 'Artigo tecnológico ou cientifico'");
 					list_id_tipos = st.executeQuery();
 				} else {
 					PreparedStatement st = con.prepareStatement("select id from tipo where tipo = ?");
@@ -157,7 +157,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 				st7.setInt(2, anoAtual);
 				ResultSet turmas = st7.executeQuery();
 
-				if (tipo.getTipo().equals("Portifólio")) {
+				if (tipo.getTipo().equals("Portfólio")) {
 					
 					String turma_sel;
 					if (check1.isSelected()) {
@@ -246,7 +246,7 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 		choiceBoxTipo.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 			if (newValue != null) {
-				if (newValue.getTipo().equals("Portifólio")) {
+				if (newValue.getTipo().equals("Portfólio")) {
 					check1.setVisible(true);
 					check2.setVisible(true);
 				} else {

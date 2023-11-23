@@ -31,6 +31,9 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	private MenuItem menuItemSobre;
 	
+	@FXML
+	private MenuItem menuItemAptosADefender;
+	
 	
 	@FXML
 	public void onMenuItemCarregarCsvAction() {
@@ -58,6 +61,10 @@ public class MainMenuBarController implements Initializable{
 		loadTelas.loadView("/gui/TelaSobre.fxml");
 	}
 	
+	@FXML
+	public void onMenuItemAptosADefender() {
+		loadTelas.loadView("/gui/TelaAptosADefender.fxml");
+	}
 	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {
