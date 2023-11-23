@@ -59,6 +59,10 @@ public class LoadGerenciarAlunos {
 	    		total_entregas += result2.getInt("n_entrega");
 			}
 	    	
+	    	if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
+	    		total_entregas = total_entregas/2;
+			}
+	    	
 	    	// entregas feitas pelo aluno
 	    	PreparedStatement st3 = conecta.prepareStatement("select count(id_aluno) entrega_aluno from feedback where id_aluno = ? and visibility = 1");
 	    	st3.setInt(1, id_aluno);
@@ -68,6 +72,10 @@ public class LoadGerenciarAlunos {
 	    	if (result3.next()) {
 	    		entrega_aluno = result3.getInt("entrega_aluno");
 			}
+	    	
+//	    	if ((!tipo_tg.equals("Portfólio")) && entrega_aluno > 0) {
+//				entrega_aluno = entrega_aluno/2;
+//			}
 	    	
 	    	// setando no objeto
 	    	aluno.setEntregas_feitas(entrega_aluno);

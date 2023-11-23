@@ -45,6 +45,10 @@ public class LoadNotas {
 			while (result2.next()) {
 				total_entregas += result2.getInt("n_entregas");
 			}
+			
+			if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
+				total_entregas = total_entregas/2;
+			}
 
 			// entregas feitas pelo aluno
 			PreparedStatement st3 = conecta.prepareStatement(
@@ -56,6 +60,10 @@ public class LoadNotas {
 			if (result3.next()) {
 				entrega_aluno = result3.getInt("n_entregas");
 			}
+			
+//			if ((!tipo_tg.equals("Portfólio")) && entrega_aluno > 0) {
+//				entrega_aluno = entrega_aluno/2;
+//			}
 			//buscando turma
 			PreparedStatement st6 = conecta.prepareStatement("SELECT turma.nome, turma.id, matricula.id_aluno, matricula.id_turma FROM turma, matricula where matricula.id_turma = turma.id and matricula.id_aluno = ?");
 			st6.setInt(1, id_aluno);
