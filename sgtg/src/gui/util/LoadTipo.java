@@ -17,8 +17,8 @@ public class LoadTipo {
 	public  static List<TipoDTO> carregaTipos() throws SQLException{
 		List<TipoDTO> listaTipos = new ArrayList<TipoDTO>();
 		
-		new DB();
-		Connection con = DB.getConnection();
+		DB db = new DB();
+		Connection con = db.getConnection();
 		
 		PreparedStatement st = con.prepareStatement("select * from tipo");
 		ResultSet result = st.executeQuery();
@@ -33,10 +33,10 @@ public class LoadTipo {
 		}
 		
 		for (int i = 0; i < listaTipos.size(); i++) {
-			if (listaTipos.get(i).getTipo().equals("Relatório técnico - disciplina")){
+			if (listaTipos.get(i).getTipo().equals("Relatório Técnico - Disciplina")){
 				listaTipos.get(i).setTipo("Relatórios (disciplina e estágio)");
 			}
-			if (listaTipos.get(i).getTipo().equals("Relatório técnico - estágio")){
+			if (listaTipos.get(i).getTipo().equals("Relatório Técnico - Estágio")){
 				listaTipos.remove(i);
 			}
 		}
