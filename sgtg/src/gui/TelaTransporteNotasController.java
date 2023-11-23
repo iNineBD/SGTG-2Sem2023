@@ -53,7 +53,7 @@ public class TelaTransporteNotasController implements Initializable {
             if (newValue != null) {
                 try {
                 	this.loadTransporteNota = new LoadTransporteNota();
-                    updateTableView();
+                    updateTableView(newValue.getIdTurma());
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
                     Alerts.showAlert("SQLException", "Erro ao buscar entregas",
@@ -100,7 +100,7 @@ public class TelaTransporteNotasController implements Initializable {
 
 	}
 
-	public void updateTableView() throws SQLException {
+	public void updateTableView(int id_turma) throws SQLException {
 		if (loadTransporteNota == null) {
 			throw new IllegalStateException("Transporte de notas indisponivel");
 		}
