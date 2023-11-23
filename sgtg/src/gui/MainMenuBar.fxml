@@ -34,9 +34,13 @@
                       <MenuItem mnemonicParsing="false" text="Acompanhamento de entregas" />
                         <MenuItem mnemonicParsing="false" text="Aptos a defender" />
 
+                        <MenuItem fx:id="menuTransporteNotas" mnemonicParsing="false" onAction="#onMenuItemTransporteNotas" text="Transporte de Notas" />
+
+
                         <MenuItem fx:id="menuRelatorioAlunoOrientador" mnemonicParsing="false" onAction="#onMenuItemRelatorioAlunoOrientador" text="Aluno e orientador" />
 
                         <MenuItem mnemonicParsing="false" onAction="#onMenuItemRelatorioDeNotas" text="Acompanhamento de Notas" />
+
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Help">

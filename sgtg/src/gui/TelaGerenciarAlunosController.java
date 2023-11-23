@@ -33,8 +33,6 @@ public class TelaGerenciarAlunosController implements Initializable {
 	
 	private Telas load = new Telas();
 
-
-
 	@FXML
 	private TableView<GerenciarAlunoDTO> tableViewGerenciarAluno;
 	@FXML
