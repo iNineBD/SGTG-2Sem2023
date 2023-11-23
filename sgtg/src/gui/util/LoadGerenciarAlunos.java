@@ -49,10 +49,9 @@ public class LoadGerenciarAlunos {
 	    	int total_entregas = 0;
 	    	int entrega_aluno = 0;
 	    	
-	    	PreparedStatement st2 = conecta.prepareStatement("select count(entrega.id) as n_entrega from entrega_tipo inner join entrega on entrega.id = entrega_tipo.id_entrega inner join entrega_turma on entrega.id = entrega_turma.id_entrega inner join matricula on entrega_turma.id_turma = matricula.id_turma where entrega_tipo.id_tipo = ? and entrega_turma.id_turma = ? and id_aluno = ? and entrega.visibility = 1");
+	    	PreparedStatement st2 = conecta.prepareStatement("select count(entrega.id) as n_entrega from entrega_tipo inner join entrega on entrega.id = entrega_tipo.id_entrega inner join entrega_turma on entrega.id = entrega_turma.id_entrega inner join matricula on entrega_turma.id_turma = matricula.id_turma where entrega_tipo.id_tipo = ? and id_aluno = ? and entrega.visibility = 1");
 	    	st2.setInt(1, id_tipo);
-	    	st2.setInt(2, id_turma);
-	    	st2.setInt(3, id_aluno);
+	    	st2.setInt(2, id_aluno);
 	    	
 	    	ResultSet result2 = st2.executeQuery();
 	    	
