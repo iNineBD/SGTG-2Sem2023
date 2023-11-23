@@ -9,11 +9,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaTransporteNotasController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaTransporteNotasController">
    <children>
       <AnchorPane>
          <children>
-            <TableView fx:id="tableViewTransporteNotas" layoutY="54.0" prefHeight="850.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+            <TableView fx:id="tableViewNotas" layoutY="54.0" prefHeight="850.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
               <columns>
                 <TableColumn fx:id="tableColumnNome" prefWidth="75.0" text="Aluno" />
                 <TableColumn fx:id="tableColumnTipoTG" prefWidth="75.0" text="Tipo TG" />
@@ -28,7 +28,7 @@
                   <Font name="Verdana Bold" size="50.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="choiceBoxTurma" layoutX="528.0" layoutY="100.0" prefHeight="10.0" prefWidth="200.0" />
+            <ChoiceBox fx:id="choiceBoxTurma" layoutX="528.0" layoutY="100.0" onDragDetected="#atualizarDadosChoiceBox" prefHeight="10.0" prefWidth="200.0" />
             <Text layoutX="808.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Somente esta Apto a Transportar Nota o Aluno que ter todas as entregas" wrappingWidth="164.4609375">
                <font>
                   <Font name="Verdana" size="12.0" />

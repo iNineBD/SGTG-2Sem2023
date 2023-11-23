@@ -7,29 +7,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.protocol.Resultset;
+
 import conexao.DB;
 import dto.TransporteNotaDTO;
 
 public class LoadTransporteNota {
+	public static List<TransporteNotaDTO> dados() throws SQLException {
+		List<TransporteNotaDTO> listNotas = new ArrayList<>();
 
-	public static List<TransporteNotaDTO> carregarNomeTipoNota(int id_tg) throws SQLException {
+		Connection conecta = DB.getConnection();
 
-		List<dto.TransporteNotaDTO> listacarregarTipoTG = new ArrayList<TransporteNotaDTO>();
-		new DB();
-		Connection con = DB.getConnection();
-		PreparedStatement st = con.prepareStatement(
-				"select tipo.id, substring(tipo, 1, 100) AS tipo from tipo where tipo LIKE 'R%' or tipo LIKE 'A%'");
-		st.setInt(1, id_tg);
-		ResultSet rs = st.executeQuery();
-		while (rs.next()) {
+		PreparedStatement st = conecta.prepareStatement(
+				"SELECT aluno.id id_aluno, aluno.nome, tipo.id id_tipo, tipo.tipo FROM aluno, tipo where aluno.id_tipo = tipo.id AND tipo LIKE 'R%' or tipo LIKE 'A%'");
+		ResultSet result = st.executeQuery();
+		while (result.next()) {
+			String nome_aluno = result.getString("nome");
+			String tipo_tg = result.getString("tipo");
+			int id_aluno = result.getInt("id_aluno");
+			int id_tipo = result.getInt("id_tipo");
+			PreparedStatement st2 = conecta
+					.prepareStatement("SELECT AVG(feedback.nota) AS media FROM feedback WHERE feedback.id_Aluno = ?");
+			st2.setInt(1, id_aluno);
+			ResultSet result2 = st2.executeQuery();
+			while (result2.next()) {
+				String media = result2.getString("media");
+				TransporteNotaDTO notas = new TransporteNotaDTO(nome_aluno, tipo_tg, media);
+				listNotas.add(notas);
 
-			int id_tg1 = rs.getInt("id");
-			String tipo_tg = rs.getString("tipo");
+			}
 
-			TransporteNotaDTO transporteNotaDTO = new TransporteNotaDTO(id_tg1, tipo_tg, id_tg1, id_tg1, id_tg1, tipo_tg);
-			listacarregarTipoTG.add(transporteNotaDTO);
 		}
 
-		return listacarregarTipoTG;
+		return listNotas;
+
 	}
+
 }
