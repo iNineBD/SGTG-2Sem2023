@@ -34,6 +34,9 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	private MenuItem menuItemSobre;
 	
+	@FXML
+	private MenuItem menuItemAptosADefender;
+	
 	
 	private MenuItem RelatorioDeNotas;
 	
@@ -74,6 +77,10 @@ public class MainMenuBarController implements Initializable{
 	}
 	
 	@FXML
+	public void onMenuItemAptosADefender() {
+		loadTelas.loadView("/gui/TelaAptosADefender.fxml");
+}
+  @FXML
 	public void onMenuItemRelatorioAlunoOrientador() {
 		loadTelas.loadView("/gui/TelaAlunoOrientador.fxml");
 	}

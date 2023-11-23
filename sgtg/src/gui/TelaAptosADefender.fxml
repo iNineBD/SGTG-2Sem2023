@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaAptosADefenderController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label alignment="CENTER" text="APTOS A DEFENDER">
+               <HBox.margin>
+                  <Insets bottom="25.0" top="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Verdana Bold" size="50.0" />
+               </font>
+            </Label>
+         </children>
+         <VBox.margin>
+            <Insets bottom="-30.0" />
+         </VBox.margin>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </HBox>
+      <TableView fx:id="table" prefHeight="900.0" prefWidth="500.0">
+        <columns>
+          <TableColumn fx:id="tableColumnNome" prefWidth="104.800048828125" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Nome" />
+          <TableColumn fx:id="tableColumnEmailAluno" prefWidth="81.5999755859375" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Email Aluno" />
+            <TableColumn fx:id="tableColumnEmailOrientador" prefWidth="131.20001220703125" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Email Orientador" />
+            <TableColumn fx:id="tableColumnTipoTG" prefWidth="99.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Tipo TG" />
+            <TableColumn fx:id="tableColumnTituloTG" prefWidth="75.0" style="-fx-font-size: 18; -fx-font-family: verdana;" text="Título TG" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </children>
+</VBox>
