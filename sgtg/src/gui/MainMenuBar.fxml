@@ -7,7 +7,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.VBox?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainMenuBarController">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.MainMenuBarController">
    <content>
       <VBox prefHeight="700.0" prefWidth="1000.0">
          <children>
@@ -32,7 +32,18 @@
                   <Menu mnemonicParsing="false" text="Relatórios">
                     <items>
                       <MenuItem mnemonicParsing="false" text="Acompanhamento de entregas" />
+
                         <MenuItem fx:id="menuItemAptosADefender" mnemonicParsing="false" onAction="#onMenuItemAptosADefender" text="Aptos a defender" />
+
+                        <MenuItem mnemonicParsing="false" text="Aptos a defender" />
+
+                        <MenuItem fx:id="menuTransporteNotas" mnemonicParsing="false" onAction="#onMenuItemTransporteNotas" text="Transporte de Notas" />
+
+
+                        <MenuItem fx:id="menuRelatorioAlunoOrientador" mnemonicParsing="false" onAction="#onMenuItemRelatorioAlunoOrientador" text="Aluno e orientador" />
+
+                        <MenuItem mnemonicParsing="false" onAction="#onMenuItemRelatorioDeNotas" text="Acompanhamento de Notas" />
+
                     </items>
                   </Menu>
                 <Menu mnemonicParsing="false" text="Help">

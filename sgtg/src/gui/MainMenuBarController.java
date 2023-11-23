@@ -29,10 +29,16 @@ public class MainMenuBarController implements Initializable{
 	private MenuItem menuItemNovaEntrega;
 	
 	@FXML
+	private MenuItem menuTransporteNotas;
+	
+	@FXML
 	private MenuItem menuItemSobre;
 	
 	@FXML
 	private MenuItem menuItemAptosADefender;
+	
+	
+	private MenuItem RelatorioDeNotas;
 	
 	
 	@FXML
@@ -57,13 +63,26 @@ public class MainMenuBarController implements Initializable{
 	}
 	
 	@FXML
+	public void onMenuItemTransporteNotas() {
+		loadTelas.loadView("/gui/TelaTransporteNotas.fxml");
+	}
+	
+	@FXML
 	public void onMenuItemSobreAction() {
 		loadTelas.loadView("/gui/TelaSobre.fxml");
+	}
+	@FXML
+	public void onMenuItemRelatorioDeNotas() {
+		loadTelas.loadView("/gui/TelaRelatorioNotas.fxml");
 	}
 	
 	@FXML
 	public void onMenuItemAptosADefender() {
 		loadTelas.loadView("/gui/TelaAptosADefender.fxml");
+}
+  @FXML
+	public void onMenuItemRelatorioAlunoOrientador() {
+		loadTelas.loadView("/gui/TelaAlunoOrientador.fxml");
 	}
 	
 	@Override

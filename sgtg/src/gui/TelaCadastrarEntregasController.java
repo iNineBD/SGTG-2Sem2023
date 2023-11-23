@@ -80,12 +80,14 @@ public class TelaCadastrarEntregasController implements Initializable {
 					AlertType.WARNING);
 		} else if (check1.isSelected() && check2.isSelected()) {
 			Alerts.showAlert("Case Portfólio", "Muitas turmas selecionadas",
-					"Para portfólio, as entregas devem ser individuais por turma. Selecione apenas uma turma!",
+
+					"Para Portfólio, as entregas devem ser individuais por turma. Selecione apenas uma turma!",
 					AlertType.WARNING);
 		} else if (choiceBoxTipo.getValue().getTipo().equals("Portfólio") && !check1.isSelected()
 				&& !check2.isSelected()) {
 			Alerts.showAlert("Case Portfólio", "Selecione uma turma",
-					"Para portfólio, as entregas devem ser individuais por turma. Selecione uma turma!",
+
+					"Para Portfólio, as entregas devem ser individuais por turma. Selecione uma turma!",
 					AlertType.WARNING);
 		} else {
 
@@ -128,7 +130,9 @@ public class TelaCadastrarEntregasController implements Initializable {
 				// relacao entrega_tipo
 				if (tipo.getTipo().equals("Relatórios (disciplina e estágio)")) {
 					PreparedStatement st = con.prepareStatement(
-							"select id from tipo where tipo != 'Portfólio' and tipo != 'Artigo tecnológico ou cientifico'");
+
+							"select id from tipo where tipo != 'Portfólio' and tipo != 'Artigo Tecnológico ou Científico'");
+
 					list_id_tipos = st.executeQuery();
 				} else {
 					PreparedStatement st = con.prepareStatement("select id from tipo where tipo = ?");

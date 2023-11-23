@@ -97,7 +97,7 @@ public class LoadEntregas {
 
 	public static void editarEntregaAUX(TelaEditarEntregaController controller, EntregasDTO obj, String tipo) {
 
-		if (tipo.equals("Relatório técnico - disciplina") || tipo.equals("Relatório técnico - estágio")) {
+		if (tipo.equals("Relatório Técnico - Disciplina") || tipo.equals("Relatório Técnico - Estágio")) {
 			tipo = "Relatórios (disciplina e estágio)";
 		}
 
