@@ -197,6 +197,10 @@ public class GerenciarAlunoDTO {
 		this.id_orientador = id_orientador;
 	}
 	
+	@Override
+	public String toString() {
+		return this.getNome_aluno().toString();
+	}
 	
 	
 }

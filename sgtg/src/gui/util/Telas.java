@@ -56,6 +56,7 @@ public class Telas {
 			mainVbox.getChildren().addAll(newVbox.getChildren());
 
 		} catch (IOException e) {
+			e.printStackTrace();
 			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", e.getMessage(), AlertType.ERROR);
 		}
 
@@ -350,7 +351,7 @@ public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
         }
 }
     	
-    public synchronized void loadView87(String absoluteName, EntregasDTO obj ) {
+    public synchronized void loadView87(String absoluteName, EntregasDTO obj, String tipo) {
     	
 		try {
 			
@@ -366,17 +367,14 @@ public synchronized void loadView4(String absoluteName, GerenciarAlunoDTO obj) {
 	        mainVbox.getChildren().addAll(newVbox.getChildren());
 
 	        TelaEditarEntregaController controller = loader.getController();
-	        LoadEntregas.editarEntregaAUX(controller, obj);
-	        controller.setLblTurma(obj.getId());
+	        LoadEntregas.editarEntregaAUX(controller, obj, tipo);
+	        
 	       
 	        
 	        
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			Alerts.showAlert("IO Exception", "Erro ao carregar a tela", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			Alerts.showAlert("SQL Exception", "Erro ao carregar dados", "Vish, deu erro aqui... Tenta novamente, por favor!", AlertType.ERROR);
 		}
 
         

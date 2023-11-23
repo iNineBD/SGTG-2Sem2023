@@ -27,9 +27,9 @@ public class TelaGerenciarAlunosController implements Initializable {
 
 	public LoadGerenciarAlunos loadAluno;
 	
-	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno();
+	private ShowAndEditAluno excluiraluno = new ShowAndEditAluno(); //o q é??
 
-	Connection conecta = DB.getConnection();
+	Connection conecta = DB.getConnection(); 
 	
 	private Telas load = new Telas();
 
@@ -74,11 +74,11 @@ public class TelaGerenciarAlunosController implements Initializable {
 		tableColumnEntregas.setCellValueFactory(new PropertyValueFactory<>("entregas_format"));
 	}
 
-	public void updateTableView() throws SQLException {
+	public void updateTableView() throws SQLException { //ler aqui e apagar comentário depois
 		if (loadAluno == null) {
 			throw new IllegalStateException("Serviço gerenciar aluno fora do ar");
 		}
-		List<GerenciarAlunoDTO> listaAlunos = loadAluno.atualizarDados();
+		List<GerenciarAlunoDTO> listaAlunos = loadAluno.atualizarDados(); // ler o atualizar dados e filtrar o que preciso
 		obsList = FXCollections.observableArrayList(listaAlunos);
 
 		tableViewGerenciarAluno.setItems(obsList);
