@@ -65,6 +65,10 @@ public class MainMenuBarController implements Initializable{
 		loadTelas.loadView("/gui/TelaRelatorioNotas.fxml");
 	}
 	
+	@FXML
+	public void onMenuItemRelatorioAlunoOrientador() {
+		loadTelas.loadView("/gui/TelaAlunoOrientador.fxml");
+	}
 	
 	@Override
 	public void initialize(URL uri, ResourceBundle rb) {

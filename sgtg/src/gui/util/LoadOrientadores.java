@@ -36,4 +36,8 @@ public class LoadOrientadores {
 		return (listaOrientador);
 		
 	}
-}
+
+	public List<OrientadorDto> atualizarDados(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}}

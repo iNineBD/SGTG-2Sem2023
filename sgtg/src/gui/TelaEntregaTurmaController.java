@@ -66,7 +66,7 @@ public class TelaEntregaTurmaController implements Initializable {
 		initializeNodes();
 
 		comboBoxTurma.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-			if (newValue != null) {
+			if 	(newValue != null) {
 				try {
 					this.loadEntregas = new LoadEntregas();
 					updateTableView();
