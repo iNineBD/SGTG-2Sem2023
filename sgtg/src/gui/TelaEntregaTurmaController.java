@@ -11,9 +11,11 @@ import java.util.ResourceBundle;
 
 import conexao.DB;
 import dto.EntregasDTO;
+import dto.TipoDTO;
 import dto.TurmasDTO;
 import gui.util.Alerts;
 import gui.util.LoadEntregas;
+import gui.util.LoadTipo;
 import gui.util.LoadTurmas;
 import gui.util.Telas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -34,13 +36,16 @@ public class TelaEntregaTurmaController implements Initializable {
 	private LoadEntregas loadEntregas;
 
 	@FXML
-	private ComboBox<TurmasDTO> comboBoxTurma;
+	private ComboBox<TipoDTO> comboBoxTurma;
 	@FXML
 	private TableView<EntregasDTO> tableViewEntregas;
 	@FXML
 	private TableColumn<EntregasDTO, String> tableColumnTitulo;
 	@FXML
 	private TableColumn<EntregasDTO, String> tableColumnDescricao;
+	
+	@FXML
+	private TableColumn<EntregasDTO, String> tableColumnTurma;
 	@FXML
 	private TableColumn<EntregasDTO, LocalDate> tableColumnData;
 	@FXML
@@ -65,6 +70,7 @@ public class TelaEntregaTurmaController implements Initializable {
 				try {
 					this.loadEntregas = new LoadEntregas();
 					updateTableView();
+					System.out.println(newValue.getId());
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					Alerts.showAlert("SQLException", "Erro ao buscar entregas",
@@ -73,14 +79,14 @@ public class TelaEntregaTurmaController implements Initializable {
 			}
 		});
 
-		// preenchimento do combobox Entregas
+		// preenchimento do combobox TIPO
 
-		List<TurmasDTO> listaTurmas = new ArrayList<TurmasDTO>();
+		List<TipoDTO> listaTipo = new ArrayList<TipoDTO>();
 
 		try {
 
-			listaTurmas = LoadTurmas.carregaTurmas((LocalDate.now().getMonthValue() > 6 ? 2 : 1),
-					LocalDate.now().getYear());
+			// lista tipos
+			listaTipo = LoadTipo.carregaTipos();
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -88,9 +94,9 @@ public class TelaEntregaTurmaController implements Initializable {
 					"Ocorreu um erro ao buscar as turmas para o semestre atual.", AlertType.ERROR);
 		}
 
-		if (listaTurmas != null) {
-			ObservableList<TurmasDTO> turmas = FXCollections.observableArrayList(listaTurmas);
-			comboBoxTurma.setItems(turmas);
+		if (listaTipo != null) {
+			ObservableList<TipoDTO> tipos = FXCollections.observableArrayList(listaTipo);
+			comboBoxTurma.setItems(tipos);
 		}
 
 	}
@@ -100,13 +106,14 @@ public class TelaEntregaTurmaController implements Initializable {
 		tableColumnData.setCellValueFactory(new PropertyValueFactory<>("data_final"));
 		tableColumnTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
 		tableColumnDescricao.setCellValueFactory(new PropertyValueFactory<>("descricao"));
+		tableColumnTurma.setCellValueFactory(new PropertyValueFactory<>("nome_turma"));
 	}
 
 	public void updateTableView() throws SQLException {
 		if (loadEntregas == null) {
 			throw new IllegalStateException("Serviço carregar entregas fora do ar");
 		}
-		List<EntregasDTO> listaEntregas = loadEntregas.atualizarDados(comboBoxTurma.getValue().getId());
+		List<EntregasDTO> listaEntregas = loadEntregas.atualizarDados(this.comboBoxTurma.getValue().getId());
 		obsList = FXCollections.observableArrayList(listaEntregas);
 
 		tableViewEntregas.setItems(obsList);
@@ -117,7 +124,7 @@ public class TelaEntregaTurmaController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEditar.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEditar.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
-			private final Button button = new Button("‍✏");
+			private final Button button = new Button("‍EDITAR");
 
 			@Override
 			protected void updateItem(EntregasDTO obj, boolean empty) {
@@ -129,14 +136,14 @@ public class TelaEntregaTurmaController implements Initializable {
 				setGraphic(button);
 				button.setOnAction(event -> {
 					Telas telas = new Telas();
-					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj);
+					telas.loadView87("/gui/TelaEditarEntrega.fxml", obj, comboBoxTurma.getValue().getTipo());
 				});
 			}
 		});
 
 		tableColumnDel.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnDel.setCellFactory(param -> new TableCell<EntregasDTO, EntregasDTO>() {
-			private final Button del = new Button("❌");
+			private final Button del = new Button("EXCLUIR");
 
 			@Override
 			protected void updateItem(EntregasDTO obj, boolean empty) {

@@ -63,12 +63,13 @@ public class InsertBd {
                 int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano,aluno);
         		int idTipo = buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra());
                 
-                PreparedStatement stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ? where aluno.id = ?;");
+                PreparedStatement stAtualizaAluno = conecta.prepareStatement("update aluno set aluno.nome = ?, aluno.email_institucional = ?, aluno.email_pessoal = ?, aluno.id_orientador = ?,aluno.id_tipo = ? where aluno.id = ?;");
                 stAtualizaAluno.setString(1, aluno.getNome());
 				stAtualizaAluno.setString(2, aluno.getEmailFatecAluno());
 				stAtualizaAluno.setString(3, aluno.getEmailPessoal());
 				stAtualizaAluno.setInt(4,idOrientador);
 				stAtualizaAluno.setInt(5, idAluno);
+				stAtualizaAluno.setInt(6, idTipo);
 				stAtualizaAluno.executeUpdate();
 	
                 
@@ -77,24 +78,21 @@ public class InsertBd {
 				stAtualizaMatricula.setInt(2, idAluno);
 				stAtualizaMatricula.executeUpdate();
 				
-				stAtualizaTg = conecta.prepareStatement("update tg set tg.problema_a_resolver = ?, tg.empresa = ?, tg.disciplina = ?, tg.id_tipo = ? where tg.id_aluno = ?");
+				stAtualizaTg = conecta.prepareStatement("update tg set tg.problema_a_resolver = ?, tg.empresa = ?, tg.disciplina = ? where tg.id_aluno = ?");
 				stAtualizaTg.setString(1, aluno.getProblemaResolvidoOuEstudoArtigo());
 				stAtualizaTg.setString(2, aluno.getEmpresa());
 				stAtualizaTg.setString(3,aluno.getDisciplina());
-				stAtualizaTg.setInt(4,idTipo);
-				stAtualizaTg.setInt(5,idAluno);
+				stAtualizaTg.setInt(4,idAluno);
 				stAtualizaTg.executeUpdate();
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
+				e.printStackTrace();
 			}
-//        	
-//        	return;
+        	
         }catch (SQLException e) {
-//            e.printStackTrace();
-        	Alerts.showAlert("SQL Exception","Erro","O aluno " + aluno.getNome()+ " já está cadastrado.", AlertType.ERROR);
-            // Handle the exception as needed (e.g., show an error message).
+            e.printStackTrace();
+        	
         }
     }
 
@@ -105,10 +103,10 @@ public class InsertBd {
         stBuscaIdTipo = conecta.prepareStatement("select tipo.id,tipo.tipo from tipo where tipo.tipo = ?");
         stBuscaSemestreEAno = conecta.prepareStatement("select semestre.semestralizacao, semestre.ano from semestre where semestre.semestralizacao = ? and semestre.ano = ?");
         stAnoESemestre = conecta.prepareStatement("insert into semestre(semestralizacao,ano) values(?,?)");
-        stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador) values(?,?,?,?)");
+        stAluno = conecta.prepareStatement("insert into aluno (nome,email_institucional,email_pessoal,id_orientador,id_tipo) values(?,?,?,?,?)");
         stOrientador = conecta.prepareStatement("insert into orientador (nome,email_fatec) values(?,?)");
         stTurma = conecta.prepareStatement("insert into turma(nome,semestralizacao,ano) values(?,?,?)");
-        stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno,id_tipo) values(?,?,?,?,?)");
+        stTg = conecta.prepareStatement("insert into tg(problema_a_resolver,empresa,disciplina,id_aluno) values(?,?,?,?)");
         stTipo = conecta.prepareStatement("insert into tipo(tipo,regra) values(?,?)");
         stMatricula = conecta.prepareStatement("insert into matricula(id_aluno,id_turma) values(?,?)");
        
@@ -140,6 +138,7 @@ public class InsertBd {
             stAluno.setString(2, aluno.getEmailFatecAluno());
             stAluno.setString(3, aluno.getEmailPessoal());
             stAluno.setInt(4, buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador()));
+            stAluno.setInt(5, buscarOuInserirTipo(aluno.getTipoTG(), aluno.getRegra()));
             stAluno.executeUpdate();
 
             stBuscaIdAluno.setString(1, aluno.getEmailPessoal());
@@ -233,7 +232,6 @@ public class InsertBd {
         stTg.setString(2, aluno.getEmpresa());
         stTg.setString(3, aluno.getDisciplina());
         stTg.setInt(4, idAluno);
-        stTg.setInt(5, idTipo);
         stTg.executeUpdate();
     }
 

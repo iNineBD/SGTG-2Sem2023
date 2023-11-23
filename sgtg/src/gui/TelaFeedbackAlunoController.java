@@ -113,7 +113,7 @@ public class TelaFeedbackAlunoController implements Initializable {
 	public void carregarEntregas() {
 		// preenchimento do ComboBox Entrega
 		List<EntregasDTO> listaEntrega = new ArrayList<EntregasDTO>();
-		// TODO Auto-generated method stub
+//		 TODO Auto-generated method stub
 		try {
 			int id_aluno_selecionada = this.aluno.getId_aluno();
 

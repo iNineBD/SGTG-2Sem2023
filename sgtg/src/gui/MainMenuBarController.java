@@ -32,6 +32,9 @@ public class MainMenuBarController implements Initializable{
 	private MenuItem menuItemSobre;
 	
 	
+	private MenuItem RelatorioDeNotas;
+	
+	
 	@FXML
 	public void onMenuItemCarregarCsvAction() {
 		TelaInicialController carregaCsv = new TelaInicialController();
@@ -56,6 +59,10 @@ public class MainMenuBarController implements Initializable{
 	@FXML
 	public void onMenuItemSobreAction() {
 		loadTelas.loadView("/gui/TelaSobre.fxml");
+	}
+	@FXML
+	public void onMenuItemRelatorioDeNotas() {
+		loadTelas.loadView("/gui/TelaRelatorioNotas.fxml");
 	}
 	
 	@FXML

@@ -26,7 +26,7 @@
       		</VBox>
       		<VBox alignment="CENTER" layoutY="174.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="190.0">
       			<children>
-      				<ComboBox fx:id="comboBoxTurma" prefHeight="30.0" prefWidth="190.0" promptText="Selecione a turma" style="-fx-font-size: 15px; -fx-font-family: verdana;">
+      				<ComboBox fx:id="comboBoxTurma" prefHeight="30.0" prefWidth="190.0" promptText="Selecione um tipo" style="-fx-font-size: 15px; -fx-font-family: verdana;">
       					<VBox.margin>
       						<Insets bottom="15.0" />
       					</VBox.margin>
@@ -41,6 +41,7 @@
       								<TableColumn fx:id="tableColumnTitulo" prefWidth="96.0" style="-fx-font-size: 18px; -fx-font-family: verdana;" text="Entrega" />
       								<TableColumn fx:id="tableColumnDescricao" prefWidth="354.0" style="-fx-font-size: 18px; -fx-font-family: verdana;" text="Descrição" />
       								<TableColumn fx:id="tableColumnData" prefWidth="289.0" style="-fx-font-size: 18px; -fx-font-family: verdana; -fx-alignment: center;" text="Data" />
+                              <TableColumn fx:id="tableColumnTurma" prefWidth="289.0" style="-fx-font-size: 18px; -fx-font-family: verdana; -fx-alignment: center;" text="Turma" />
       								<TableColumn fx:id="tableColumnEditar" prefWidth="149.0" style="-fx-font-size: 18px; -fx-font-family: verdana; -fx-alignment: center;" text="Editar" />
                               <TableColumn fx:id="tableColumnDel" prefWidth="149.0" style="-fx-font-size: 18px; -fx-font-family: verdana; -fx-alignment: center;" text="Excluir" />
       							</columns>
