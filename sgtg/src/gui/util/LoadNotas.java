@@ -1,5 +1,6 @@
 package gui.util;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -45,9 +46,9 @@ public class LoadNotas {
 				total_entregas += result2.getInt("n_entregas");
 			}
 			
-			if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
-				total_entregas = total_entregas/2;
-			}
+//			if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
+//				total_entregas = total_entregas/2;
+//			}
 
 			// entregas feitas pelo aluno
 			PreparedStatement st3 = conecta.prepareStatement(
@@ -60,9 +61,7 @@ public class LoadNotas {
 				entrega_aluno = result3.getInt("n_entregas");
 			}
 			
-//			if ((!tipo_tg.equals("Portfólio")) && entrega_aluno > 0) {
-//				entrega_aluno = entrega_aluno/2;
-//			}
+//			
 			//buscando turma
 			PreparedStatement st6 = conecta.prepareStatement("SELECT turma.nome, turma.id, matricula.id_aluno, matricula.id_turma FROM turma, matricula where matricula.id_turma = turma.id and matricula.id_aluno = ?");
 			st6.setInt(1, id_aluno);
@@ -71,6 +70,11 @@ public class LoadNotas {
 			while (result6.next()) {
 				nome_turma = nome_turma + " " + result6.getString("nome");
 				
+			}
+			
+			
+			if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0 && (nome_turma.equals(" TG1 TG2") || nome_turma.equals(" TG2 TG1")))  {
+				total_entregas = total_entregas/2;
 			}
 
 			// media das notas
@@ -82,8 +86,9 @@ public class LoadNotas {
 
 			while (result5.next()) {
 				String entregas_format = entrega_aluno + "/" + total_entregas;
-				String media = result5.getString("media");
-				NotasDTO notas = new NotasDTO(nome_aluno, tipo_tg, media,entregas_format,nome_turma);
+				Double media = result5.getDouble("media");
+				BigDecimal mdDecimal = new BigDecimal(media).setScale(2, BigDecimal.ROUND_HALF_UP);
+				NotasDTO notas = new NotasDTO(nome_aluno, tipo_tg, mdDecimal.doubleValue(),entregas_format,nome_turma);
 				listaNotas.add(notas);
 			}
 		}

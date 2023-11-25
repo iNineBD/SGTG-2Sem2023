@@ -14,7 +14,7 @@ public class NotasDTO {
 	
 	private String entregas_format; // tabela entrega 
 	
-	private String nota; // tabela feedback
+	private Double nota; // tabela feedback
 	
 	private int id_aluno;
 	
@@ -23,7 +23,7 @@ public class NotasDTO {
 	private int id_turma;
 	
 
-	public NotasDTO(String nome_aluno, String tipo_tg, String nota, String entregas_format, String nome_turma) {
+	public NotasDTO(String nome_aluno, String tipo_tg, Double nota, String entregas_format, String nome_turma) {
 		this.nome_aluno = nome_aluno;
 		this.tipo_tg = tipo_tg;
 		this.nota = nota;
@@ -106,11 +106,11 @@ public class NotasDTO {
 		this.total_entregas = total_entregas;
 	}
 
-	public String getNota() {
+	public Double getNota() {
 		return nota;
 	}
 
-	public void setNota(String nota) {
+	public void setNota(Double nota) {
 		this.nota = nota;
 	}
 	
