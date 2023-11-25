@@ -171,3 +171,19 @@ alter table tg
 add constraint fk_id_aluno_tg
 foreign key (id_aluno)
 references aluno (id);
+
+
+DELIMITER $$
+CREATE PROCEDURE `pr_insert_entrega`(
+ptitulo varchar(30),
+pdata_entrega date,
+pdescricao varchar(200)
+)
+BEGIN
+	INSERT INTO entrega (titulo_entrega, data_entrega, descricao) VALUES (ptitulo, pdata_entrega, pdescricao);
+    SELECT id FROM entrega WHERE id =  LAST_INSERT_ID();
+END$$
+DELIMITER ;
+
+
+
