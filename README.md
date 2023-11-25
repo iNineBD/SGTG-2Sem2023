@@ -131,7 +131,7 @@ defesa, fechamento de semestre e transporte de notas.
         </tr>
         <tr>
             <td>Documentação</td>
-            <td>Como professor, quero ter um meio de consulta  e requisitos de funcionamento sobre o Sistema de Gerenciamento do Banco de Dados, para que eu tenha total independência para tratar possíveis dificuldades.</td>
+            <td>Como professor, quero ter um meio de consulta  e requisitos de funcionamento sobre o Sistema de Gerenciamento de TGs, para que eu tenha total independência para tratar possíveis dificuldades.</td>
             <td>12</td>
             <td>4</td>
         </tr>
