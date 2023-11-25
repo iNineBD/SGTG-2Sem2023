@@ -1,6 +1,5 @@
 package gui;
 
-import java.io.File;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -9,8 +8,6 @@ import gui.util.Telas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.MenuItem;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class MainMenuBarController implements Initializable{
 	
@@ -36,9 +33,6 @@ public class MainMenuBarController implements Initializable{
 	
 	@FXML
 	private MenuItem menuItemAptosADefender;
-	
-	
-	private MenuItem RelatorioDeNotas;
 	
 	
 	@FXML

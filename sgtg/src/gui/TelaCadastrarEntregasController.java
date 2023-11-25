@@ -59,8 +59,8 @@ public class TelaCadastrarEntregasController implements Initializable {
 
 	public void onBtnSalvarAction() throws SQLException {
 
-		DB db = new DB();
-		Connection con = db.getConnection();
+		
+		Connection con = DB.getConnection();
 
 		// cadastro entrega
 

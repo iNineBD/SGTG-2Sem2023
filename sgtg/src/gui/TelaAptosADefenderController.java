@@ -2,12 +2,10 @@ package gui;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import dto.AptosADefenderDTO;
-import dto.GerenciarAlunoDTO;
 import gui.util.LoadAptos;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,9 +17,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaAptosADefenderController implements Initializable {
 
-	private LoadAptos loadAptos;
-	
-	private AptosADefenderDTO aptosADefenderDTO;
 	
 	@FXML
 	private TableView<AptosADefenderDTO> table;
@@ -37,14 +32,7 @@ public class TelaAptosADefenderController implements Initializable {
 	private TableColumn<AptosADefenderDTO, String> tableColumnTituloTG;
 	
 	private ObservableList<AptosADefenderDTO> obsList; 	
-	
-	public void setLoadAptos(LoadAptos loadAptos) {
-		this.loadAptos = loadAptos;
-	}
-	
-	public void setAptosADefender(AptosADefenderDTO aptosADefenderDTO) {
-		this.aptosADefenderDTO = aptosADefenderDTO;
-	}
+
 	
 
 	@Override

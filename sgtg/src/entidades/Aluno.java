@@ -4,7 +4,11 @@ import java.io.Serializable;
 
 public class Aluno implements Serializable{
 	
-	// Atributos da classe Aluno
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+		// Atributos da classe Aluno
 		private String nome;
 		private String emailPessoal;
 		private String emailFatecAluno;
@@ -32,7 +36,7 @@ public class Aluno implements Serializable{
 			this.problemaResolvidoOuEstudoArtigo = problemaResolvidoOuEstudoArtigo;
 			this.empresa = empresa;
 			this.disciplina = disciplina;
-			this.confirmado = confirmado;
+			
 		}
 		
 		// Métodos getters e setters para receber e editar os dados

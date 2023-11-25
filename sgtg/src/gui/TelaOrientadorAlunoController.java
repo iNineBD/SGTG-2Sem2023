@@ -26,9 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TelaOrientadorAlunoController implements Initializable {
-	public LoadOrientadorAluno loadOrientadorAluno = new LoadOrientadorAluno();
-
-	private RelatorioOrientadorAlunoDTO orientadorAluno;
+	
 
 	Connection conecta = DB.getConnection();
 
@@ -49,9 +47,7 @@ public class TelaOrientadorAlunoController implements Initializable {
 
 	private ObservableList<RelatorioOrientadorAlunoDTO> obsList;
 
-	public void setOrientadorAluno(RelatorioOrientadorAlunoDTO orientadorAluno) {
-		this.orientadorAluno = orientadorAluno;
-	}
+
 
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -95,10 +91,8 @@ public class TelaOrientadorAlunoController implements Initializable {
 		}
 
 	public void updateTableView(int id_turma) throws SQLException { 
-		if (loadOrientadorAluno == null) {
-			throw new IllegalStateException("Serviço gerenciar aluno fora do ar");
-		}
-		List<RelatorioOrientadorAlunoDTO> listaAlunos = loadOrientadorAluno.carregaOrientadoresAlunos(id_turma); 
+		
+		List<RelatorioOrientadorAlunoDTO> listaAlunos = LoadOrientadorAluno.carregaOrientadoresAlunos(id_turma); 
 																								
 		obsList = FXCollections.observableArrayList(listaAlunos);
 		TableViewAlunoOrientador.setItems(obsList); 

@@ -8,7 +8,6 @@ import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDate;
 
 import conexao.DB;
-import dto.GerenciarAlunoDTO;
 import entidades.Aluno;
 import gui.TelaEditarAlunoController;
 import javafx.scene.control.Alert.AlertType;
@@ -44,7 +43,7 @@ public class InsertBd {
             conecta = DB.getConnection();
             prepararStatements(conecta);
 
-            int idOrientador = buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
+            buscarOuInserirOrientador(aluno.getEmailFatecOrientador(), aluno.getOrientador());
             int idAluno = buscarOuInserirAluno(aluno);
             int idTurma = buscarOuInserirTurma(aluno.getNomeTurma(), semestre, ano,aluno);
             inserirMatricula(idAluno, idTurma,semestre,ano,aluno);
@@ -261,7 +260,7 @@ public class InsertBd {
     }    
     
     public void atualizaAluno(int id_aluno,TelaEditarAlunoController controller) throws SQLException {
-    	Connection conecta = conecta = DB.getConnection();
+    	Connection conecta = DB.getConnection();
     	
     	stBuscaIdOrientador = conecta.prepareStatement("select orientador.id as id, orientador.email_fatec as email_fatec from orientador where orientador.nome = ?");
         

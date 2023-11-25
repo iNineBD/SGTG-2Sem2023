@@ -12,11 +12,9 @@ import java.util.ResourceBundle;
 import conexao.DB;
 import dto.EntregasDTO;
 import dto.TipoDTO;
-import dto.TurmasDTO;
 import gui.util.Alerts;
 import gui.util.LoadEntregas;
 import gui.util.LoadTipo;
-import gui.util.LoadTurmas;
 import gui.util.Telas;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -70,7 +68,7 @@ public class TelaEntregaTurmaController implements Initializable {
 				try {
 					this.loadEntregas = new LoadEntregas();
 					updateTableView();
-					System.out.println(newValue.getId());
+		
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					Alerts.showAlert("SQLException", "Erro ao buscar entregas",

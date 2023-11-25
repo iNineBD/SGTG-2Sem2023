@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.protocol.Resultset;
-
 import conexao.DB;
 import dto.TransporteNotaDTO;
 
@@ -26,7 +24,7 @@ public class LoadTransporteNota {
 			String nome_aluno = result.getString("nome");
 			String tipo_tg = result.getString("tipo");
 			int id_aluno = result.getInt("id_aluno");
-			int id_tipo = result.getInt("id_tipo");
+			
 			
 			PreparedStatement st2 = conecta.prepareStatement("SELECT AVG(feedback.nota) AS media FROM feedback WHERE feedback.id_Aluno = ?");
 			

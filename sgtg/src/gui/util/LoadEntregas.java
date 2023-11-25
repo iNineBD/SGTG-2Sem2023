@@ -6,15 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import conexao.DB;
 import dto.EntregasDTO;
-import dto.TurmasDTO;
 import gui.TelaEditarEntregaController;
-import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
 
 public class LoadEntregas {
 	public List<EntregasDTO> atualizarDados(int tipo_selecionado) throws SQLException {

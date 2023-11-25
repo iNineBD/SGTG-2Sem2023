@@ -189,8 +189,8 @@ public class ShowAndEditAluno {
 		if (Alerts.showAlertConfirmation("Atenção", "Voce está prestes a excluir um aluno", "Tem certeza?")) {
 			PreparedStatement st2;
 			try {
-				DB db = new DB();
-				Connection conecta = db.getConnection();
+				
+				Connection conecta = DB.getConnection();
 				st2 = conecta.prepareStatement("update sgtg.aluno set visibility = 0 where id = ?");
 				st2.setInt(1, id_usuario);
 				st2.executeUpdate();

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import conexao.DB;
-import dto.GerenciarAlunoDTO;
 import dto.NotasDTO;
 
 public class LoadNotas {

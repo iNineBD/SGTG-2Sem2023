@@ -6,21 +6,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import entidades.Aluno;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Telas;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.util.Scanner;
-import java.util.ArrayList;
-import entidades.Aluno;
 
 public class TelaInicialController implements Initializable{
 	
@@ -41,13 +39,13 @@ public class TelaInicialController implements Initializable{
         fileChooser.setTitle("Selecione um arquivo!");
         File selectedFile = fileChooser.showOpenDialog(new Stage());
         String caminhoAbsoluto = selectedFile.getAbsolutePath();
-        File file = new File(caminhoAbsoluto);
+       
 		String nomeArquivo = selectedFile.getName();
 		String extensaoArquivo = nomeArquivo.substring(nomeArquivo.lastIndexOf(".") + 1);
-		Scanner leitor = null;
+		
 		
 		ArrayList<Aluno> listAlunos = new ArrayList<Aluno>();
-		Constraints filtro = new Constraints();
+		
 		
 			if(extensaoArquivo.trim().equalsIgnoreCase("csv")) {
 							
@@ -60,10 +58,10 @@ public class TelaInicialController implements Initializable{
 						
 						// Listando os atributos do CSV
 						String emailPessoal = vetor[1].trim();
-						String emailFatecAluno = filtro.verificarEmail(vetor[2].trim());
-						String nome = filtro.verificarNome(vetor[3].trim());
-						String orientador = filtro.verificarNome(vetor[4].trim());
-						String emailFatecOrientador = filtro.verificarEmail(vetor[5].trim());
+						String emailFatecAluno = Constraints.verificarEmail(vetor[2].trim());
+						String nome = Constraints.verificarNome(vetor[3].trim());
+						String orientador = Constraints.verificarNome(vetor[4].trim());
+						String emailFatecOrientador = Constraints.verificarEmail(vetor[5].trim());
 						String turma = vetor[6].trim().toUpperCase();
 						//Pegando o tipo TG e sua regra
 						String tipo = vetor[7].trim();

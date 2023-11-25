@@ -23,8 +23,8 @@ public class DB {
 				conn = DriverManager.getConnection(url, props);
 			}
 			catch (SQLException e) {
-				Alerts alerts = new Alerts();
-				alerts.showAlert("SQL Exception", "getConnection", e.getMessage(), Alert.AlertType.ERROR);
+				
+				Alerts.showAlert("SQL Exception", "getConnection", e.getMessage(), Alert.AlertType.ERROR);
 			}
 		}
 		return conn;
@@ -35,8 +35,8 @@ public class DB {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				Alerts alerts = new Alerts();
-				alerts.showAlert("SQL Exception", "closeConnection", e.getMessage(), Alert.AlertType.ERROR);
+				
+				Alerts.showAlert("SQL Exception", "closeConnection", e.getMessage(), Alert.AlertType.ERROR);
 			}
 		}
 	}
@@ -48,8 +48,8 @@ public class DB {
 			return props;
 		}
 		catch (IOException e) {
-			Alerts alerts = new Alerts();
-			alerts.showAlert("IO Exception", "loadProperties", e.getMessage(), Alert.AlertType.ERROR);
+			
+			Alerts.showAlert("IO Exception", "loadProperties", e.getMessage(), Alert.AlertType.ERROR);
 		}
 		return null;
 	}
@@ -59,8 +59,8 @@ public class DB {
 			try {
 				st.close();
 			} catch (SQLException e) {
-				Alerts alerts = new Alerts();
-				alerts.showAlert("SQL Exception", "closeStatement", e.getMessage(), Alert.AlertType.ERROR);
+				
+				Alerts.showAlert("SQL Exception", "closeStatement", e.getMessage(), Alert.AlertType.ERROR);
 			}
 		}
 	}
@@ -70,8 +70,8 @@ public class DB {
 			try {
 				rs.close();
 			} catch (SQLException e) {
-				Alerts alerts = new Alerts();
-				alerts.showAlert("SQL Exception", "closeResultSet", e.getMessage(), Alert.AlertType.ERROR);
+				
+				Alerts.showAlert("SQL Exception", "closeResultSet", e.getMessage(), Alert.AlertType.ERROR);
 			}
 		}
 	}

@@ -92,8 +92,7 @@ public class TelaFeedbackViewController implements Initializable {
     	
 		try {
 			
-			DB db = new DB();
-	    	Connection conn = db.getConnection();
+	    	Connection conn = DB.getConnection();
 	    	PreparedStatement st = conn.prepareStatement("SELECT feedback.comentario, feedback.nota, entrega.titulo_entrega, entrega.descricao FROM feedback, aluno, entrega where aluno.id = feedback.id_aluno and feedback.id_entrega = entrega.id and  id_aluno = ?");
 	    	st.setInt(1, id_aluno);
 	    	

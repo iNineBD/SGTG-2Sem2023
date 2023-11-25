@@ -9,8 +9,6 @@ import java.util.List;
 
 import conexao.DB;
 import dto.TurmasDTO;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 
 public class LoadTurmas {
 	

@@ -1,15 +1,5 @@
 package gui;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
-
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,10 +7,16 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import dto.OrientadorDto;
-import dto.TurmasDTO;
-import entidades.Aluno;
 import gui.util.Alerts;
 import gui.util.LoadOrientadores;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 
 public class TelaEditarAlunoController implements Initializable{
 	

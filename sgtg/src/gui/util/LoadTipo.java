@@ -5,11 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import conexao.DB;
-import dto.OrientadorDto;
 import dto.TipoDTO;
 
 public class LoadTipo {
@@ -17,8 +15,8 @@ public class LoadTipo {
 	public  static List<TipoDTO> carregaTipos() throws SQLException{
 		List<TipoDTO> listaTipos = new ArrayList<TipoDTO>();
 		
-		DB db = new DB();
-		Connection con = db.getConnection();
+		
+		Connection con = DB.getConnection();
 		
 		PreparedStatement st = con.prepareStatement("select * from tipo");
 		ResultSet result = st.executeQuery();
