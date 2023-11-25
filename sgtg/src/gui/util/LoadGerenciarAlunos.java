@@ -59,9 +59,6 @@ public class LoadGerenciarAlunos {
 	    		total_entregas += result2.getInt("n_entrega");
 			}
 	    	
-	    	if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
-	    		total_entregas = total_entregas/2;
-			}
 	    	
 	    	// entregas feitas pelo aluno
 	    	PreparedStatement st3 = conecta.prepareStatement("select count(id_aluno) entrega_aluno from feedback where id_aluno = ? and visibility = 1");
@@ -93,6 +90,10 @@ public class LoadGerenciarAlunos {
 	            for (int j = i ; j < listaAlunos.size(); j++) {
 	                if (alunoAtual.getId_aluno() == (listaAlunos.get(j).getId_aluno())&& alunoAtual.getId_turma() !=(listaAlunos.get(j).getId_turma()) ) {
 	                	alunoAtual.setNome_turma("TG1 e TG2");
+	                	if ((!alunoAtual.getTipo_tg().equals("Portfólio")) && alunoAtual.getTotal_entregas() > 0) {
+	                		alunoAtual.setTotal_entregas(alunoAtual.getTotal_entregas() / 2) ;
+	        			}
+	        	    	
 	                    listaAlunos.remove(j);
 	                }
 	                

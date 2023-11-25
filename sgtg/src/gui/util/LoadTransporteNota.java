@@ -1,5 +1,6 @@
 package gui.util;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,10 +33,12 @@ public class LoadTransporteNota {
 			ResultSet result2 = st2.executeQuery();
 			
 			while (result2.next()) {
-				int media = result2.getInt("media");
+				Double media = result2.getDouble("media");
+				 @SuppressWarnings("deprecation")
+				BigDecimal mdDecimal = new BigDecimal(media).setScale(2, BigDecimal.ROUND_HALF_UP);
 				
 				if(media >= 6) {
-					TransporteNotaDTO notas = new TransporteNotaDTO(nome_aluno, tipo_tg, media);
+					TransporteNotaDTO notas = new TransporteNotaDTO(nome_aluno, tipo_tg, mdDecimal.doubleValue());
 					listNotas.add(notas);					
 				}
 			}
