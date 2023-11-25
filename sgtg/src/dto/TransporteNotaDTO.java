@@ -18,10 +18,10 @@ public class TransporteNotaDTO {
 	
 	private int ano; // turma 
 	
-	private String media;
+	private int media;
 	
 
-	public TransporteNotaDTO(String nome, String tipo_tg, String media) {
+	public TransporteNotaDTO(String nome, String tipo_tg, int media) {
 		this.nome = nome;
 		this.tipo_tg = tipo_tg;
 		this.media = media;
@@ -63,11 +63,11 @@ public class TransporteNotaDTO {
 		this.id_aluno = id_aluno;
 	}
 
-	public String getMedia() {
+	public int getMedia() {
 		return media;
 	}
 
-	public void setMedia(String media) {
+	public void setMedia(int media) {
 		this.media = media;
 	}
 

@@ -30,31 +30,58 @@ public class LoadAptos {
 	    
 	    try {
 	    	// tabela aluno + total entregas
-	    	stAlunos = conn.prepareStatement("SELECT aluno.nome AS nome_aluno, aluno.email_pessoal AS email_aluno, orientador.email_fatec AS email_orientador "
-	    			+ ", tipo.tipo AS tipo_tg, IFNULL(tg.problema_a_resolver, '') AS titulo_tg, aluno.id AS id_aluno, count(entrega.id) total_entregas "
-	    			+ "FROM aluno, orientador, tipo, tg, entrega, matricula\r\n"
-	    			+ "WHERE aluno.id_orientador = orientador.id AND tipo.id = tg.id_tipo AND tg.id_aluno = aluno.id AND aluno.id = matricula.id_aluno AND matricula.id_turma = entrega.id_turma "
-	    			+ "GROUP BY nome_aluno, email_aluno, email_orientador, tipo_tg, titulo_tg, id_aluno;");
+	    	stAlunos = conn.prepareStatement("select aluno.nome as nome_aluno, aluno.email_pessoal as email_pessoal_aluno, orientador.email_fatec as email_orientador,\r\n"
+	    			+ "tipo.id as id_tipo, tipo.tipo as tipo_tg, tg.problema_a_resolver as titulo_tg, aluno.id as id_aluno from aluno\r\n"
+	    			+ "inner join orientador on\r\n"
+	    			+ "aluno.id_orientador = orientador.id\r\n"
+	    			+ "inner join tipo on\r\n"
+	    			+ "aluno.id_tipo = tipo.id\r\n"
+	    			+ "inner join tg on\r\n"
+	    			+ "aluno.id = tg.id_aluno\r\n"
+	    			+ "inner join entrega_tipo on\r\n"
+	    			+ "entrega_tipo.id_tipo = tipo.id\r\n"
+	    			+ "inner join entrega on\r\n"
+	    			+ "entrega_tipo.id_entrega = entrega.id\r\n"
+	    			+ "inner join matricula on\r\n"
+	    			+ "aluno.id = matricula.id_aluno\r\n"
+	    			+ "group by aluno.nome, aluno.email_pessoal, orientador.email_fatec, tipo.tipo, tg.problema_a_resolver, aluno.id;");
 	        
 	        ResultSet resultAlunos = stAlunos.executeQuery();
 
 	        while (resultAlunos.next()) {
 	        	
 	            String nome_aluno = resultAlunos.getString("nome_aluno");
-	            String email_aluno = resultAlunos.getString("email_aluno");
+	            String email_aluno = resultAlunos.getString("email_pessoal_aluno");
 	            String email_orientador = resultAlunos.getString("email_orientador");
 	            String tipo_tg = resultAlunos.getString("tipo_tg");
 	            String titulo_tg = resultAlunos.getString("titulo_tg");
+	            int id_tipo = resultAlunos.getInt("id_tipo");
 	            
 	            // informações que não serão exibidas na tela
 	            int id_aluno = resultAlunos.getInt("id_aluno");
-	            int total_entregas = resultAlunos.getInt("total_entregas");
-		        
+	            int total_entregas = 0;
+	            
+	            PreparedStatement st2 = conn.prepareStatement("select count(entrega.id) as n_entrega from entrega_tipo inner join entrega on entrega.id = entrega_tipo.id_entrega inner join entrega_turma on entrega.id = entrega_turma.id_entrega inner join matricula on entrega_turma.id_turma = matricula.id_turma where entrega_tipo.id_tipo = ? and id_aluno = ? and entrega.visibility = 1");
+		    	st2.setInt(1, id_tipo);
+		    	st2.setInt(2, id_aluno);
+		    	
+		    	ResultSet result2 = st2.executeQuery();
+		    	
+		    	while (result2.next()) {
+		    		total_entregas += result2.getInt("n_entrega");
+				}
+		    	
+		    	if ((!tipo_tg.equals("Portfólio")) && total_entregas > 0) {
+		    		total_entregas = total_entregas/2;
+				}
+		    	
 		        // tabela com id aluno + total_feedback
-		        stFeedback = conn.prepareStatement("SELECT count(feedback.id_aluno) total_feedback "
-		        		+ "FROM feedback "
-		        		+ "WHERE feedback.id_aluno = " + id_aluno + ";");
-		       
+		        stFeedback = conn.prepareStatement("select count(feedback.id_aluno) total_feedback "
+		        		+ "from feedback "
+		        		+ "where feedback.id_aluno = ?;");
+		        
+		        stFeedback.setInt(1,id_aluno);
+		        
 		        ResultSet resultFeedback = stFeedback.executeQuery();
 
 	            resultFeedback.next();

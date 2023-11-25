@@ -56,6 +56,7 @@ public class TelaTransporteNotasController implements Initializable {
                     updateTableView(newValue.getIdTurma());
                 } catch (SQLException e) {
                     // TODO Auto-generated catch block
+                	e.printStackTrace();
                     Alerts.showAlert("SQLException", "Erro ao buscar entregas",
                             "Ocorreu um erro ao buscar as entregas para turma selcionada.", AlertType.WARNING);
                 }
@@ -89,8 +90,9 @@ public class TelaTransporteNotasController implements Initializable {
 				cbTransporteNotaDTO.setAno(ano_turma_selecionada);
 				listTurma.add(cbTransporteNotaDTO);
 			}
-			ObservableList<CBTransporteNotaDTO> observableList = FXCollections.observableArrayList(listTurma);
-			choiceBoxTurma.getItems().addAll(observableList);
+			
+			ObservableList<CBTransporteNotaDTO> turmas = FXCollections.observableArrayList(listTurma);
+			choiceBoxTurma.setItems(turmas);
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -104,7 +106,7 @@ public class TelaTransporteNotasController implements Initializable {
 		if (loadTransporteNota == null) {
 			throw new IllegalStateException("Transporte de notas indisponivel");
 		}
-		List<TransporteNotaDTO> listNotas = LoadTransporteNota.dados();
+		List<TransporteNotaDTO> listNotas = LoadTransporteNota.dados(id_turma);
 		ObservableList<TransporteNotaDTO>obsList = FXCollections.observableArrayList(listNotas);
 		tableViewNotas.setItems(obsList);
 

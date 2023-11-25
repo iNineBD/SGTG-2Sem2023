@@ -17,37 +17,37 @@ public class AptosADefenderDTO {
 	
 	
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 	
-	public String getEmailALuno() {
-		return email_aluno;
+	public String getEmail_aluno() {
+		return this.email_aluno;
 	}
-	public void setEmailALuno(String emailAluno) {
+	public void setEmail_aluno(String emailAluno) {
 		this.email_aluno = emailAluno;
 	}
 	
-	public String getEmailOrientador() {
-		return email_orientador;
+	public String getEmail_orientador() {
+		return this.email_orientador;
 	}
-	public void setEmailOrientador(String emailOrientador) {
+	public void setEmail_orientador(String emailOrientador) {
 		this.email_orientador = emailOrientador;
 	}
 	
-	public String getTipoTg() {
-		return tipo_tg;
+	public String getTipo_tg() {
+		return this.tipo_tg;
 	}
-	public void setTipoTg(String tipoTg) {
+	public void setTipo_tg(String tipoTg) {
 		tipo_tg = tipoTg;
 	}
 	
-	public String getTituloTg() {
-		return titulo_tg;
+	public String getTitulo_tg() {
+		return this.titulo_tg;
 	}
-	public void setTituloTg(String tituloTg) {
+	public void setTitulo_tg(String tituloTg) {
 		titulo_tg = tituloTg;
 	}
 	
