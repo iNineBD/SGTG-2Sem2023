@@ -1,6 +1,6 @@
 drop database sgtg;
 
-create database if not exists sgtg;
+create database if not exists sgtg CHARACTER  SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 use sgtg;
 
