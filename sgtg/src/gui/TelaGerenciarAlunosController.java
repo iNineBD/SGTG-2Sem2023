@@ -89,7 +89,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 	private void initEditButtons() {
 		tableColumnEDIT.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEDIT.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("Visual./Edit.");
+			private final Button button = new Button("VISUAL./EDITAR");
 			
 			
 			
@@ -119,7 +119,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 
 		tableColumnFEEDBACK.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnFEEDBACK.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("Feedback");
+			private final Button button = new Button("FEEDBACK");
 
 			@Override
 			protected void updateItem(GerenciarAlunoDTO obj, boolean empty) {
@@ -137,7 +137,7 @@ public class TelaGerenciarAlunosController implements Initializable {
 		
 		tableColumnEXCLUIR.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
 		tableColumnEXCLUIR.setCellFactory(param -> new TableCell<GerenciarAlunoDTO, GerenciarAlunoDTO>() {
-			private final Button button = new Button("Excluir");
+			private final Button button = new Button("EXCLUIR");
 
 			@Override
 			public void updateItem(GerenciarAlunoDTO obj, boolean empty) {

@@ -9,36 +9,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaRelatorioDeNotaController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaRelatorioDeNotaController">
    <children>
-      <AnchorPane prefHeight="600.0" prefWidth="1000.0">
+      <AnchorPane prefHeight="1000.0" prefWidth="1000.0">
          <children>
-            <HBox prefHeight="0.0" prefWidth="601.0" AnchorPane.bottomAnchor="540.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="10.0">
+            <HBox alignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="10.0" prefWidth="600.0" scaleZ="0.0" text="RELATÓRIO DE NOTAS">
+                  <Label alignment="CENTER" scaleZ="0.0" text="RELATÓRIO DE NOTAS">
                      <font>
-                        <Font name="System Bold" size="30.0" />
+                        <Font name="Verdana Bold" size="50.0" />
                      </font>
                      <HBox.margin>
-                        <Insets top="10.0" />
+                        <Insets />
                      </HBox.margin>
                   </Label>
                </children>
             </HBox>
-            <TableView fx:id="tableViewRelatorioDeNotas" layoutY="96.0" prefHeight="306.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0">
-              <columns>
-                <TableColumn fx:id="tableViewNome" prefWidth="256.0" text="Nome" />
-                  <TableColumn fx:id="tabeViewTurma" prefWidth="118.0" text="Turma" />
-                  <TableColumn fx:id="tabeViewTipo" prefWidth="203.0" text="Tipo" />
-                  <TableColumn fx:id="tableViewEntregas" prefWidth="101.0" text="Entregas" />
-                  <TableColumn fx:id="tableViewNotas" prefWidth="121.0" text="Nota" />
-              </columns>
-            </TableView>
-            <Label fx:id="lbSemestreAno" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="56.0" prefHeight="30.0" prefWidth="163.0" textAlignment="CENTER" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="65.0">
+            <Label fx:id="lbSemestreAno" alignment="CENTER" contentDisplay="CENTER" layoutX="218.0" layoutY="56.0" textAlignment="CENTER" textFill="#2f2dba" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="85.0">
                <font>
-                  <Font size="20.0" />
+                  <Font name="Verdana Bold" size="30.0" />
                </font>
             </Label>
+            <TableView fx:id="tableViewRelatorioDeNotas" layoutY="96.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="130.0">
+              <columns>
+                <TableColumn fx:id="tableViewNome" prefWidth="256.0" style="-fx-font-family: verdana; -fx-font-size: 18;" text="Nome" />
+                  <TableColumn fx:id="tabeViewTurma" prefWidth="118.0" style="-fx-font-family: verdana; -fx-font-size: 18; -fx-alignment: center;" text="Turma" />
+                  <TableColumn fx:id="tabeViewTipo" prefWidth="203.0" style="-fx-font-family: verdana; -fx-font-size: 18;" text="Tipo" />
+                  <TableColumn fx:id="tableViewEntregas" prefWidth="101.0" style="-fx-font-family: verdana; -fx-font-size: 18; -fx-alignment: center;" text="Entregas" />
+                  <TableColumn fx:id="tableViewNotas" prefWidth="121.0" style="-fx-font-family: verdana; -fx-font-size: 18; -fx-alignment: center;" text="Nota" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
          </children>
       </AnchorPane>
    </children>
