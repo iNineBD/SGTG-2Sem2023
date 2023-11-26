@@ -87,6 +87,7 @@ public class LoadNotas {
 			while (result5.next()) {
 				String entregas_format = entrega_aluno + "/" + total_entregas;
 				Double media = result5.getDouble("media");
+				@SuppressWarnings("deprecation")
 				BigDecimal mdDecimal = new BigDecimal(media).setScale(2, BigDecimal.ROUND_HALF_UP);
 				NotasDTO notas = new NotasDTO(nome_aluno, tipo_tg, mdDecimal.doubleValue(),entregas_format,nome_turma);
 				listaNotas.add(notas);
